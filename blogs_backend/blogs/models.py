@@ -8,3 +8,7 @@ class Post(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)    # auto_now_add=True makes date equals to
                                                                 #  date of creation(fixed value)
     author = models.ForeignKey(User, on_delete=models.CASCADE)  # if user is deleted than all of his posts will be deletd
+
+
+    def __str__(self):
+        return 'Title: ' + self.title
