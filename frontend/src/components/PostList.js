@@ -13,8 +13,9 @@ class PostList extends React.Component {
     }
 
     renderPosts = () => {
-        return (
-            <Post title={'Testing'} desc={'Description'} author={'Author'}/>
+        return this.props.posts.map ( post => {
+                return <Post key={post.id} title={post.title} desc={post.content} author={post.author}/>
+            }
         )
     }
 
@@ -28,7 +29,6 @@ class PostList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {posts: state.posts}
 }
 export default connect(mapStateToProps, {fetchPosts})(PostList)

@@ -1,14 +1,26 @@
 import _ from 'lodash'
+import DjangoREST from '../apis/DjangoREST'
 
 // USING THUNK MIDDLEWARE (for async request)
 
 //SAME below
 export const fetchPosts = () => {
-    return {
-        type: 'FETCH_POSTS',
-        payload: [{p: '1'}]
+    return async (dispatch) => {
+        
+        const response = await DjangoREST.get('/posts')
+
+        dispatch({type: 'FETCH_POSTS', payload: response.data})
     }
 } 
+
+export const fetchPost = (id) => {
+    return async (dispatch) => {
+        const response = await DjangoREST.get(`/posts/${id}`)
+
+        dispatch({type: 'FETCH_POST', payload: response.data})
+    
+    }
+}
 
 /*Has Multifetch Issue*/
 

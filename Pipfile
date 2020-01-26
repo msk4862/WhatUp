@@ -9,6 +9,7 @@ pylint = "*"
 [packages]
 django = "*"
 djangorestframework = "*"
+django-cors-headers = "*"
 
 [requires]
 python_version = "3.7"
