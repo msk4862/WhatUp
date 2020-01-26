@@ -21,7 +21,7 @@ class PostList extends React.Component {
 
     render() {
         return (
-            <div className='col-12 postlist'>
+            <div className='col-12 d-flex flex-column postlist'>
                 {this.renderPosts()}
             </div>
         )
