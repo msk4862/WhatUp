@@ -7,6 +7,7 @@ class MyUserManager(BaseUserManager):
         """
         Creates and saves a User with the given field
         """
+        print('called')
         if not email:
             raise ValueError('Users must have an email address')
         if not user_type:
@@ -61,7 +62,7 @@ class MyUser(AbstractBaseUser):
     objects = MyUserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['user_type',]
+    REQUIRED_FIELDS = ['user_type', 'phone_no',]
 
     def __str__(self):
         return self.email
@@ -85,4 +86,5 @@ class MyUser(AbstractBaseUser):
 
 class Student(models.Model):
     StudentID = models.OneToOneField(MyUser, on_delete=models.CASCADE, primary_key=True)
-    Groups = models.CharField(max_length = 50)
+    GroupID = models.CharField(max_length = 50)
+    SubscriptionID = models.CharField(max_length = 50)
