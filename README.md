@@ -1,1 +1,1 @@
-## Blogs developed with React-Django
+## Blogs developed with MERN stack.

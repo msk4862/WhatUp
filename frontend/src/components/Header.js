@@ -5,7 +5,7 @@ import './styles/Header.css'
 function Header() {
     return (
         <nav className='navbar navbar-expand-sm'>
-            <h2>eSports Gyan</h2>
+            <h2>Blogs</h2>
         </nav>
     )
 }
