@@ -23,3 +23,4 @@ class BlogDetailSerializer(serializers.ModelSerializer):
             'Body',
             'DateCreated',
         )
+

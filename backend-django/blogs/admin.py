@@ -3,5 +3,5 @@ from .models import *
 
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ('id', 'Title', 'BodyMeta',)
+    list_display = ('id', 'Title', 'BodyMeta', 'DateCreated',)
     
