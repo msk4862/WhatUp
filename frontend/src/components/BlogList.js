@@ -13,15 +13,16 @@ class BlogList extends React.Component {
     }
 
     renderBlogs = () => {
+        console.log(this.props)
         return this.props.blogs.map ( blog => {
-                return <Blog key={blog.id} title={blog.title} desc={blog.content} author={blog.author}/>
+                return <Blog key={blog.id} title={blog.Title} desc={blog.BodyMeta} date={blog.DateCreated}/>
             }
         )
     }
 
     render() {
         return (
-            <div className='col-12 d-flex flex-column postlist'>
+            <div className='container-fluid postlist'>
                 {this.renderBlogs()}
             </div>
         )

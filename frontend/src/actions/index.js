@@ -8,7 +8,6 @@ import ACTIONS from './actionTypes'
 //SAME below
 export const fetchBlogs = () => {
     return async (dispatch) => {
-        
         const response = await DjangoREST.get('/blogs')
 
         dispatch({type: ACTIONS.FETCH_BLOGS, payload: response.data})
