@@ -1,7 +1,7 @@
 import React from 'react'
 
-import './styles/Post.css'
-function Post(props) {
+import './styles/Blog.css'
+function Blog(props) {
 
     return (
         <div className='d-flex card'>
@@ -18,4 +18,4 @@ function Post(props) {
     )
 }
 
-export default Post
+export default Blog

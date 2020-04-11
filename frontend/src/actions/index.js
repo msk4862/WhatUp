@@ -1,23 +1,25 @@
 import _ from 'lodash'
+
 import DjangoREST from '../apis/DjangoREST'
+import ACTIONS from './actionTypes'
 
 // USING THUNK MIDDLEWARE (for async request)
 
 //SAME below
-export const fetchPosts = () => {
+export const fetchBlogs = () => {
     return async (dispatch) => {
         
-        const response = await DjangoREST.get('/posts')
+        const response = await DjangoREST.get('/blogs')
 
-        dispatch({type: 'FETCH_POSTS', payload: response.data})
+        dispatch({type: ACTIONS.FETCH_BLOGS, payload: response.data})
     }
 } 
 
-export const fetchPost = (id) => {
+export const fetchBlog = (id) => {
     return async (dispatch) => {
-        const response = await DjangoREST.get(`/posts/${id}`)
+        const response = await DjangoREST.get(`/blogs/${id}`)
 
-        dispatch({type: 'FETCH_POST', payload: response.data})
+        dispatch({type: ACTIONS.FETCH_BLOG, payload: response.data})
     
     }
 }

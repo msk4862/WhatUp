@@ -1,7 +1,9 @@
+import ACTIONS from '../actions/actionTypes'
+
 export default (state = [], action) => {
 
     switch(action.type) {
-        case 'FETCH_POSTS':
+        case ACTIONS.FETCH_BLOGS:
             return action.payload
         
         default:
