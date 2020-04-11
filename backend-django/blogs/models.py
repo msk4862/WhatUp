@@ -1,10 +1,10 @@
 from django.db import models
 
-class  Blog(models.Model):
+class Blog(models.Model):
     Title                   = models.CharField(max_length=100)
-    Meta                    = models.CharField(max_length=500)
+    BodyMeta                = models.CharField(max_length=500)
     Body                    = models.TextField()
-    DateCreated             = models.TimeField(auto_now=True)
+    DateCreated             = models.DateField(auto_now=True)
 
-    def str(self):
+    def __str__(self):
         return self.Title

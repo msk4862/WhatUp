@@ -9,7 +9,7 @@ class BlogListSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'Title',
-            'Meta',
+            'BodyMeta',
             'DateCreated',
         )
 
