@@ -9,7 +9,7 @@ function Blog(props) {
                 <h4 className='card-title'>{props.title}</h4>
                 <p className='card-text'>{props.desc}</p>
                 <div className='row justify-content-between'>
-                    <p className='col-sm-3'>Creadted on {props.date}</p>
+                    <p className='col-sm-3'>Created on {props.date}</p>
                     <div className='col-4 col-sm-4 col-offset-last'>
                         <i><span>by</span>
                             <a href='#' className='card-link'> author</a>
