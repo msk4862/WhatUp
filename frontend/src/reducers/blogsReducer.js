@@ -1,13 +1,22 @@
 import ACTIONS from '../actions/actionTypes'
 
-export default (state = [], action) => {
+const initialState = { 
+                        blogList: [], 
+                        blogDetailList: [],
+                    }
+
+export default (state = initialState, action) => {
 
     switch(action.type) {
         case ACTIONS.FETCH_BLOGS:
-            return action.payload
+            var newArr = state.blogList.concat(action.payload);
+
+            return {...state, blogList: newArr}
 
         case ACTIONS.FETCH_BLOG:
-            return action.payload
+            var newArr = state.blogDetailList.concat(action.payload);
+
+            return {...state, blogDetailList: newArr}
         
         default:
             return state

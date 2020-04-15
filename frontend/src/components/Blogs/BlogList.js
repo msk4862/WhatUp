@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {connect} from 'react-redux'
 
 import { fetchBlogs } from '../../actions'
@@ -6,14 +6,14 @@ import Blog from './Blog'
 
 import '../styles/BlogList.css'
 
-class BlogList extends React.Component {
+const BlogList = (props) => {
 
-    componentDidMount() {
-        this.props.fetchBlogs()
-    }
+    useEffect(() => {
+        props.fetchBlogs()
+    }, [])
 
-    renderBlogs = () => {
-        return this.props.blogs.map (blog => {
+    function renderBlogs() {
+        return props.blogs.map (blog => {
                 return <Blog 
                             key={blog.id} 
                             id={blog.id}
@@ -25,17 +25,15 @@ class BlogList extends React.Component {
         )
     }
 
-    render() {
-        return (
-            <div className='container-fluid postlist'>
-                {this.renderBlogs()}
-            </div>
-        )
-    }
+    return (
+        <div className='container-fluid postlist'>
+            {renderBlogs()}
+        </div>
+    )
 }
 
 const mapStateToProps = (state) => {
     console.log(state)
-    return {blogs: state.blogs}
+    return {blogs: state.blogs.blogList}
 }
 export default connect(mapStateToProps, {fetchBlogs})(BlogList)
