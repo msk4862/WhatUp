@@ -1,10 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import { fetchBlogs } from '../actions'
+import { fetchBlogs } from '../../actions'
 import Blog from './Blog'
 
-import './styles/BlogList.css'
+import '../styles/BlogList.css'
 
 class BlogList extends React.Component {
 
@@ -13,14 +13,14 @@ class BlogList extends React.Component {
     }
 
     renderBlogs = () => {
-        console.log(this.props)
-        return this.props.blogs.map ( blog => {
+        return this.props.blogs.map (blog => {
                 return <Blog 
-                        key={blog.id} 
-                        title={blog.Title} 
-                        desc={blog.BodyMeta} 
-                        date={blog.DateCreated}
-                    />
+                            key={blog.id} 
+                            id={blog.id}
+                            title={blog.Title} 
+                            desc={blog.BodyMeta} 
+                            date={blog.DateCreated}
+                        />
             }
         )
     }
@@ -35,6 +35,7 @@ class BlogList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log(state)
     return {blogs: state.blogs}
 }
 export default connect(mapStateToProps, {fetchBlogs})(BlogList)
