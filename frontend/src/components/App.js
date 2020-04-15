@@ -1,9 +1,9 @@
 import React from 'react';
-
-import Header from './Header'
+// import { Router, Link } from 'react-router-dom'
 
 import './styles/App.css'
 import BlogList from './BlogList'
+import Header from './Header'
 
 function App() {
   return (

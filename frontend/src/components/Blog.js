@@ -2,7 +2,7 @@ import React from 'react'
 
 import './styles/Blog.css'
 
-function Blog(props) {
+const Blog = (props) => {
 
     return (
         <div className='card'>
