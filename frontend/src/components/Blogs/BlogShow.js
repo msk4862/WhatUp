@@ -6,11 +6,13 @@ import '../styles/BlogShow.css'
 
 const BlogShow = (props) => {
 
+    // replacement of componentDidMount()
     // empty array is passed as second argument to use it like componentDidMount()
     useEffect(() => {
         const { id } = props.match.params
         props.fetchBlog(id)
     }, [])
+    console.log(props)
 
     return (
         <div className='container-fluid blog-body'>
@@ -25,8 +27,9 @@ const BlogShow = (props) => {
         </div>
     )
 }
-const mapStateToProps = (state) => {
-    return {blog : state.blogs.blogDetailList}
+const mapStateToProps = (state, ownProps) => {
+    console.log(state.blogs)
+    return {blog : state.blogs[ownProps.match.params.id]}
 }
 
 export default connect(mapStateToProps, {fetchBlog})(BlogShow)

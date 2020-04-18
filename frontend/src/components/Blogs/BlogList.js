@@ -13,16 +13,20 @@ const BlogList = (props) => {
     }, [])
 
     function renderBlogs() {
-        return props.blogs.map (blog => {
-                return <Blog 
-                            key={blog.id} 
-                            id={blog.id}
-                            title={blog.Title} 
-                            desc={blog.BodyMeta} 
-                            date={blog.DateCreated}
-                        />
-            }
-        )
+        if(props.blogs) {
+            return props.blogs.map (blog => {
+                    return <Blog 
+                                key={blog.id} 
+                                id={blog.id}
+                                title={blog.Title} 
+                                desc={blog.BodyMeta} 
+                                date={blog.DateCreated}
+                            />
+                }
+            )
+        } else {
+            return <h2>No blogs found!</h2>
+        }
     }
 
     return (
@@ -33,7 +37,6 @@ const BlogList = (props) => {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
-    return {blogs: state.blogs.blogList}
+    return {blogs: Object.values(state.blogs)}
 }
 export default connect(mapStateToProps, {fetchBlogs})(BlogList)

@@ -1,22 +1,17 @@
+import _ from 'lodash'
+
 import ACTIONS from '../actions/actionTypes'
 
-const initialState = { 
-                        blogList: [], 
-                        blogDetailList: [],
-                    }
-
-export default (state = initialState, action) => {
+export default (state = [], action) => {
 
     switch(action.type) {
         case ACTIONS.FETCH_BLOGS:
-            var newArr = state.blogList.concat(action.payload);
 
-            return {...state, blogList: newArr}
+            return {...state, ..._.mapKeys(action.payload, 'id')}
 
         case ACTIONS.FETCH_BLOG:
-            var newArr = state.blogDetailList.concat(action.payload);
 
-            return {...state, blogDetailList: newArr}
+            return {...state, [action.payload.id]: action.payload}
         
         default:
             return state
