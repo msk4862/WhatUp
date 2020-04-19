@@ -12,13 +12,16 @@ const BlogShow = (props) => {
         const { id } = props.match.params
         props.fetchBlog(id)
     }, [])
-    console.log(props)
 
-    return (
+    return (        
         <div className='container-fluid blog-body'>
             <h1 className='blog-title'>{props.blog.Title}</h1>
             <div className='blog-meta row'>
-                <span className='col-auto col-sm-auto'><strong>Author</strong></span>
+                <span className='col-auto col-sm-auto'>
+                    <strong>
+                        {props.blog.Author.user.first_name} {props.blog.Author.user.last_name}
+                    </strong>
+                    </span>
                 <span>{props.blog.DateCreated}</span>
             </div>
             <div className='blog-body'>
@@ -28,7 +31,7 @@ const BlogShow = (props) => {
     )
 }
 const mapStateToProps = (state, ownProps) => {
-    console.log(state.blogs)
+    console.log(state.blogs, ownProps)
     return {blog : state.blogs[ownProps.match.params.id]}
 }
 

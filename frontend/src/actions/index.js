@@ -9,7 +9,7 @@ import ACTIONS from './actionTypes'
 export const fetchBlogs = () => {
     return async (dispatch) => {
         const response = await DjangoREST.get('/blogs')
-
+        
         dispatch({type: ACTIONS.FETCH_BLOGS, payload: response.data})
     }
 } 
@@ -17,7 +17,7 @@ export const fetchBlogs = () => {
 export const fetchBlog = (id) => {
     return async (dispatch) => {
         const response = await DjangoREST.get(`/blogs/${id}`)
-
+        
         dispatch({type: ACTIONS.FETCH_BLOG, payload: response.data})
     
     }
