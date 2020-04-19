@@ -2,8 +2,8 @@ from rest_framework import serializers
 
 from .models import Blog
 
-
 class BlogSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Blog
         fields = (
@@ -12,5 +12,7 @@ class BlogSerializer(serializers.ModelSerializer):
             'Body',
             'BodyMeta',
             'DateCreated',
+            'Author',
         )
+        depth=2
 
