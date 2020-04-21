@@ -1,12 +1,20 @@
 ## Blogs web app developed with React-Django.
-A simple full stack project to learn the architecture from frontend to baackend.
+A simple Full stack project for beginners to understand the entire flow from frontend to backend.
 
 ## Getting Started
 
 #### 1. Go to `frontend` folder
-### Run `npm start
+First install dependencies:
+```
+npm install
+```
 
-Runs the app in the development mode.<br />
+Then run using:
+```
+npm start
+```
+
+It Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
@@ -20,9 +28,20 @@ pipenv shell
 ```
 Then install the dependencies:
 
-`pipenv install`
+```
+pipenv install
+```
 
-Then run `python manage.py runserver` to start server.
+Then perform all unapplied migrations:
+```
+python manage.py migrate
+```
+
+Then run 
+```
+python manage.py runserver
+``` 
+It will start django admin.<br/>
 Open [http://localhost:8000](http://localhost:8000) to view it in the browser.
 
 <br/><br/>
