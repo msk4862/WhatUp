@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import './styles/Login.css'
 
 const Login = () => {
+
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
     return (
         <div className='login-form-container container'>
             <div className='login-welcome row justify-content-center'>
@@ -12,11 +16,27 @@ const Login = () => {
                 <div className='col-8 col-sm-4'>
                     <div className="form-group">
                         <label>Email</label>
-                        <input type="email" className="form-control" id="email"/>
+                        <input 
+                            type="email" 
+                            className="form-control" 
+                            value={email}
+                            onChange={(event) => {
+                                event.preventDefault();
+                                setEmail(event.target.value)
+                            }}
+                        />
                     </div>
                     <div className="form-group">
                         <label>Password</label>
-                        <input type="password" className="form-control"/>
+                        <input 
+                            type="password" 
+                            className="form-control"
+                            value={password}
+                            onChange={(event) => {
+                                event.preventDefault();
+                                setPassword(event.target.value)
+                            }}
+                        />
                     </div>
                     <div className="form-group  row justify-content-center">
                         <button type="submit" class="btn">Login</button>
