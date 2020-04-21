@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import { fetchBlog } from '../../actions'
-import '../styles/BlogShow.css'
+import '../styles/Blogs/BlogShow.css'
 
 const BlogShow = (props) => {
 

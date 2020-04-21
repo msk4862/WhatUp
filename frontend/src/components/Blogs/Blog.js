@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import '../styles/Blog.css'
+import '../styles/Blogs/Blog.css'
 
 const Blog = (props) => {
 
