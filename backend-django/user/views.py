@@ -5,14 +5,32 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 from .models import Author
-from .serializers import AuthorSerializer, UserSerializer
+from .serializers import AuthorSerializer, UserListSerializer, UserSerializer
 
 
-class UserListAPIView(generics.ListCreateAPIView):
+class UserListAPIView(generics.ListAPIView):
     
     permission_classes = [permissions.AllowAny]
-    serializer_class = UserSerializer
+    serializer_class = UserListSerializer
     queryset = User.objects.all()
+
+
+class UserCreateAPIView(views.APIView):
+    '''
+        User Create API View
+    '''
+    permission_classes = [permissions.AllowAny]
+    serializer_class = UserSerializer
+    
+    def post(self, request):
+        data = request.data
+        serializer = UserSerializer(data=data)
+        if not serializer.is_valid(raise_exception=True):
+            return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)        
+        serializer.save()
+        return Response(serializer.data, status.HTTP_201_CREATED)
+        
+        
 
 class UserDetailAPIView(views.APIView):
     '''
@@ -44,8 +62,9 @@ class UserDetailAPIView(views.APIView):
         if instance is None:
             return Response({'error': 'Given user not found'}, status=status.HTTP_404_NOT_FOUND)
 
+        print(instance)
         serializer = UserSerializer(instance, data = data)
-
+        print(serializer)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)    

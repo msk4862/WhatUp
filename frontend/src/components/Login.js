@@ -7,12 +7,17 @@ const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    function onLogin(event) {
+        // event.preventDefault()
+        
+    }
+
     return (
         <div className='login-form-container container'>
             <div className='login-welcome row justify-content-center'>
                 <h2 className='col-10 col-sm-6'>Welcome Back</h2>
             </div>
-            <form className='login-form row justify-content-center'>
+            <form className='login-form row justify-content-center' onSubmit={onLogin}>
                 <div className='col-8 col-sm-4'>
                     <div className="form-group">
                         <label>Email</label>
@@ -33,7 +38,7 @@ const Login = () => {
                             className="form-control"
                             value={password}
                             onChange={(event) => {
-                                event.preventDefault();
+                                event.preventDefault(); 
                                 setPassword(event.target.value)
                             }}
                         />
