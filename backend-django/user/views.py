@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 from .models import Author
-from .serializers import AuthorSerializer, UserListSerializer, UserSerializer
+from .serializers import AuthorSerializer, UserListSerializer, UserCreateSerializer, UserDetailSerializer
 
 
 class UserListAPIView(generics.ListAPIView):
@@ -20,11 +20,11 @@ class UserCreateAPIView(views.APIView):
         User Create API View
     '''
     permission_classes = [permissions.AllowAny]
-    serializer_class = UserSerializer
+    serializer_class = UserCreateSerializer
     
     def post(self, request):
         data = request.data
-        serializer = UserSerializer(data=data)
+        serializer = UserCreateSerializer(data=data)
         if not serializer.is_valid(raise_exception=True):
             return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)        
         serializer.save()
@@ -37,7 +37,7 @@ class UserDetailAPIView(views.APIView):
         View to get and update user details
     '''
     permission_classes = [permissions.AllowAny]
-    serializer_class = UserSerializer
+    serializer_class = UserDetailSerializer
 
     def get_object(self, id):
         try:
@@ -51,7 +51,7 @@ class UserDetailAPIView(views.APIView):
         if instance is None:
             return Response({'error': 'Given user not found'}, status=status.HTTP_404_NOT_FOUND)
 
-        serializer = UserSerializer(instance)
+        serializer = UserDetailSerializer(instance)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     
@@ -62,8 +62,7 @@ class UserDetailAPIView(views.APIView):
         if instance is None:
             return Response({'error': 'Given user not found'}, status=status.HTTP_404_NOT_FOUND)
 
-        print(instance)
-        serializer = UserSerializer(instance, data = data)
+        serializer = UserDetailSerializer(instance, data = data)
         print(serializer)
         if serializer.is_valid(raise_exception=True):
             serializer.save()

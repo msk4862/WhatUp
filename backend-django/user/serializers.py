@@ -18,6 +18,24 @@ class UserListSerializer(serializers.ModelSerializer):
         )
 
 
+
+class UserCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            'username',
+            'email', 
+            'profile',           
+            'first_name',
+            'last_name',
+            'password',
+        )
+        extra_kwargs = {
+            'password' : {'write_only': True}
+        }
+
+
+
 class AuthorSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -28,7 +46,8 @@ class AuthorSerializer(serializers.ModelSerializer):
             'bio',
         )
 
-class UserSerializer(serializers.ModelSerializer):
+
+class UserDetailSerializer(serializers.ModelSerializer):
 
     # 'profile' is related_name in  Author
     profile = AuthorSerializer(required=False)
@@ -42,11 +61,12 @@ class UserSerializer(serializers.ModelSerializer):
             'profile',           
             'first_name',
             'last_name',
-            'password',
         )
+
         extra_kwargs = {
-            'password' : {'write_only': True}
-        }
+                'email': {'required': False},
+                }
+
 
 
     def create(self, validated_data):
@@ -65,22 +85,22 @@ class UserSerializer(serializers.ModelSerializer):
             user.save()
         return validated_data
     
-    # def update(self, instance, validated_data):
-    #     # saving user data
-    #     instance.email = validated_data.get('email', instance.email)
-    #     instance.username = validated_data.get('username', instance.username)
-    #     instance.first_name = validated_data.get('first_name', instance.first_name)
-    #     instance.last_name = validated_data.get('last_name', instance.last_name)
+    def update(self, instance, validated_data):
+        # saving user data
+        instance.email = validated_data.get('email', instance.email)
+        instance.username = validated_data.get('username', instance.username)
+        instance.first_name = validated_data.get('first_name', instance.first_name)
+        instance.last_name = validated_data.get('last_name', instance.last_name)
 
-    #     instance.save()
+        instance.save()
 
-    #     if(validated_data['profile']):
-    #         profile_data = validated_data.pop('profile')
-    #         profile = instance.profile
+        if(validated_data['profile']):
+            profile_data = validated_data.pop('profile')
+            profile = instance.profile
 
-    #         # saving author data
-    #         profile.bio = profile_data.get('bio', profile.bio)
-    #         profile.profile_image = profile_data.get('profile_image', profile.profile_image)
-    #         profile.save()
+            # saving author data
+            profile.bio = profile_data.get('bio', profile.bio)
+            profile.profile_image = profile_data.get('profile_image', profile.profile_image)
+            profile.save()
 
-    #     return instance
+        return instance
