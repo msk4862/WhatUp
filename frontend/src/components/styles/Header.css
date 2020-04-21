@@ -2,3 +2,14 @@
     background-color: #543864;
     box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.4);
 }
+
+.auth-buttons button {
+    background-color: transparent;
+    margin-right: 15px;
+    border: 1px solid #f8f8f8;
+}
+
+.auth-buttons button:hover {
+    background-color: #363062;
+    text-decoration: none;
+}

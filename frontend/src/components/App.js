@@ -31,8 +31,6 @@ function App() {
                 <Route exact path='/blogs/:id' component={BlogShow}/>
                 <Route exact path='/blogs/edit/:id' component={BlogEdit}/>
                 <Route exact path='/blogs/delete/:id' component={BlogCreate}/>
-
-
               </div>
           </div>
       </BrowserRouter>
