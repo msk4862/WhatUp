@@ -31,8 +31,27 @@ class UserCreateSerializer(serializers.ModelSerializer):
             'password',
         )
         extra_kwargs = {
-            'password' : {'write_only': True}
+            'password' : {'write_only': True},
+            'profile' : {'required': False},
         }
+
+        
+    def create(self, validated_data):
+        print(validated_data)
+        if (validated_data.get('profile')):
+            profile_data = validated_data.pop('profile')
+            password = validated_data.pop('password')
+            user = User(**validated_data)
+            user.set_password(password)
+            user.save()
+            Author.objects.create(user=user, **profile_data)
+        else:
+            user = User(**validated_data)
+            password = validated_data.pop('password')
+            user.set_password(password)
+            user.save()
+        return validated_data
+    
 
 
 
@@ -45,6 +64,7 @@ class AuthorSerializer(serializers.ModelSerializer):
             'profile_image',
             'bio',
         )
+
 
 
 class UserDetailSerializer(serializers.ModelSerializer):
@@ -67,24 +87,6 @@ class UserDetailSerializer(serializers.ModelSerializer):
                 'email': {'required': False},
                 }
 
-
-
-    def create(self, validated_data):
-        print(validated_data)
-        if (validated_data.get('profile')):
-            profile_data = validated_data.pop('profile')
-            password = validated_data.pop('password')
-            user = User(**validated_data)
-            user.set_password(password)
-            user.save()
-            Author.objects.create(user=user, **profile_data)
-        else:
-            user = User(**validated_data)
-            password = validated_data.pop('password')
-            user.set_password(password)
-            user.save()
-        return validated_data
-    
     def update(self, instance, validated_data):
         # saving user data
         instance.email = validated_data.get('email', instance.email)
