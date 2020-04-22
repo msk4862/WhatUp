@@ -1,5 +1,5 @@
 ## Blogs web app developed with React-Django.
-A simple Full stack project for beginners to understand the entire flow from frontend to backend.
+A simple Full stack project to understand the entire flow from frontend to backend.
 
 ## Getting Started
 
