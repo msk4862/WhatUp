@@ -93,7 +93,6 @@ const Signup = () => {
                                 setEmail(event.target.value)
                             }}
                         />
-                        <label>{}</label>
                     </div>
 
                     <div className="form-group">

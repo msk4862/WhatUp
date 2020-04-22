@@ -4,6 +4,7 @@
 }
 
 .auth-buttons button {
+    color: #f8f8f8;
     background-color: transparent;
     margin-right: 15px;
     border: 1px solid #f8f8f8;
