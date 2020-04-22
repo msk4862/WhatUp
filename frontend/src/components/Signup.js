@@ -10,6 +10,8 @@ const Signup = () => {
     const [firstname, setFirstname] = useState('')
     const [lastname, setLastname] = useState('')
     const [password, setPassword] = useState('')
+    const [message, setMessage] = useState('')
+    const [isError, setIsError] = useState(false)
 
     function Register(event) {
         event.preventDefault()
@@ -20,9 +22,55 @@ const Signup = () => {
             last_name: lastname,
             password: password,
         }
-        console.log(data)
-        const response = DjangoRest.post('/users/register', {data})
-        console.log(response.data)
+        
+        DjangoRest.post('/users/register', data)
+        .then(res => {
+            if(res.status === 201) {
+                setMessage(`Account created successfully. \nNow login to continue`)
+                setIsError(false)
+            }
+        })
+        .catch(function (error) {
+            if (error.response) {
+                setMessage(error.response.data.email)
+            } else {
+                setMessage(error)
+            }
+            setIsError(true)
+        })
+        
+    }
+
+    function renderMessage() {
+        /*
+            rendering info message
+        */
+        if (message !== '') {
+
+            let color = ''
+            let symbol = ''
+            if(isError) {
+                color = 'red'
+                symbol = '\u2715'
+            }
+            else {
+                color = 'green' 
+                symbol = '\u2713'
+            }
+            const style = {
+                color: `${color}`,
+                border: `2px solid ${color}`
+            }
+            return (
+                <div className='error-message row justify-content-center'>
+                    <p className='col-8 col-sm-8' style={style}>
+                        {symbol} {message}
+                    </p>
+                </div>
+            )
+        } else {
+            return null
+        }
     }
 
     return (
@@ -32,18 +80,20 @@ const Signup = () => {
             </div>
             <form className='signup-form row justify-content-center' onSubmit={Register}>
                 <div className='col-10 col-sm-6'>
-
+                  {renderMessage()}  
                     <div className="form-group">
                         <label>Email</label>
                         <input 
                             type="email" 
                             className="form-control" 
+                            required
                             value={email}
                             onChange={(event) => {
                                 event.preventDefault();
                                 setEmail(event.target.value)
                             }}
                         />
+                        <label>{}</label>
                     </div>
 
                     <div className="form-group">
@@ -51,6 +101,7 @@ const Signup = () => {
                         <input 
                             type="text" 
                             className="form-control" 
+                            required
                             value={username}
                             onChange={(event) => {
                                 event.preventDefault();
@@ -65,6 +116,7 @@ const Signup = () => {
                             <input 
                                 type="text" 
                                 className="form-control" 
+                                required
                                 value={firstname}
                                 onChange={(event) => {
                                     event.preventDefault();
@@ -77,6 +129,7 @@ const Signup = () => {
                             <input 
                                 type="text" 
                                 className="form-control" 
+                                required
                                 value={lastname}
                                 onChange={(event) => {
                                     event.preventDefault();
@@ -91,6 +144,7 @@ const Signup = () => {
                         <input 
                             type="password" 
                             className="form-control"
+                            required
                             value={password}
                             onChange={(event) => {
                                 event.preventDefault();

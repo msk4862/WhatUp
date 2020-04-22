@@ -15,3 +15,14 @@
 .signup-welcome {
     text-align: center;
 }
+
+.error-message {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.error-message p {
+    margin: 0 0 10px 0px;
+    padding: 5px;
+    border-radius: 5px;
+}
