@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from .models import Author
 User = get_user_model()
@@ -29,11 +30,25 @@ class UserCreateSerializer(serializers.ModelSerializer):
             'first_name',
             'last_name',
             'password',
+            'tokens',
         )
         extra_kwargs = {
             'password' : {'write_only': True},
             'profile' : {'required': False},
         }
+
+    
+    def get_tokens(self, user):
+        
+        user_obj = User(email = user.get('id'))
+        tokens = RefreshToken.for_user(user_obj)
+        refresh = str(tokens)
+        access = str(tokens.access_token)
+        data = {
+            "refresh": refresh,
+            "access": access
+        }
+        return data
 
         
     def create(self, validated_data):
