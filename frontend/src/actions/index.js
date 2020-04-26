@@ -23,6 +23,27 @@ export const fetchBlog = (id) => {
     }
 }
 
+export const login = (data) => {
+    return async (dispatch) => {
+        const response = await DjangoREST.post(`/users/login`, data)
+
+        localStorage.setItem('jwtToken', response.data['access'])
+        
+        dispatch({type: ACTIONS.LOGIN, payload: response.data})
+     
+    }
+}
+
+export const logout = (data) => {
+    return async (dispatch) => {
+
+        localStorage.removeItem('jwtToken')
+        
+        dispatch({type: ACTIONS.LOGOUT})
+     
+    }
+}
+
 /*Has Multifetch Issue*/
 
 // export const fetchUser = (id) => {

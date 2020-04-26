@@ -1,6 +1,9 @@
 const ACTION_TYPES = {
     FETCH_BLOGS: 'FETCH_BLOGS',
     FETCH_BLOG: 'FETCH_BLOG',
+    LOGIN: 'LOGIN',
+    LOGOUT: 'LOGOUT',
+    REGISTER: 'REGISTER',
 }
 
 export default ACTION_TYPES

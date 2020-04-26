@@ -1,16 +1,31 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 
 import './styles/Login.css'
+import { login } from '../actions/index'
+import history from '../history'
 
-const Login = () => {
+const Login = (props) => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     function onLogin(event) {
-        // event.preventDefault()
+        event.preventDefault()
+        const cred = {
+            email: email,
+            password: password
+        }
+        props.login(cred)
         
     }
+
+    useEffect(()=>{
+        //navigating to home
+        if (props.auth.isLoggedIn) {
+            history.push('/')
+        }
+    }, [props.auth])
 
     return (
         <div className='login-form-container container'>
@@ -44,7 +59,7 @@ const Login = () => {
                         />
                     </div>
                     <div className="form-group  row justify-content-center">
-                        <button type="submit" class="btn">Login</button>
+                        <button type="submit" className="btn">Login</button>
                     </div>
                 </div>
                 
@@ -54,4 +69,8 @@ const Login = () => {
     )
 }
 
-export default Login
+const mapStateToProps = (state) => {
+    return {auth: state.user.auth}
+}
+
+export default connect(mapStateToProps, {login})(Login)
