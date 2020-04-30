@@ -34,7 +34,7 @@ export const login = (data) => {
     }
 }
 
-export const logout = (data) => {
+export const logout = () => {
     return async (dispatch) => {
 
         localStorage.removeItem('jwtToken')

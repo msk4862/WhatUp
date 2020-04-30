@@ -21,11 +21,12 @@ const Login = (props) => {
     }
 
     useEffect(()=>{
-        //navigating to home
+        //navigating to home if logged in
         if (props.auth.isLoggedIn) {
             history.push('/')
         }
     }, [props.auth])
+
 
     return (
         <div className='login-form-container container'>

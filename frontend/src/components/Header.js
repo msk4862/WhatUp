@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import './styles/Header.css'
+import { logout } from '../actions/index'
+import history from '../history'
 
 const Header = (props) => {
+
+    function Logout(event) {
+        event.preventDefault()
+        props.logout()
+
+        // redirect to login page
+        history.push('/login')
+    }
 
     function renderUserLinks() {
         return (
             <div className='auth-buttons col-*'>
-                    <button className='btn'>Logout</button>
+                    <button className='btn' onClick={Logout}>Logout</button>
             </div>
         )
     }
@@ -37,4 +47,4 @@ const Header = (props) => {
 const mapStateToProps = (state) => {
     return {auth: state.user.auth}
 }
-export default connect(mapStateToProps)(Header)
+export default connect(mapStateToProps, {logout})(Header)
