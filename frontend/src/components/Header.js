@@ -18,28 +18,42 @@ const Header = (props) => {
 
     function renderUserLinks() {
         return (
-            <div className='auth-buttons col-*'>
-                    <button className='btn' onClick={Logout}>Logout</button>
-            </div>
+            <ul className='navbar-nav auth-buttons'>
+                <li className="nav-item">
+                    <button className='btn nav-link' onClick={Logout}>Logout</button>
+                </li>
+            </ul>
         )
     }
 
     function renderGuestLinks() {
         return (
-            <div className='auth-buttons col-*'>
-                <Link to='/login'><button className='btn'>Login</button></Link>
-                <Link to='/signup'><button className='btn'>Signup</button></Link>
-            </div>
+            <ul className="navbar-nav auth-buttons">
+                <li className="nav-item">
+                    <Link className="nav-link" to='/login'><button className='btn'>Login</button></Link>
+                </li>
+                <li className="nav-item">
+                    <Link className="nav-link" to='/signup'><button className='btn'>Signup</button></Link>
+                </li>
+            </ul>
         )
     }
 
     return (
-        <nav className='navbar navbar-expand-sm row justify-content-between'>
-            <h2 className='col-sm-4'><Link to='/'>Blogs</Link></h2>
-            {
-                props.auth.isLoggedIn? renderUserLinks() : renderGuestLinks()
-            }
-        </nav>
+        <nav className="navbar navbar-expand-sm">
+                <Link className="navbar-brand" href="#">Blogs</Link>
+                
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar">
+                        <span className="navbar-toggler-icon"></span>
+                </button>
+
+                <div className="collapse navbar-collapse" id="myNavbar">
+                {
+                    props.auth.isLoggedIn? renderUserLinks() : renderGuestLinks()
+                }
+                </div>
+            </nav>
+
     )
 }
 
