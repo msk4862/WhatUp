@@ -4,7 +4,10 @@ from .models import Blog
 
 
 class BlogListSerializer(serializers.ModelSerializer):
-    
+    firstname = serializers.CharField(source='Author.user.first_name')
+    lastname = serializers.CharField(source='Author.user.last_name')
+    # email = serializers.CharField(source='Author.user.email_name')
+
     class Meta:
         model = Blog
         fields = (
@@ -13,13 +16,12 @@ class BlogListSerializer(serializers.ModelSerializer):
             'Body',
             'BodyMeta',
             'DateCreated',
-            'Author',
+            'firstname',
+            'lastname',
         )
-        depth=2
 
 
 class BlogDetailSerializer(serializers.ModelSerializer):
-    
     class Meta:
         model = Blog
         fields = (
