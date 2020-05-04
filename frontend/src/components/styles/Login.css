@@ -6,12 +6,6 @@
     margin-top: 1rem;
 }
 
-.login-form button {
-    color: #f8f8f8;
-    background-color: #543864;
-    box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.4);
-}
-
 .login-welcome {
     text-align: center;
 }
