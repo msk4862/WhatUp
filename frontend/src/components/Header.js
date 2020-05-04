@@ -41,7 +41,7 @@ const Header = (props) => {
 
     return (
         <nav className="navbar navbar-expand-sm">
-                <Link className="navbar-brand" href="#">Blogs</Link>
+                <Link className="navbar-brand" to='/'><h2>Blogs</h2></Link>
                 
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar">
                         <span className="navbar-toggler-icon"></span>
