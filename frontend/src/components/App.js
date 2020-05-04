@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route } from 'react-router-dom'
+import { Router, Route, Switch } from 'react-router-dom'
 
 import './styles/App.css'
 import Header from './Header'
@@ -18,18 +18,22 @@ function App() {
           <div>
             <Header/>
               <div className='container'>
-                <Route exact path='/' component={BlogList}/>
-
-                {/* Authentication Routes */}
-                <Route exact path='/login' component={Login}/>
-                <Route exact path='/signup' component={Signup}/>
                 
-                {/* Blogs Routes */}
-                <Route exact path='/blogs' component={BlogList}/>
-                <Route exact path='/blogs/create' component={BlogCreate}/>
-                <Route exact path='/blogs/:id' component={BlogShow}/>
-                <Route exact path='/blogs/edit/:id' component={BlogEdit}/>
-                <Route exact path='/blogs/delete/:id' component={BlogCreate}/>
+                {/* Show only single route at a time (required beacuse /blogs/create=== blogs/:id ) */}
+                <Switch>
+                  <Route exact path='/' component={BlogList}/>
+
+                  {/* Authentication Routes */}
+                  <Route exact path='/login' component={Login}/>
+                  <Route exact path='/signup' component={Signup}/>
+                  
+                  {/* Blogs Routes */}
+                  <Route path='/blogs' exact component={BlogList}/>
+                  <Route path='/blogs/create' exact component={BlogCreate}/>
+                  <Route path='/blogs/edit/:id' exact component={BlogEdit}/>
+                  <Route path='/blogs/delete/:id' exact component={BlogCreate}/>
+                  <Route path='/blogs/:id' exact component={BlogShow}/>
+                </Switch>
               </div>
           </div>
       </Router>
