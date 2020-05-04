@@ -18,10 +18,18 @@ const Header = (props) => {
 
     function renderUserLinks() {
         return (
-            <ul className='navbar-nav auth-buttons'>
-                <li className="nav-item">
-                    <button className='btn nav-link' onClick={Logout}>Logout</button>
+            <ul className='navbar-nav my-account'>
+                {/* <!-- Dropdown --> */}
+                <li className="nav-item dropdown">
+                    <a className="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">
+                        My Account
+                    </a>
+                    <div className="dropdown-menu">
+                        <Link className="dropdown-item" to='/blogs/create'>Write Blog</Link>
+                        <Link className="dropdown-item" onClick={Logout}>Logout</Link>
+                    </div>
                 </li>
+
             </ul>
         )
     }
@@ -43,16 +51,18 @@ const Header = (props) => {
         <nav className="navbar navbar-expand-sm">
                 <Link className="navbar-brand" to='/'><h2>Blogs</h2></Link>
                 
+                 {/* Toggler/collapsibe Button */}
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar">
                         <span className="navbar-toggler-icon"></span>
                 </button>
 
+                {/* Nav Links */}
                 <div className="collapse navbar-collapse" id="myNavbar">
                 {
                     props.auth.isLoggedIn? renderUserLinks() : renderGuestLinks()
                 }
                 </div>
-            </nav>
+        </nav>
 
     )
 }

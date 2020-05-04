@@ -3,7 +3,7 @@
     box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.4);
 }
 
-.auth-buttons {
+.auth-buttons, .my-account {
     margin-left: auto;
 }
 
