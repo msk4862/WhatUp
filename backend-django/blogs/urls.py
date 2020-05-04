@@ -5,5 +5,6 @@ from .views import *
 
 urlpatterns = [
     path('', BlogListApiView.as_view()),
+    path('create', BlogCreateApiView.as_view()),
     path('<int:pk>', BlogDetailApiView.as_view()),
 ]
