@@ -27,7 +27,7 @@ const BlogList = (props) => {
                 }
             )
         } else {
-            return <h2>No blogs found!</h2>
+            return <h2>Sorry! No blogs yet written.</h2>
         }
     }
 
