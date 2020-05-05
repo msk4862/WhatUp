@@ -48,7 +48,7 @@ const Header = (props) => {
     }
 
     return (
-        <nav className="navbar navbar-expand-sm">
+        <nav className="navbar navbar-expand-sm navbar-dark">
                 <Link className="navbar-brand" to='/'><h2>Blogs</h2></Link>
                 
                  {/* Toggler/collapsibe Button */}

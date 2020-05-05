@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import { fetchBlog } from '../../actions'
+import UserHeader from '../UserHeader'
 import '../styles/Blogs/BlogShow.css'
 
 const BlogShow = (props) => {
@@ -13,25 +14,33 @@ const BlogShow = (props) => {
         props.fetchBlog(id)
     }, [])
 
-    return (        
-        <div className='container-fluid blog-body'>
-            <h1 className='blog-title'>{props.blog.Title}</h1>
-            <div className='blog-meta row'>
-                <span className='col-auto col-sm-auto'>
-                    <strong>
-                        {props.blog.Author.user.first_name} {props.blog.Author.user.last_name}
-                    </strong>
-                    </span>
-                <span>{props.blog.DateCreated}</span>
-            </div>
-            <div className='blog-body'>
-                <p>{props.blog.Body}</p>
-            </div>
+    function renderBlog() {
+        if(props.blog.Author) {
+            return (
+                <div className='container-fluid blog-body'>
+                    <h1 className='blog-title'>{props.blog.Title}</h1>
+                    <div className='blog-meta row'>
+                        <UserHeader author_id={props.blog.Author}/>
+                        <span>{props.blog.DateCreated}</span>
+                    </div>
+                    <div className='blog-body'>
+                        <p>{props.blog.Body}</p>
+                    </div>
+                </div>
+            )
+        } else {
+            return <div>Loading...</div>
+        }
+    }
+
+    return (    
+        <div>
+            {renderBlog()}
         </div>
     )
 }
+
 const mapStateToProps = (state, ownProps) => {
-    console.log(state.blogs, ownProps)
     return {blog : state.blogs[ownProps.match.params.id]}
 }
 

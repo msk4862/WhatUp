@@ -17,7 +17,6 @@ const Login = (props) => {
             password: password
         }
         props.login(cred)
-        
     }
 
     useEffect(()=>{

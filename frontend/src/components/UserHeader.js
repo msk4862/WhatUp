@@ -1,32 +1,23 @@
-import React, {Component} from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import { fetchUser } from '../actions'
 
-class UserHeader extends Component {
+const UserHeader = (props) => {
 
-    componentDidMount() {
-        this.props.fetchUser(this.props.id)
-    }
+    useEffect(() => {
+        props.fetchUser(props.author_id)
+    }, [])
 
-    render() {
-        const { user } = this.props
-        
-        if(!user) {
-            return null
-        }
-
-        return (
-            <div>
-                <p><strong>Authored by <i>{user.name}</i></strong></p>
-            </div>
-        )
-    }
-
+    return (
+        <span className='col-auto col-sm-auto'>
+            <strong>{`${props.user.first_name} ${props.user.last_name}`} </strong>
+        </span>
+    )
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return {user : state.users.find((user) => user.id === ownProps.id)}
+const mapStateToProps = (state) => {
+    return {user : state.user.user}
 }
 
 export default connect(mapStateToProps, {fetchUser})(UserHeader)

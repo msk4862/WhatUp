@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 
 import '../styles/Blogs/BlogCreate.css'
+
 const BlogCreate = (props) => {
 
     const [title, setTitle] = useState('')

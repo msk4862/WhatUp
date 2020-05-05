@@ -1,4 +1,4 @@
-// import _ from 'lodash'
+import _ from 'lodash'
 
 import DjangoREST from '../apis/DjangoREST'
 import ACTIONS from './actionTypes'
@@ -23,13 +23,24 @@ export const fetchBlog = (id) => {
     }
 }
 
+export const createBlog = (data) => {
+    return async (dispatch) => {
+        const response = await DjangoREST.post('/blogs/create', data)
+        
+        dispatch({type: ACTIONS.CREATE_BLOG, payload: response.data})
+    }
+}
+
+
 export const login = (data) => {
     return async (dispatch) => {
         const response = await DjangoREST.post(`/users/login`, data)
 
-        localStorage.setItem('jwtToken', response.data['access'])
+        console.log(response)
+
+        // localStorage.setItem('jwtToken', response.data['access'])
         
-        dispatch({type: ACTIONS.LOGIN, payload: response.data})
+        // dispatch({type: ACTIONS.LOGIN, payload: response.data})
      
     }
 }
@@ -58,14 +69,14 @@ export const logout = () => {
 /*
 MultiFetch Solution-1 (Using Lodash memoize())
 */
-// export const fetchUser = id => {
-//     return (dispatch) => {
-//         _fetchUser(id, dispatch)
-//     }
-// } 
+export const fetchUser = id => {
+    return (dispatch) => {
+        _fetchUser(id, dispatch)
+    }
+} 
 
-// const _fetchUser = _.memoize(async (id, dispatch) => {
-//         const response = await JSONPlaceHolder.get(`/users/${id}`)
+const _fetchUser = _.memoize(async (id, dispatch) => {
+        const response = await DjangoREST.get(`/users/${id}`)
         
-//         dispatch({ type: 'FETCH_USER', payload: response.data})
-// })
+        dispatch({ type: ACTIONS.FETCH_USER, payload: response.data})
+})
