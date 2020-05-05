@@ -7,6 +7,7 @@ const UserHeader = (props) => {
 
     useEffect(() => {
         props.fetchUser(props.author_id)
+    // eslint-disable-next-line    
     }, [])
 
     return (

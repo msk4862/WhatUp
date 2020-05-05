@@ -1,17 +1,36 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 
 import './styles/Signup.css'
-import DjangoRest from '../apis/DjangoREST'
+import { signup, clearAlert } from '../actions'
+import history from '../history'
 
-const Signup = () => {
+const Signup = (props) => {
 
     const [email, setEmail] = useState('')
     const [username, setUsername] = useState('')
     const [firstname, setFirstname] = useState('')
     const [lastname, setLastname] = useState('')
     const [password, setPassword] = useState('')
-    const [message, setMessage] = useState('')
-    const [isError, setIsError] = useState(false)
+    const [alert, setAlert] = useState('')
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(()=> {
+        if (props.auth.isLoggedIn) {
+            history.push('/')
+        }
+        
+        if(props.alert.isError) {
+            setAlert(props.alert.message)
+
+            // workin as componentWillUnmount(), To clear alert
+            return function cleanAlert() {
+                props.clearAlert()
+            }
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    })
+
 
     function Register(event) {
         event.preventDefault()
@@ -23,48 +42,28 @@ const Signup = () => {
             password: password,
         }
         
-        DjangoRest.post('/users/register', data)
-        .then(res => {
-            if(res.status === 201) {
-                setMessage(`Account created successfully. \nNow login to continue`)
-                setIsError(false)
-            }
-        })
-        .catch(function (error) {
-            if (error.response) {
-                setMessage(error.response.data.email)
-            } else {
-                setMessage(error)
-            }
-            setIsError(true)
-        })
-        
+        props.signup(data)
     }
 
     function renderMessage() {
         /*
             rendering info message
         */
-        if (message !== '') {
+        if (alert !== '') {
 
-            let color = ''
-            let symbol = ''
-            if(isError) {
-                color = 'red'
-                symbol = '\u2715'
+            const meta = {
+                color: 'red',
+                symbol: '\u2715'
             }
-            else {
-                color = 'green' 
-                symbol = '\u2713'
-            }
+    
             const style = {
-                color: `${color}`,
-                border: `2px solid ${color}`
+                color: `${meta.color}`,
+                border: `2px solid ${meta.color}`
             }
             return (
                 <div className='error-message row justify-content-center'>
-                    <p className='col-8 col-sm-8' style={style}>
-                        {symbol} {message}
+                    <p className='col-*' style={style}>
+                        {meta.symbol} {alert}
                     </p>
                 </div>
             )
@@ -162,4 +161,11 @@ const Signup = () => {
     )
 }
 
-export default Signup
+const mapStateToProps = (state) => {
+    return {
+        auth: state.user.auth,
+        alert: state.alert,
+    }
+}
+
+export default connect(mapStateToProps, {signup, clearAlert})(Signup)

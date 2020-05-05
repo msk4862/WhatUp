@@ -31,17 +31,36 @@ export const createBlog = (data) => {
     }
 }
 
+export const signup = (data) => {
+    return async (dispatch) => {
+        
+        DjangoREST.post(`/users/register`, data)
+        .then(response => {
+            localStorage.setItem('jwtToken', response.data.tokens['access'])
+
+            dispatch({type: ACTIONS.SIGNUP, payload: response.data})
+        })
+        .catch(error => {
+            console.log(error.response.data)
+            dispatch({type: ACTIONS.SET_ALERT, payload: error.response.data['email'][0]})
+        })
+        
+    }
+}
 
 export const login = (data) => {
     return async (dispatch) => {
-        const response = await DjangoREST.post(`/users/login`, data)
+        DjangoREST.post(`/users/login`, data)
+        .then(response=> {
+            localStorage.setItem('jwtToken', response.data['access'])
+            dispatch({type: ACTIONS.LOGIN, payload: response.data})
+         
+        })
+        .catch(error => {
+            console.log(error.response.data)
+            dispatch({type: ACTIONS.SET_ALERT, payload: error.response.data['detail']})
 
-        console.log(response)
-
-        // localStorage.setItem('jwtToken', response.data['access'])
-        
-        // dispatch({type: ACTIONS.LOGIN, payload: response.data})
-     
+        })
     }
 }
 
@@ -80,3 +99,10 @@ const _fetchUser = _.memoize(async (id, dispatch) => {
         
         dispatch({ type: ACTIONS.FETCH_USER, payload: response.data})
 })
+
+
+export const clearAlert = () => {
+    return (dispatch) => {
+        dispatch({ type: ACTIONS.CLEAR_ALERT})
+    }
+}

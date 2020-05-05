@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
@@ -26,7 +26,7 @@ const Header = (props) => {
                     </a>
                     <div className="dropdown-menu">
                         <Link className="dropdown-item" to='/blogs/create'>Write Blog</Link>
-                        <Link className="dropdown-item" onClick={Logout}>Logout</Link>
+                        <Link className="dropdown-item" to={Logout}>Logout</Link>
                     </div>
                 </li>
 
