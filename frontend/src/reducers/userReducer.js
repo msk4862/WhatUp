@@ -11,9 +11,18 @@ let initialState = {
 export default (state = initialState, action) => {
 
     switch(action.type) {
-        case ACTIONS.LOGIN:
+
+        case ACTIONS.SIGNUP:
 
             var updatedAuth = {
+                isLoggedIn: true,
+                token: action.payload.tokens['access']
+            }
+            return {...state, auth: updatedAuth}
+
+        case ACTIONS.LOGIN:
+
+            updatedAuth = {
                 isLoggedIn: true,
                 token: action.payload['access']
             }
