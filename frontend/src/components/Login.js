@@ -11,15 +11,6 @@ const Login = (props) => {
     const [password, setPassword] = useState('')
     const [alert, setAlert] = useState('')
 
-    function onLogin(event) {
-        event.preventDefault()
-        const cred = {
-            email: email,
-            password: password
-        }
-        props.login(cred)
-    }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(()=>{
         //navigating to home if logged in
@@ -37,6 +28,15 @@ const Login = (props) => {
         }
     })
 
+    function onLogin(event) {
+        event.preventDefault()
+        const cred = {
+            email: email,
+            password: password
+        }
+        props.login(cred)
+    }
+    
     function renderMessage() {
         /*
             rendering alert
