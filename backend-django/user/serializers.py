@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
+
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from .models import Author
@@ -21,6 +22,9 @@ class UserListSerializer(serializers.ModelSerializer):
 
 
 class UserCreateSerializer(serializers.ModelSerializer):
+    
+    tokens = serializers.SerializerMethodField()
+
     class Meta:
         model = User
         fields = (
@@ -37,9 +41,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
             'profile' : {'required': False},
         }
 
-    
     def get_tokens(self, user):
-        
         user_obj = User(email = user.get('id'))
         tokens = RefreshToken.for_user(user_obj)
         refresh = str(tokens)
@@ -66,7 +68,6 @@ class UserCreateSerializer(serializers.ModelSerializer):
             user.set_password(password)
             user.save()
         return validated_data
-    
 
 
 

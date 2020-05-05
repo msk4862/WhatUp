@@ -25,7 +25,6 @@ class UserCreateAPIView(views.APIView):
     def post(self, request):
         data = request.data
         serializer = UserCreateSerializer(data=data)
-        print(serializer.is_valid())
         if not serializer.is_valid(raise_exception=True):
             return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)        
         serializer.save()
