@@ -4,7 +4,8 @@ let initialState = {
     auth: {
         isLoggedIn: false,
         token: '',
-    }
+    },
+    user: {},
 }
 
 export default (state = initialState, action) => {
@@ -20,12 +21,15 @@ export default (state = initialState, action) => {
 
         case ACTIONS.LOGOUT:
 
-            var updatedAuth = {
+            updatedAuth = {
                 isLoggedIn: false,
                 token: ''
             }
             return {...state, auth: updatedAuth}
     
+        case ACTIONS.FETCH_USER:
+
+            return {...state, user: action.payload}
 
         default:
             return state
