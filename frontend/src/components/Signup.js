@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import './styles/Signup.css'
 import { signup, clearAlert } from '../actions'
 import history from '../history'
+import { SIGNUP_TITLE } from '../utilities/Constants'
 
 const Signup = (props) => {
 
@@ -75,7 +76,7 @@ const Signup = (props) => {
     return (
         <div className='signup-form-container container'>
             <div className='signup-welcome row justify-content-center'>
-                <h2 className='col-10 col-sm-6'>Welcome</h2>
+                <h2 className='col-10 col-sm-6'>{SIGNUP_TITLE}</h2>
             </div>
             <form className='signup-form row justify-content-center' onSubmit={Register}>
                 <div className='col-10 col-sm-6'>

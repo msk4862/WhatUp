@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import './styles/Header.css'
 import { logout } from '../actions/index'
 import history from '../history'
+import { APP_TITLE, MY_PROFILE_TEXT } from '../utilities/Constants'
 
 const Header = (props) => {
 
@@ -22,7 +23,7 @@ const Header = (props) => {
                 {/* <!-- Dropdown --> */}
                 <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">
-                        My Account
+                        {MY_PROFILE_TEXT}
                     </a>
                     <div className="dropdown-menu">
                         <Link className="dropdown-item" to='/blogs/create'>Write Blog</Link>
@@ -49,7 +50,7 @@ const Header = (props) => {
 
     return (
         <nav className="navbar navbar-expand-sm navbar-dark">
-                <Link className="navbar-brand" to='/'><h2>Blogs</h2></Link>
+                <Link className="navbar-brand" to='/'><h2>{APP_TITLE}</h2></Link>
                 
                  {/* Toggler/collapsibe Button */}
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar">

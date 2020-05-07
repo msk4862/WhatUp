@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import './styles/Login.css'
+import FormField from './FormField'
 import { login, clearAlert } from '../actions/index'
 import history from '../history'
+import { LOGIN_TITLE } from '../utilities/Constants'
 
 const Login = (props) => {
 
@@ -66,7 +68,7 @@ const Login = (props) => {
     return (
         <div className='login-form-container container'>
             <div className='login-welcome row justify-content-center'>
-                <h2 className='col-10 col-sm-6'>Welcome Back</h2>
+                <h2 className='col-10 col-sm-6'>{LOGIN_TITLE}</h2>
             </div>
             <form className='login-form row justify-content-center' onSubmit={onLogin}>
                 <div className='col-8 col-sm-8'>
@@ -82,6 +84,7 @@ const Login = (props) => {
                                 setEmail(event.target.value)
                             }}
                         />
+                        
                     </div>
                     <div className="form-group">
                         <label>Password</label>
