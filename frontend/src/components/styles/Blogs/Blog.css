@@ -9,7 +9,8 @@ a, a:hover {
     color: #f8f8f8;
 }
 
-.meta-date {
-    color: #f4f4f4;
+.meta-date, .meta-date a {
+    color: #d8b9c3;
     font-size: 0.85rem;
+    text-transform: capitalize;
 }

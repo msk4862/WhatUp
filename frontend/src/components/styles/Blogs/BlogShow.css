@@ -4,6 +4,7 @@
 
 .blog-meta {
     margin-top: 20px;
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     color: #d8b9c3;
+    text-transform: capitalize;
 }
