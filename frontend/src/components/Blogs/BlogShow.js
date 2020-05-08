@@ -16,19 +16,22 @@ const BlogShow = (props) => {
     }, [])
 
     function renderBlog() {
-        if(props.blog.Author) {
-            return (
-                <div className='container-fluid blog-body'>
-                    <h1 className='blog-title'>{props.blog.Title}</h1>
-                    <div className='blog-meta row'>
-                        <UserHeader author_id={props.blog.Author}/>
-                        <span>{props.blog.DateCreated}</span>
+        
+        if(props.blog ) {
+            if(props.blog.Author) {
+                return (
+                    <div className='container-fluid blog-body'>
+                        <h1 className='blog-title'>{props.blog.Title}</h1>
+                        <div className='blog-meta row'>
+                            <UserHeader author_id={props.blog.Author}/>
+                            <span>{props.blog.DateCreated}</span>
+                        </div>
+                        <div className='blog-body'>
+                            <p>{props.blog.Body}</p>
+                        </div>
                     </div>
-                    <div className='blog-body'>
-                        <p>{props.blog.Body}</p>
-                    </div>
-                </div>
-            )
+                )
+            }
         } else {
             return <div>Loading...</div>
         }

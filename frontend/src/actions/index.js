@@ -2,6 +2,7 @@ import _ from 'lodash'
 
 import DjangoREST from '../apis/DjangoREST'
 import ACTIONS from './actionTypes'
+import history from '../history'
 
 // USING THUNK MIDDLEWARE (for async request)
 
@@ -25,9 +26,15 @@ export const fetchBlog = (id) => {
 
 export const createBlog = (data) => {
     return async (dispatch) => {
-        const response = await DjangoREST.post('/blogs/create', data)
-        
-        dispatch({type: ACTIONS.CREATE_BLOG, payload: response.data})
+        DjangoREST.post('/blogs/create', data)
+        .then(response => {
+            dispatch({type: ACTIONS.CREATE_BLOG, payload: response.data})
+            history.push('/')
+        })
+        .catch(error => {
+            console.log(error.response.data)
+            // dispatch({type: ACTIONS.SET_ALERT, payload: error.response.data['email'][0]})
+        })
     }
 }
 

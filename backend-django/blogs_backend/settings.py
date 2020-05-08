@@ -62,6 +62,7 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 
     'AUTH_HEADER_TYPES': ('Token',),
+    'USER_ID_CLAIM': 'user_id',
 }
 
 MIDDLEWARE = [

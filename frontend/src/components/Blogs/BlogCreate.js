@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
+import jwt_decode from 'jwt-decode'
 
 import '../styles/Blogs/BlogCreate.css'
+import { createBlog } from '../../actions'
 import history from '../../history'
 
 const BlogCreate = (props) => {
@@ -10,22 +12,31 @@ const BlogCreate = (props) => {
     const [shortDesc, setShortDesc] = useState('')
     const [body, setBody] = useState('')
 
+
     useEffect(()=> {
         if (!props.auth.isLoggedIn) {
             history.push('/login')
         }
     }, [])
 
+    useEffect(() => {
+        if(props.alert.isError) {
+            console.log(props.alert.message)
+        }
+    })
+
     function onCreateBlog(event) {
         event.preventDefault()
+
+        const user_id = jwt_decode(props.auth.token).user_id
 
         const blog = {
             Title: title,
             BodyMeta: shortDesc,
             Body: body,
+            Author: user_id,
         }
-        console.log(blog)
-        // props.login(cred)
+        props.createBlog(blog)
     }
 
     return (
@@ -80,6 +91,9 @@ const BlogCreate = (props) => {
 
 
 const mapStateToProps = (state) => {
-    return {auth: state.user.auth}
+    return {
+        auth: state.user.auth,
+        alert: state.alert,
+    }
 }
-export default connect(mapStateToProps)(BlogCreate)
+export default connect(mapStateToProps, {createBlog})(BlogCreate)
