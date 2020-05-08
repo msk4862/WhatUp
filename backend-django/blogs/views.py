@@ -2,13 +2,11 @@ from django.shortcuts import render
 from rest_framework import generics
 
 from .models import Blog
-from .serializers import BlogDetailSerializer, BlogListSerializer
-
-
+from .serializers import BlogDetailSerializer
 
 
 class BlogListApiView(generics.ListAPIView):
-    serializer_class = BlogListSerializer
+    serializer_class = BlogDetailSerializer
     queryset = Blog.objects.all()
 
 
