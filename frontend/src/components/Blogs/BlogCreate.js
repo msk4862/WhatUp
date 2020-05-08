@@ -1,13 +1,20 @@
-import React, { useState } from 'react'
-
+import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 
 import '../styles/Blogs/BlogCreate.css'
+import history from '../../history'
 
 const BlogCreate = (props) => {
 
     const [title, setTitle] = useState('')
     const [shortDesc, setShortDesc] = useState('')
     const [body, setBody] = useState('')
+
+    useEffect(()=> {
+        if (!props.auth.isLoggedIn) {
+            history.push('/login')
+        }
+    }, [])
 
     function onCreateBlog(event) {
         event.preventDefault()
@@ -71,4 +78,8 @@ const BlogCreate = (props) => {
     )
 }
 
-export default BlogCreate
+
+const mapStateToProps = (state) => {
+    return {auth: state.user.auth}
+}
+export default connect(mapStateToProps)(BlogCreate)

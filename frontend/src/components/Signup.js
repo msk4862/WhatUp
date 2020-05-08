@@ -79,7 +79,7 @@ const Signup = (props) => {
                 <h2 className='col-10 col-sm-6'>{SIGNUP_TITLE}</h2>
             </div>
             <form className='signup-form row justify-content-center' onSubmit={Register}>
-                <div className='col-10 col-sm-6'>
+                <div className='col-8 col-sm-8 col-lg-4'>
                   {renderMessage()}  
                     <div className="form-group">
                         <label>Email</label>

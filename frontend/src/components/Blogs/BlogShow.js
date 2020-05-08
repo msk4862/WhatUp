@@ -9,7 +9,6 @@ const BlogShow = (props) => {
 
     // replacement of componentDidMount()
     // empty array is passed as second argument to use it like componentDidMount()
-
     useEffect(() => {
         const { id } = props.match.params
         props.fetchBlog(id)
