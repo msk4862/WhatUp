@@ -22,9 +22,9 @@ const BlogShow = (props) => {
                 return (
                     <div className='container-fluid blog-body'>
                         <h1 className='blog-title'>{props.blog.Title}</h1>
-                        <div className='blog-meta row'>
+                        <div className='blog-meta'>
                             <UserHeader author_id={props.blog.Author}/>
-                            <span>{props.blog.DateCreated}</span>
+                            <span> | {props.blog.DateCreated}</span>
                         </div>
                         <div className='blog-body'>
                             <p>{props.blog.Body}</p>

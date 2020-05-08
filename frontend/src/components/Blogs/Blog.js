@@ -14,13 +14,10 @@ const Blog = ({id, title, desc, date, author}) => {
                 <div className='row meta-date justify-content-between align-items-center'>
                     <p className='col-6 col-sm-6 date'>Created on {date}</p>                    
                     <div className='col-4 col-sm-4 ml-auto'>
-                        <i><span>by </span>
-                            <a href='#' className='card-link'>
-                                <UserHeader author_id={author}/>
-                            </a>
-                        </i>
+                        <a href='#' className='card-link'>
+                            Posted by <UserHeader author_id={author}/>
+                        </a>
                     </div>
-                    
                 </div>
             </div>
         </div>

@@ -5,7 +5,7 @@ let initialState = {
         isLoggedIn: false,
         token: '',
     },
-    user: {},
+    users: [],
 }
 
 export default (state = initialState, action) => {
@@ -38,7 +38,9 @@ export default (state = initialState, action) => {
     
         case ACTIONS.FETCH_USER:
 
-            return {...state, user: action.payload}
+            const updatedUsers = [...state.users, action.payload]
+
+            return {...state, users: updatedUsers}
 
         default:
             return state

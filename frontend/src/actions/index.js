@@ -38,6 +38,20 @@ export const createBlog = (data) => {
     }
 }
 
+export const editBlog = (id, data) => {
+    return async (dispatch) => {
+        DjangoREST.put(`/blogs/${id}`, data)
+        .then(response => {
+            dispatch({type: ACTIONS.CREATE_BLOG, payload: response.data})
+            history.push('/')
+        })
+        .catch(error => {
+            console.log(error.response.data)
+            // dispatch({type: ACTIONS.SET_ALERT, payload: error.response.data['email'][0]})
+        })
+    }
+}
+
 export const signup = (data) => {
     return async (dispatch) => {
         

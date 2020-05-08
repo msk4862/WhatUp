@@ -21,8 +21,7 @@ const BlogList = (props) => {
                                 title={blog.Title} 
                                 desc={blog.BodyMeta} 
                                 date={blog.DateCreated}
-                                firstname={blog.firstname}
-                                lastname={blog.lastname}
+                                author={blog.Author}
                             />
                 }
             )
