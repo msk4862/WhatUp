@@ -15,7 +15,7 @@ const BlogEdit = (props) => {
         if (!props.auth.isLoggedIn) {
             history.push('/login')
         } 
-        console.log(props)
+
         if (props.blog) {
             const {Title, Body, BodyMeta} = props.blog
             setTitle(Title)

@@ -27,6 +27,7 @@ const Header = (props) => {
                     </a>
                     <div className="dropdown-menu">
                         <Link className="dropdown-item" to='/blogs/create'>Write Blog</Link>
+                        <Link className="dropdown-item" to='/blogs/my-blogs'>My Blogs</Link>
                         <Link className="dropdown-item" to=''  onClick={Logout}>Logout</Link>
                     </div>
                 </li>

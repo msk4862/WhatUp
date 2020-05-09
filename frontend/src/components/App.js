@@ -29,6 +29,7 @@ function App() {
                   
                   {/* Blogs Routes */}
                   <Route path='/blogs' exact component={BlogList}/>
+                  <Route path='/blogs/my-blogs' exact component={BlogList}/>
                   <Route path='/blogs/create' exact component={BlogCreate}/>
                   <Route path='/blogs/edit/:id' exact component={BlogEdit}/>
                   <Route path='/blogs/delete/:id' exact component={BlogCreate}/>
