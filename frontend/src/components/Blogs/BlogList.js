@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import {connect} from 'react-redux'
 
-import { fetchBlogs } from '../../actions'
+import { fetchBlogs, login } from '../../actions'
 import Blog from './Blog'
 
 import '../styles/Blogs/BlogList.css'
@@ -10,6 +10,7 @@ const BlogList = (props) => {
 
     useEffect(() => {
         props.fetchBlogs()
+        props.login()
     }, [])
 
     function renderBlogs() {
@@ -40,4 +41,4 @@ const BlogList = (props) => {
 const mapStateToProps = (state) => {
     return {blogs: Object.values(state.blogs)}
 }
-export default connect(mapStateToProps, {fetchBlogs})(BlogList)
+export default connect(mapStateToProps, {fetchBlogs, login})(BlogList)
