@@ -2,7 +2,7 @@ import _ from 'lodash'
 
 import ACTIONS from '../actions/actionTypes'
 
-export default (state = [], action) => {
+export default (state = {}, action) => {
 
     switch(action.type) {
         case ACTIONS.FETCH_BLOGS:
@@ -17,6 +17,14 @@ export default (state = [], action) => {
 
             return {...state, [action.payload.id]: action.payload}
         
+        case ACTIONS.EDIT_BLOG:
+
+            return {...state, [action.payload.id]: action.payload}
+        
+        case ACTIONS.DELETE_BLOG:
+
+            return _.omit(state, action.payload)
+
         default:
             return state
     }
