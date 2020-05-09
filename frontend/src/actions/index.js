@@ -71,18 +71,7 @@ export const signup = (data) => {
 
 export const login = (data=null) => {
 
-    // using browser cache to login 
-    const cachedToken = localStorage.getItem('jwtToken')
-    if(cachedToken) {
-        const data = {
-            access: cachedToken
-        }
-        return {
-            type: ACTIONS.LOGIN,
-            payload: data
-        }
-    }
-    else if(data) {
+    if(data) {
         return async (dispatch) => {
             DjangoREST.post(`/users/login`, data)
             .then(response=> {
@@ -95,6 +84,17 @@ export const login = (data=null) => {
                 dispatch({type: ACTIONS.SET_ALERT, payload: error.response.data['detail']})
     
             })
+        }
+    }
+    // using browser cache to login 
+    const cachedToken = localStorage.getItem('jwtToken')
+    if(cachedToken) {
+        const data = {
+            access: cachedToken
+        }
+        return {
+            type: ACTIONS.LOGIN,
+            payload: data
         }
     }
 }
