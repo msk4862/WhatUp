@@ -69,29 +69,41 @@ export const signup = (data) => {
     }
 }
 
-export const login = (data) => {
-    return async (dispatch) => {
-        DjangoREST.post(`/users/login`, data)
-        .then(response=> {
-            localStorage.setItem('jwtToken', response.data['access'])
-            dispatch({type: ACTIONS.LOGIN, payload: response.data})
-         
-        })
-        .catch(error => {
-            console.log(error.response.data)
-            dispatch({type: ACTIONS.SET_ALERT, payload: error.response.data['detail']})
+export const login = (data=null) => {
 
-        })
+    // using browser cache to login 
+    const cachedToken = localStorage.getItem('jwtToken')
+    if(cachedToken) {
+        const data = {
+            access: cachedToken
+        }
+        return {
+            type: ACTIONS.LOGIN,
+            payload: data
+        }
+    }
+    else if(data) {
+        return async (dispatch) => {
+            DjangoREST.post(`/users/login`, data)
+            .then(response=> {
+                localStorage.setItem('jwtToken', response.data['access'])
+                dispatch({type: ACTIONS.LOGIN, payload: response.data})
+             
+            })
+            .catch(error => {
+                console.log(error.response.data)
+                dispatch({type: ACTIONS.SET_ALERT, payload: error.response.data['detail']})
+    
+            })
+        }
     }
 }
 
 export const logout = () => {
-    return async (dispatch) => {
+    localStorage.removeItem('jwtToken')
 
-        localStorage.removeItem('jwtToken')
-        
-        dispatch({type: ACTIONS.LOGOUT})
-     
+    return {        
+        type: ACTIONS.LOGOUT
     }
 }
 
@@ -123,7 +135,5 @@ const _fetchUser = _.memoize(async (id, dispatch) => {
 
 
 export const clearAlert = () => {
-    return (dispatch) => {
-        dispatch({ type: ACTIONS.CLEAR_ALERT})
-    }
+    return { type: ACTIONS.CLEAR_ALERT}
 }
