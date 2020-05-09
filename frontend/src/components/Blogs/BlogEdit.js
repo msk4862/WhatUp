@@ -13,20 +13,16 @@ const BlogEdit = (props) => {
     
     useEffect(()=> {
         if (!props.auth.isLoggedIn) {
-            // history.push('/login')
-        }
-    }, [])
-
-    useEffect(()=> {
+            history.push('/login')
+        } 
         console.log(props)
         if (props.blog) {
-            const {b_title, b_shortDesc, b_body} = props.blog
-            setTitle(b_title)
-            setShortDesc(b_shortDesc)
-            setBody(b_body)
+            const {Title, Body, BodyMeta} = props.blog
+            setTitle(Title)
+            setShortDesc(BodyMeta)
+            setBody(Body)
         }
-    })
-
+    }, [])
 
     function onEditBlog(event) {
         event.preventDefault()
@@ -39,7 +35,7 @@ const BlogEdit = (props) => {
             Body: body,
             Author: user_id,
         }
-        props.editBlog(blog)
+        props.editBlog(props.blog.id, blog)
     }
 
     return (
