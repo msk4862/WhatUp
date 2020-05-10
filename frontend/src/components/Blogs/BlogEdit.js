@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import jwt_decode from 'jwt-decode'
 
 import { fetchBlog, editBlog } from '../../actions'
 import history from '../../history'
@@ -27,7 +26,7 @@ const BlogEdit = (props) => {
     function onEditBlog(event) {
         event.preventDefault()
 
-        const user_id = jwt_decode(props.auth.token).user_id
+        const user_id = props.auth.currentUserId
 
         const blog = {
             Title: title,

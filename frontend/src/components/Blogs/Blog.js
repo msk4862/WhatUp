@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import jwt_decode from 'jwt-decode'
 
 import '../styles/Blogs/Blog.css'
 import UserHeader from '../UserHeader'
@@ -9,7 +8,7 @@ import { connect } from 'react-redux'
 const Blog = ({id, title, desc, date, author, auth}) => {
     
     function renderAdmin() {
-        const current_user = jwt_decode(auth.token).user_id
+        const current_user = auth.currentUserId
 
         if (current_user === author) {
             return (    

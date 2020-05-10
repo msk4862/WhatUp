@@ -1,9 +1,12 @@
 import ACTIONS from '../actions/actionTypes'
 
+import jwt_decode from 'jwt-decode'
+
 let initialState = {
     auth: {
         isLoggedIn: false,
-        token: '',
+        token: null,
+        currentUserId: null
     },
     users: [],
 }
@@ -16,23 +19,29 @@ export default (state = initialState, action) => {
 
             var updatedAuth = {
                 isLoggedIn: true,
-                token: action.payload.tokens['access']
+                token: action.payload.tokens['access'],
+                currentUserId: jwt_decode(action.payload['access']).user_id,
             }
+
             return {...state, auth: updatedAuth}
 
         case ACTIONS.LOGIN:
+            console.log(action.payload)
 
             updatedAuth = {
                 isLoggedIn: true,
-                token: action.payload['access']
+                token: action.payload['access'],
+                currentUserId: jwt_decode(action.payload['access']).user_id,
             }
+            
             return {...state, auth: updatedAuth}
 
         case ACTIONS.LOGOUT:
 
             updatedAuth = {
                 isLoggedIn: false,
-                token: ''
+                token: null,
+                currentUserId: null,
             }
             return {...state, auth: updatedAuth}
     

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import {connect} from 'react-redux'
-import jwt_decode from 'jwt-decode'
 
 import { fetchBlogs, login } from '../../actions'
 import Blog from './Blog'
@@ -23,7 +22,7 @@ const BlogList = (props) => {
         if(props.blogs) {
             if( props.location.pathname === "/blogs/my-blogs" & props.auth.isLoggedIn) {
                 // render current user's blog only
-                const user_id = jwt_decode(props.auth.token).user_id
+                const user_id = props.auth.currentUserId
 
                 return props.blogs.map (blog => {
                     if (blog.Author === user_id) {
