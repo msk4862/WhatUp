@@ -10,7 +10,10 @@ const BlogList = (props) => {
 
     useEffect(() => {
         props.fetchBlogs()
-        props.login()
+        if (!props.auth.isLoggedIn) {
+            // trying login using browser cache
+            props.login()
+        }
     }, [])
 
     function renderBlogs() {
@@ -39,6 +42,9 @@ const BlogList = (props) => {
 }
 
 const mapStateToProps = (state) => {
-    return {blogs: Object.values(state.blogs)}
+    return {
+        auth: state.user.auth,
+        blogs: Object.values(state.blogs),
+    }
 }
 export default connect(mapStateToProps, {fetchBlogs, login})(BlogList)
