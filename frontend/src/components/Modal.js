@@ -1,6 +1,5 @@
 import React from 'react'
 import { createPortal } from 'react-dom'
-import history from '../history'
 
 import './styles/Modal.css'
 
@@ -15,12 +14,12 @@ const Modal = ({header, content, actions, onDismiss}) => {
                 onClick={(e) => e.stopPropagation()}>
 
                 <div className='modal-header'>
-                    <h4 class="modal-title">{header}</h4>
+                    <h4 className="modal-title">{header}</h4>
                 </div>
-                <div class="modal-body">
+                <div className="modal-body">
                     <p>{content}</p>
                 </div>
-                <div class="modal-footer">
+                <div className="modal-footer">
                     {actions}
                 </div>
             </div>
