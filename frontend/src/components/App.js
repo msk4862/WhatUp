@@ -9,6 +9,7 @@ import BlogList from './Blogs/BlogList'
 import BlogShow from './Blogs/BlogShow'
 import BlogCreate from './Blogs/BlogCreate'
 import BlogEdit from './Blogs/BlogEdit'
+import BlogDelete from './Blogs/BlogDelete'
 import history from '../history'
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
                   <Route path='/blogs/my-blogs' exact component={BlogList}/>
                   <Route path='/blogs/create' exact component={BlogCreate}/>
                   <Route path='/blogs/edit/:id' exact component={BlogEdit}/>
-                  <Route path='/blogs/delete/:id' exact component={BlogCreate}/>
+                  <Route path='/blogs/delete/:id' exact component={BlogDelete}/>
                   <Route path='/blogs/:id' exact component={BlogShow}/>
                 </Switch>
               </div>
