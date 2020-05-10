@@ -102,15 +102,12 @@ export const login = (data=null) => {
         }
     }
     // using browser cache to login 
-    const cachedToken = localStorage.getItem('jwtToken')
-    if(cachedToken) {
-        const data = {
-            access: cachedToken
-        }
-        return {
-            type: ACTIONS.LOGIN,
-            payload: data
-        }
+    const response = {
+        access: localStorage.getItem('jwtToken')
+    }
+    return {
+        type: ACTIONS.LOGIN,
+        payload: response
     }
 }
 

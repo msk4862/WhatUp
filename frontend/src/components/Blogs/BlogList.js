@@ -10,7 +10,8 @@ const BlogList = (props) => {
 
     useEffect(() => {
         props.fetchBlogs()
-        if (!props.auth.isLoggedIn) {
+
+        if (!props.auth.isLoggedIn & localStorage.getItem('jwtToken')) {
             // trying login using browser cache
             props.login()
         }
