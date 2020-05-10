@@ -10,6 +10,9 @@ import history from '../../history'
 const BlogDelete = (props) => {
 
     useEffect(()=> {
+        if (!props.auth.isLoggedIn) {
+            history.push('/login')
+        } 
         props.fetchBlog(props.match.params.id)
     }, [])
 
@@ -47,7 +50,10 @@ const BlogDelete = (props) => {
 
 
 const mapStateToProps = (state, ownProps) => {
-    return { blog: state.blogs[ownProps.match.params.id]}
+    return { 
+        auth: state.user.auth,
+        blog: state.blogs[ownProps.match.params.id],
+    }
 }
 
 export default connect(mapStateToProps, { fetchBlog, deleteBlog})(BlogDelete)
