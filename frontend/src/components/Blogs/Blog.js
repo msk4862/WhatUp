@@ -14,7 +14,7 @@ const Blog = ({id, title, desc, date, author, auth}) => {
             return (    
                 
                 <div className='row justify-content-end'>
-                    <Link type='button' className='btn mr-4' to={`/blogs/edit/${id}`}>Edit</Link>
+                    <Link style={{backgroundColor:'#46a049'}} type='button' className='btn mr-4' to={`/blogs/edit/${id}`}>Edit</Link>
                     <Link style={{backgroundColor:'#d63447'}} type='button' className='btn mr-4' to={`/blogs/delete/${id}`} >Delete</Link>
                 </div>
             )
