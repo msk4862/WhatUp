@@ -1,16 +1,18 @@
 .card {
-    background-color: #363062;
-    box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.4);
-    margin-bottom: 1.25rem;
+  background-color: #363062;
+  box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.4);
+  margin-bottom: 1.25rem;
 }
 
-a, a:hover {
-    text-decoration: none;
-    color: #f8f8f8;
+a,
+a:hover {
+  text-decoration: none;
+  color: #f8f8f8;
 }
 
-.meta-data, .meta-data a {
-    color: #d8b9c3;
-    font-size: 0.85rem;
-    text-transform: capitalize;
+.meta-data,
+.meta-data a {
+  color: #d8b9c3;
+  font-size: 0.85rem;
+  text-transform: capitalize;
 }

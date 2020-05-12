@@ -1,22 +1,22 @@
 .signup-form-container {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .signup-form {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 .signup-welcome {
-    text-align: center;
+  text-align: center;
 }
 
 .error-message {
-    text-align: center;
-    margin-top: 20px;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .error-message p {
-    margin: 0 0 10px 0px;
-    padding: 5px;
-    border-radius: 5px;
+  margin: 0 0 10px 0px;
+  padding: 5px;
+  border-radius: 5px;
 }

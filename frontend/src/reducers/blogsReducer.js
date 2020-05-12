@@ -1,31 +1,25 @@
-import _ from 'lodash'
+import _ from "lodash";
 
-import ACTIONS from '../actions/actionTypes'
+import ACTIONS from "../actions/actionTypes";
 
 export default (state = {}, action) => {
+  switch (action.type) {
+    case ACTIONS.FETCH_BLOGS:
+      return { ...state, ..._.mapKeys(action.payload, "id") };
 
-    switch(action.type) {
-        case ACTIONS.FETCH_BLOGS:
+    case ACTIONS.FETCH_BLOG:
+      return { ...state, [action.payload.id]: action.payload };
 
-            return {...state, ..._.mapKeys(action.payload, 'id')}
-            
-        case ACTIONS.FETCH_BLOG:
+    case ACTIONS.CREATE_BLOG:
+      return { ...state, [action.payload.id]: action.payload };
 
-            return {...state, [action.payload.id]: action.payload}
+    case ACTIONS.EDIT_BLOG:
+      return { ...state, [action.payload.id]: action.payload };
 
-        case ACTIONS.CREATE_BLOG:
+    case ACTIONS.DELETE_BLOG:
+      return _.omit(state, action.payload);
 
-            return {...state, [action.payload.id]: action.payload}
-        
-        case ACTIONS.EDIT_BLOG:
-
-            return {...state, [action.payload.id]: action.payload}
-        
-        case ACTIONS.DELETE_BLOG:
-
-            return _.omit(state, action.payload)
-
-        default:
-            return state
-    }
-}
+    default:
+      return state;
+  }
+};

@@ -1,20 +1,21 @@
 .navbar {
-    background-color: #543864;
-    box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.4);
+  background-color: #543864;
+  box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.4);
 }
 
-.auth-buttons, .my-account {
-    margin-left: auto;
+.auth-buttons,
+.my-account {
+  margin-left: auto;
 }
 
 .auth-buttons button {
-    color: #f8f8f8;
-    background-color: transparent;
-    margin-right: 15px;
-    border: 1px solid #f8f8f8;
+  color: #f8f8f8;
+  background-color: transparent;
+  margin-right: 15px;
+  border: 1px solid #f8f8f8;
 }
 
 .auth-buttons button:hover {
-    background-color: #e43f5a;
-    text-decoration: none;
+  background-color: #e43f5a;
+  text-decoration: none;
 }
