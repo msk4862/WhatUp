@@ -1,22 +1,13 @@
 # pull official base image
 FROM python:3.7-slim
 
-RUN mkdir /home/blog-backend
+RUN mkdir /code
 
 # set working directory
-WORKDIR /home/blog-backend
+WORKDIR /code
+
+COPY . /code/
 
 # install app dependencies
-
-
-RUN npm ci
-
-COPY . .
-
-EXPOSE 8000
-
-CMD ["python", "runserver"]
-
-
-
+RUN pip install -r requirements.txt
 
