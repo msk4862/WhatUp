@@ -1,4 +1,4 @@
-export const APP_TITLE = "Blogs";
+export const APP_TITLE = "WhatUp";
 export const MY_PROFILE_TEXT = "My Account";
 export const LOGIN_TITLE = "Welcome Back";
 export const SIGNUP_TITLE = "Welcome";
