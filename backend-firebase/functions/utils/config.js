@@ -1,4 +1,4 @@
-exports.firebaseConfig = {
+module.exports = {
     apiKey: "AIzaSyBaiVMeH_TFWaM_ijDosdgofyHZKBblLmA",
     authDomain: "what-up-bde10.firebaseapp.com",
     databaseURL: "https://what-up-bde10.firebaseio.com",
