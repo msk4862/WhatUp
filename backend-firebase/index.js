@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const _ = require('lodash');
-const postsRoute = require("./resources/posts/posts.router"); 
+const postsRoute = require("./functions/resources/posts/posts.router"); 
 
 const port = 8000
 
@@ -13,6 +13,9 @@ app.use(bodyParser.json());
 
 // Routes
 app.use("/api/posts", postsRoute);
+
+var posts = []
+var id = 0
 
 // app.get('/posts', (req, res) => {
 //     res.statusCode = 200;
