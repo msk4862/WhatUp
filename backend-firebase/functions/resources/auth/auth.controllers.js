@@ -76,3 +76,23 @@ exports.signup = (req, res) => {
         })
 
 }
+
+exports.login = (req, res) => {
+    const user = {
+        email: req.body.email,
+        password: req.body.password,
+    }
+
+    firebase.auth().signInWithEmailAndPassword(user.email, user.password)
+        .then(data => {
+            return data.user.getIdToken();
+        })
+        .then(token => {
+            return res.status(200).send({token});
+        })
+        .catch(err => {
+            console.error(err);
+            if(err === "auth/wrong-password") res.status(403).send({credential: "Incorrect credentials!"})
+            return res.status(500).send({error: err.toString()});
+        })
+}
