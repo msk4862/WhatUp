@@ -28,7 +28,7 @@ exports.createPost = (req, res) => {
 
     const data = req.body;
     const newPost = {
-        userHandle: data.userHandle,
+        userHandle: req.user.handle,
         bodyMeta: data.bodyMeta,
         body: data.body,
         createdAt: new Date().toISOString(),
