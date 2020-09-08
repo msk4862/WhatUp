@@ -4,6 +4,18 @@ const config = require("../../utils/config");
 
 firebase.initializeApp(config);
 
+const isEmpty = (string) => {
+    if(string.trim() === "") return true;
+    return false;
+}
+
+const isEmail = (email) => {
+    const emailRegEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if(email.match(emailRegEx)) return true;
+    return false;
+}
+
 exports.signup = (req, res) => {
     const newUser = {
         email: req.body.email,
@@ -11,7 +23,19 @@ exports.signup = (req, res) => {
         confirmPassword: req.body.confirmPassword,
         handle: req.body.handle,        
     }
-    // TODO: validate data
+    
+    // data validations
+    let errors = {};
+    if(isEmpty(newUser.email)) errors.email = "Must not be empty!";
+    else if(!isEmail(newUser.email)) errors.email = "Must be valid!";
+
+    if(isEmpty(newUser.password)) errors.password = "Must not be empty!";
+    else if(newUser.password !== newUser.confirmPassword) errors.password = "Passwords must match!";
+
+    if(isEmpty(newUser.email)) errors.handle = "Must not be empty!";
+
+    if(Object.keys(errors).length > 0) return res.status(400).send(errors);
+
 
     let token, userId;
     db.doc(`/users/${newUser.handle}`).get()
