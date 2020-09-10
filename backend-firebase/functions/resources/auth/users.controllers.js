@@ -1,6 +1,7 @@
-const { db } = require("../../utils/admin");
+const { admin, db } = require("../../utils/admin");
 const firebase = require("firebase");
 const config = require("../../utils/config");
+const { user } = require("firebase-functions/lib/providers/auth");
 
 firebase.initializeApp(config);
 
@@ -60,6 +61,8 @@ exports.signup = (req, res) => {
                 email: newUser.email,
                 createdAt: new Date().toISOString(),
                 userId,
+                imageUrl: `https://firebasestorage.googleapis.com/v0/v/${config.storageBucket}/o/noimage.png?alt=media`,
+
             }
 
             return db.doc(`/users/${newUser.handle}`).set(userCredentials)
@@ -75,6 +78,53 @@ exports.signup = (req, res) => {
             return res.status(500).send({error: err.toString()});
         })
 
+}
+
+
+exports.uploadImage = (req, res) => {
+
+    // parsing form data using busboy
+    const Busboy = require("busboy");
+    const os = require("os");
+    const fs = require("fs");
+    const path = require("path");
+
+    const busboy = new Busboy({ headers: req.headers });
+    let imageToBeUploaded, imageFileName;
+
+    busboy.on("file", (fieldname, file, filename, encoding, mimetype) => {
+        
+        // creating custom image filename
+        const imageFileExt = filename.split(".")[filename.split(".").length-1];
+        imageFileName = `${Math.round(Math.random()*1000000000)}.${imageFileExt}`;
+        
+        const filePath = path.join(os.tmpdir(), imageFileName);
+
+        imageToBeUploaded = { filePath, mimetype };
+        file.pipe(fs.createWriteStream(filePath));
+
+    });
+
+    busboy.on("finish", () => {
+        console.log('Done parsing form!');
+        admin.storage().bucket().upload(imageToBeUploaded.filePath, {
+            resumable: false,
+            metadata: {
+                contentType: imageToBeUploaded.mimetype
+            }
+        })
+        .then(() => {
+            const imageUrl = `https://firebasestorage.googleapis.com/v0/v/${config.storageBucket}/o/${imageFileName}?alt=media`;
+            return db.doc(`/users/${req.user.handle}`).update({imageUrl});
+        })
+        .then(() => {
+            return res.status(200).send({message:"Image uploaded succsfully!"});
+        })
+        .catch(err => {
+            console.error(err);
+            return res.status(500).send({error: err.toString()});
+        })
+    });
 }
 
 exports.login = (req, res) => {
