@@ -1,22 +1,9 @@
 const { admin, db } = require("../../utils/admin");
 const firebase = require("firebase");
 const config = require("../../utils/config");
-const { user } = require("firebase-functions/lib/providers/auth");
+const { validateSignupData } = require("../../utils/dataValidators");
 
 firebase.initializeApp(config);
-
-// data validations
-const isEmpty = (string) => {
-    if(string.trim() === "") return true;
-    return false;
-}
-
-const isEmail = (email) => {
-    const emailRegEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    if(email.match(emailRegEx)) return true;
-    return false;
-}
 
 // signup handler
 exports.signup = (req, res) => {
@@ -28,17 +15,9 @@ exports.signup = (req, res) => {
     }
     
     // data validations
-    let errors = {};
-    if(isEmpty(newUser.email)) errors.email = "Must not be empty!";
-    else if(!isEmail(newUser.email)) errors.email = "Must be valid!";
+    const { valid, errors } = validateSignupData(newUser);
 
-    if(isEmpty(newUser.password)) errors.password = "Must not be empty!";
-    else if(newUser.password !== newUser.confirmPassword) errors.password = "Passwords must match!";
-
-    if(isEmpty(newUser.email)) errors.handle = "Must not be empty!";
-
-    if(Object.keys(errors).length > 0) return res.status(400).send(errors);
-
+    if(!valid) return res.status(400).send(errors);
 
     let token, userId;
     db.doc(`/users/${newUser.handle}`).get()
@@ -144,15 +123,31 @@ exports.uploadImage = (req, res) => {
             return db.doc(`/users/${req.user.handle}`).update({imageUrl});
         })
         .then(() => {
-            return res.status(200).send({message:"Image uploaded succsfully!"});
+            return res.status(200).send({message:"Image uploaded successfully!"});
         })
         .catch(err => {
             console.error(err);
             return res.status(500).send({error: err.toString()});
-        })
+        });
     });
     busboy.end(req.rawBody);
 }
 
-// profile data handler
+// add user profile data handler
+exports.addUserDetails = (req, res) => {
+    const data = req.body;
 
+    const userDetails = {
+        bio: data.bio,
+        website: data.website,
+    }
+
+    db.doc(`/users/${req.user.handle}`).update(userDetails)
+        .then(() => {
+            return res.status(200).send({message:"Details added successfully!"});
+        })
+        .catch(err => {
+            console.error(err);
+            return res.status(500).send({error: err.toString()});
+        });
+}
