@@ -114,7 +114,7 @@ exports.uploadImage = (req, res) => {
             }
         })
         .then(() => {
-            const imageUrl = `https://firebasestorage.googleapis.com/v0/v/${config.storageBucket}/o/${imageFileName}?alt=media`;
+            const imageUrl = `https://firebasestorage.googleapis.com/v0/b/${config.storageBucket}/o/${imageFileName}?alt=media`;
             return db.doc(`/users/${req.user.handle}`).update({imageUrl});
         })
         .then(() => {
@@ -125,6 +125,7 @@ exports.uploadImage = (req, res) => {
             return res.status(500).send({error: err.toString()});
         })
     });
+    busboy.end(req.rawBody);
 }
 
 exports.login = (req, res) => {
@@ -142,7 +143,7 @@ exports.login = (req, res) => {
         })
         .catch(err => {
             console.error(err);
-            if(err === "auth/wrong-password") res.status(403).send({credential: "Incorrect credentials!"})
+            if(err.code === "auth/wrong-password") res.status(403).send({credential: "Incorrect credentials!"})
             return res.status(500).send({error: err.toString()});
         })
 }
