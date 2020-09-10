@@ -5,6 +5,7 @@ const { user } = require("firebase-functions/lib/providers/auth");
 
 firebase.initializeApp(config);
 
+// data validations
 const isEmpty = (string) => {
     if(string.trim() === "") return true;
     return false;
@@ -17,6 +18,7 @@ const isEmail = (email) => {
     return false;
 }
 
+// signup handler
 exports.signup = (req, res) => {
     const newUser = {
         email: req.body.email,
@@ -80,7 +82,28 @@ exports.signup = (req, res) => {
 
 }
 
+// login handler
+exports.login = (req, res) => {
+    const user = {
+        email: req.body.email,
+        password: req.body.password,
+    }
 
+    firebase.auth().signInWithEmailAndPassword(user.email, user.password)
+        .then(data => {
+            return data.user.getIdToken();
+        })
+        .then(token => {
+            return res.status(200).send({token});
+        })
+        .catch(err => {
+            console.error(err);
+            if(err.code === "auth/wrong-password") res.status(403).send({credential: "Incorrect credentials!"})
+            return res.status(500).send({error: err.toString()});
+        })
+}
+
+// uplaod image handler
 exports.uploadImage = (req, res) => {
 
     // parsing form data using busboy
@@ -94,6 +117,9 @@ exports.uploadImage = (req, res) => {
 
     busboy.on("file", (fieldname, file, filename, encoding, mimetype) => {
         
+        if(mimetype !== "image/jpg" && mimetype !== "image/jpeg" && mimetype !== "image/png") {
+            return res.status(400).send({error: "Inavlid file type!"});
+        }
         // creating custom image filename
         const imageFileExt = filename.split(".")[filename.split(".").length-1];
         imageFileName = `${Math.round(Math.random()*1000000000)}.${imageFileExt}`;
@@ -128,22 +154,5 @@ exports.uploadImage = (req, res) => {
     busboy.end(req.rawBody);
 }
 
-exports.login = (req, res) => {
-    const user = {
-        email: req.body.email,
-        password: req.body.password,
-    }
+// profile data handler
 
-    firebase.auth().signInWithEmailAndPassword(user.email, user.password)
-        .then(data => {
-            return data.user.getIdToken();
-        })
-        .then(token => {
-            return res.status(200).send({token});
-        })
-        .catch(err => {
-            console.error(err);
-            if(err.code === "auth/wrong-password") res.status(403).send({credential: "Incorrect credentials!"})
-            return res.status(500).send({error: err.toString()});
-        })
-}
