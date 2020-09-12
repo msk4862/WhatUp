@@ -140,6 +140,7 @@ exports.addUserDetails = (req, res) => {
     const userDetails = {
         bio: data.bio,
         website: data.website,
+        location: data.location,
     }
 
     db.doc(`/users/${req.user.handle}`).update(userDetails)
@@ -150,4 +151,25 @@ exports.addUserDetails = (req, res) => {
             console.error(err);
             return res.status(500).send({error: err.toString()});
         });
+}
+
+// get user details
+exports.getUserDeatils = (req, res) => {
+    let userData = {};
+
+    db.doc(`users/${req.user.handle}`).get()
+        .then(doc => {
+            if(!doc.exists) {
+                return res.status(404).send({error: "User not found!"});
+            }
+            userData.credentials = doc.data();
+            return db.collection("likes").where("userHandle", "==", req.user.handle);
+        })
+        .then(data => {
+            userData.likes = [];
+            data.forEach(doc => {
+                userData.likes.push(doc.data());
+            });
+            return res.status(200).send(userData);
+        })
 }

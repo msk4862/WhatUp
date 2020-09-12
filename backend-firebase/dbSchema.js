@@ -8,5 +8,40 @@ let db = {
             likeCount: 2,
             commentsCount: 4,
         },
+    ],
+
+    comments: [
+        {
+            userHandle: "user",
+            postId: "7wIhyf6oNo3jMiTzeZWG",
+            body: "asuh ashiash",
+            createdAt: "",
+        }
+    ],
+
+    
+    users: [
+        {
+            credentials: {
+                userId: "KUgsaashkashkasgyuas",
+                email: "email@email.com",
+                handle: "msk",
+                createdAt: "ISO string",
+                imageUrl: "firebase url",
+                bio: "bio",
+                website: "https://a.com",
+                Location: "Delhi, IN",
+            },
+            likes: [
+                {
+                    userHandle: "user",
+                    postId: "7wIhyf6oNo3jMiTzeZWG" 
+                },
+                {
+                    userHandle: "user",
+                    postId: "7wIhyf6oNo3jMiTzeZWG" 
+                }
+            ]
+        }
     ]
 }

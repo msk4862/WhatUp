@@ -1,6 +1,6 @@
 const app = require("express");
 const FBAuth = require("../../utils/authMiddleware");
-const { signup, login, uploadImage, addUserDetails } = require("./users.controllers");
+const { signup, login, uploadImage, addUserDetails, getUserDeatils } = require("./users.controllers");
 
 const Router = app.Router();
 
@@ -12,6 +12,7 @@ Router
 
 Router
     .route("/")
-    .post(FBAuth, addUserDetails);
+    .post(FBAuth, addUserDetails)
+    .get(FBAuth, getUserDeatils)
 
 module.exports = Router;

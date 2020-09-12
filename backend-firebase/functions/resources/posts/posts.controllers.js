@@ -46,6 +46,28 @@ exports.createPost = (req, res) => {
     
 }
 
+// get one post
 exports.getOnePost = (req, res) => {
-    const id = req.query.param;
+    let postData = {}
+    db.doc(`/posts/${req.params.postId}`).get()
+        .then(doc => {
+            if(!doc.exists) {
+                return res.status(404).send({error: "Post not found!"});
+            }
+
+            postData = doc.data();
+            postData.id = doc.id;
+            return db.collection("comments").where("postId", "==", postData.id).get();
+        })
+        .then(data => {
+            postData.comments = {};
+            data.forEach(doc => {
+                postData.comments.push(doc.data());
+            });
+        })
+        .catch(err => {
+            console.log(err)
+            return res.status(500).send({error: err.toString()});
+        });
 }
+
