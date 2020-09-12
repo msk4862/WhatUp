@@ -1,7 +1,7 @@
 const functions = require("firebase-functions");
 const app = require('express')();
 const postRoute = require("./resources/posts/posts.routes");
-const userRoute = require("./resources/auth/users.routes");
+const userRoute = require("./resources/users/users.routes");
 const FBAuth = require("./utils/authMiddleware");
 
 // Routes
