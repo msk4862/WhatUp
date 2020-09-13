@@ -19,7 +19,11 @@ exports.createNotifictionOnLike = functions.firestore.document("likes/{id}")
         return db.doc(`/posts/${likeDoc.data().postId}`).get()
             .then(post => {
                 if(!post.exists) {
-                    return res.status(404).send({error: "Post doesn't exist!"});
+                    return;
+                }
+                // sender == receiver
+                else if (post.data().userHandle === likeDoc.data().userHandle) {
+                    return;
                 }
                 else {
                     return db.doc(`/notification/${likeDoc.id}`).set({
