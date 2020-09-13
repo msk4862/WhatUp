@@ -46,7 +46,7 @@ const Header = (props) => {
 
     function renderGuestLinks() {
         return (
-            <ul className="navbar-nav auth-buttons">
+            <ul className="navbar-nav">
                 <li className="nav-item">
                     <Link className="nav-link" to="/login">
                         <button className="btn">Login</button>
@@ -62,7 +62,7 @@ const Header = (props) => {
     }
 
     return (
-        <nav className="navbar navbar-expand-sm navbar-dark">
+        <nav className="navbar navbar-expand-sm">
             <Link className="navbar-brand" to="/">
                 <h2>{APP_TITLE}</h2>
             </Link>

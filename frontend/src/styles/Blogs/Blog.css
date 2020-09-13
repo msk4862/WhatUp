@@ -4,14 +4,22 @@
     margin-bottom: 1.25rem;
 }
 
+.card-text  {
+    margin-bottom: 0.675rem;    
+}
+
 a,
 a:hover {
     text-decoration: none;
-    color: var(--font-light-color);
+    color: var(--font-dark-color);
+}
+
+ .card .meta-data small {
+    color: var(--font-gray-color);
 }
 
 .meta-data,
 .meta-data a {
-    font-size: 0.85rem;
+    font-size: var(--small);
     text-transform: capitalize;
 }

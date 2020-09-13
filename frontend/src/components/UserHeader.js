@@ -12,7 +12,7 @@ const UserHeader = (props) => {
     function renderUserHeader() {
         if (props.user) {
             return (
-                <strong>{`${props.user.first_name} ${props.user.last_name}`}</strong>
+                <>{`${props.user.first_name} ${props.user.last_name}`}</>
             );
         } else {
             return <p>Loading..</p>;

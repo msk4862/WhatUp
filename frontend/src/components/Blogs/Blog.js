@@ -43,11 +43,15 @@ const Blog = ({ id, title, desc, date, author, auth }) => {
                 </h4>
                 <p className="card-text">{desc}</p>
                 <div className="row meta-data justify-content-between align-items-center">
-                    <p className="col-6 col-sm-6">Created on {date}</p>
-                    <div className="col-6 col-sm-6">
-                        <a href="#" className="card-link">
-                            Posted by <UserHeader author_id={author} />
-                        </a>
+                    <div className="col">
+                        <div>
+                            <a href="#">
+                                <small><b><UserHeader author_id={author} /></b></small>
+                            </a>
+                        </div>
+                        <div>
+                            <small>Created on {date}</small>
+                        </div>
                     </div>
                 </div>
                 {auth.isLoggedIn ? renderAdmin() : null}

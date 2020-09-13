@@ -3,13 +3,19 @@
     box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.4);
 }
 
-.auth-buttons,
+.navbar .navbar-brand h2 {
+    color: var(--font-light-color);
+}
+
+.navbar-nav,
 .my-account {
     margin-left: auto;
 }
 
-.auth-buttons button {
+.navbar-nav button {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
     background-color: transparent;
     margin-right: 15px;
-    border: 1px solid var(--font-light-color);
+    border: 2px solid var(--font-light-color);
 }
