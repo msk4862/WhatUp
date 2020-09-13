@@ -9,11 +9,12 @@ exports.getAllPosts = (req, res) => {
         let posts = [];
         data.forEach(doc => {
             posts.push({
-                postId: doc.id,
-                userHandle: doc.data().userHandle,
+                postId: doc.id,                
                 bodyMeta: doc.data().bodyMeta,
                 body: doc.data().body,
                 createdAt: doc.data().createdAt,
+                userHandle: doc.data().userHandle,
+                userImage: doc.data().userImage,
             });
         })
         return res.status(200).send(posts);
