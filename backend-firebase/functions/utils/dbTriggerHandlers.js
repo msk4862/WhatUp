@@ -1,4 +1,4 @@
-const { db } = require("./utils/admin");
+const { db } = require("./admin");
 
 exports.createNotifictionOnLikeHandler = (likeDoc) => {
     return db.doc(`/posts/${likeDoc.data().postId}`).get()
