@@ -90,7 +90,15 @@ exports.updateOnePost = (req, res) => {
         body: data.body,
     }
 
-    db.doc(`/posts/${req.params.postId}`).update(updatedPost)
+    db.doc(`/posts/${req.params.postId}`).get()
+        .then(doc => {
+            if(doc.data().userHandle !== req.user.handle) {
+                return res.status(403).send({error:"Unauthorized!"});
+            } 
+            else {
+                return doc.ref.update(updatedPost);
+            }
+        })
         .then(() => {
             return res.status(200).send({message:"Post updated successfully!"});
         })
@@ -103,7 +111,15 @@ exports.updateOnePost = (req, res) => {
 // delete a post
 exports.deleteOnePost = (req, res) => {
 
-    db.doc(`/posts/${req.params.postId}`).delete()
+    db.doc(`/posts/${req.params.postId}`).get()
+        .then(doc => {
+            if(doc.data().userHandle !== req.user.handle) {
+                return res.status(403).send({error:"Unauthorized!"});
+            } 
+            else {
+                return doc.ref.delete();
+            }
+        })
         .then(() => {
             return res.status(200).send({message:"Post deleted successfully!"});
         })
