@@ -30,15 +30,20 @@ exports.createPost = (req, res) => {
     const data = req.body;
     const newPost = {
         userHandle: req.user.handle,
+        userImage: req.user.imageUrl,
         bodyMeta: data.bodyMeta,
         body: data.body,
         createdAt: new Date().toISOString(),
+        likeCount: 0,
+        commentCount: 0,
     }
 
     db.collection("posts")
     .add(newPost)
     .then(doc => {
-        return res.status(201).send({message: `Post with id ${doc.id} is created successfully.`});
+        const resPost = newPost;
+        resPost.id = doc.id;
+        return res.status(201).send(resPost);
     })
     .catch(err => {
         console.log(err)
@@ -59,7 +64,9 @@ exports.getOnePost = (req, res) => {
 
             postData = doc.data();
             postData.id = doc.id;
-            return db.collection("comments").where("postId", "==", postData.id).get();
+            return db.collection("comments")
+                .orderBy("createdAt", "desc")
+                .where("postId", "==", postData.id).get();
         })
         .then(data => {
             postData.comments = [];
@@ -106,3 +113,113 @@ exports.deleteOnePost = (req, res) => {
         });
 }
 
+// comment on post
+exports.commentOnPost = (req, res) => {
+    const commentData = {
+        body: req.body.body,
+        postId: req.params.postId,
+        userHandle: req.user.handle,
+        userImage: req.user.imageUrl,
+        createdAt: new Date().toISOString(),
+    }
+
+    const postDoc = db.doc(`/posts/${req.params.postId}`);
+    let postData;
+
+    postDoc.get()
+        .then(doc => {
+            if(!doc.exists) {
+                return res.status(404).send({error: "Post doesn't exist!"});
+            }
+
+            postData = doc.data();
+            return db.collection("comments").add(commentData);
+        })
+        .then(() => {
+            postData.commentCount ++;
+            return postDoc.update({commentCount : postData.commentCount})
+        })
+        .then(() => {
+            return res.status(201).send(postData);
+        })
+        .catch(err => {
+            console.error(err);
+            return res.status(500).send({error: err.toString()});
+        });
+} 
+
+
+// like a post
+exports.likeAPost = (req, res) => {
+    const likeData = {
+        userHandle: req.user.handle,
+        postId: req.params.postId,
+    }
+
+    const postDoc = db.doc(`/posts/${req.params.postId}`);
+    let postData;
+
+    postDoc.get()
+        .then(doc => {
+            if(!doc.exists) {
+                return res.status(404).send({error: "Post doesn't exist!"});
+            }
+
+            postData = doc.data();
+            return db.collection("likes").add(likeData);
+        })
+        .then(() => {
+            postData.likeCount ++;
+            return postDoc.update({commentCount : postData.likeCount})
+        })
+        .then(() => {
+            return res.status(201).send(postData);
+        })
+        .catch(err => {
+            console.error(err);
+            return res.status(500).send({error: err.toString()});
+        });
+
+}
+
+// unlike a post
+exports.unlikeAPost = (req, res) => {
+    const likeDoc = db.collection("likes")
+                            .where("userHandle", "==", req.user.handle)
+                            .where("postId", "==", req.params.postId)
+                            .limit(1);
+
+    const postDoc = db.doc(`/posts/${req.params.postId}`);
+    let postData;
+
+    postDoc.get()
+        .then(doc => {
+            if(!doc.exists) {
+                return res.status(404).send({error: "Post doesn't exist!"});
+            }
+
+            postData = doc.data();
+            return likeDoc.get();
+        })
+        .then(data => {
+            if(data.empty) {
+                return res.status(404).send({error: "Like  not found!"});
+            }
+            // deleting like from collection
+            console.log(data.docs[0].id)
+            return db.doc(`/likes/${data.docs[0].id}`).delete();
+        })
+        .then(() => {
+            
+            if(postData.likeCount > 0) postData.likeCount--;
+            return postDoc.update({commentCount : postData.likeCount})
+        })
+        .then(() => {
+            return res.status(200).send(postData);
+        })
+        .catch(err => {
+            console.error(err);
+            return res.status(500).send({error: err.toString()});
+        });
+
+}
