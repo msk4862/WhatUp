@@ -181,7 +181,7 @@ exports.likeAPost = (req, res) => {
         })
         .then(() => {
             postData.likeCount ++;
-            return postDoc.update({commentCount : postData.likeCount})
+            return postDoc.update({likeCount : postData.likeCount})
         })
         .then(() => {
             return res.status(200).send(postData);
@@ -217,13 +217,12 @@ exports.unlikeAPost = (req, res) => {
                 return res.status(404).send({error: "Like  not found!"});
             }
             // deleting like from collection
-            console.log(data.docs[0].id)
             return db.doc(`/likes/${data.docs[0].id}`).delete();
         })
         .then(() => {
             
             if(postData.likeCount > 0) postData.likeCount--;
-            return postDoc.update({commentCount : postData.likeCount})
+            return postDoc.update({likeCount : postData.likeCount})
         })
         .then(() => {
             return res.status(200).send(postData);
