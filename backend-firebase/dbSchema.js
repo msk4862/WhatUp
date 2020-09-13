@@ -21,7 +21,17 @@ let db = {
         }
     ],
 
-    
+    notification: [
+        {
+            recipient: "user",
+            sender: "sender_user",
+            read: "true | false",
+            postId: "",
+            type: "like|comment",
+            createdAt: "ISO string"
+        }
+    ],
+
     users: [
         {
             credentials: {
