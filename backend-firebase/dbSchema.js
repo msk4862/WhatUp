@@ -2,6 +2,7 @@ let db = {
     posts: [
         {
             userHandle: "user",
+            userImage: "",
             bodyMeta: "this is body meta",
             body: "this is body",
             createdAt: "2020-09-08T11:04:03.724Z", //ISO string
@@ -15,7 +16,8 @@ let db = {
             userHandle: "user",
             postId: "7wIhyf6oNo3jMiTzeZWG",
             body: "asuh ashiash",
-            createdAt: "",
+            imageUrl: "user image",
+            createdAt: "ISO string",
         }
     ],
 
