@@ -1,6 +1,13 @@
 const app = require("express");
 const FBAuth = require("../../utils/authMiddleware");
-const { signup, login, uploadImage, addUserDetails, getUserDeatils } = require("./users.controllers");
+const { 
+    signup, 
+    login, 
+    uploadImage, 
+    addUserDetails, 
+    getAuthenticatedUserDetails,
+    getUserDetails,
+} = require("./users.controllers");
 
 const Router = app.Router();
 
@@ -10,9 +17,16 @@ Router
     .post("/login", login)
     .post("/upload", FBAuth, uploadImage)
 
+// current logged in user details
 Router
     .route("/")
     .post(FBAuth, addUserDetails)
-    .get(FBAuth, getUserDeatils)
+    .get(FBAuth, getAuthenticatedUserDetails)
+
+Router
+    .get("/:handle", getUserDetails);
+
+// Router
+//     .put()
 
 module.exports = Router;

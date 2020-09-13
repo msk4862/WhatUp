@@ -154,7 +154,7 @@ exports.addUserDetails = (req, res) => {
 }
 
 // get authenticated user details
-exports.getUserDeatils = (req, res) => {
+exports.getAuthenticatedUserDetails = (req, res) => {
     let userData = {};
 
     db.doc(`users/${req.user.handle}`).get()
@@ -172,4 +172,45 @@ exports.getUserDeatils = (req, res) => {
             });
             return res.status(200).send(userData);
         })
+        .catch(err => {
+            console.error(err);
+            return res.status(500).send({error: err.toString()});
+        });
+}
+
+// get any user's details based on handle
+exports.getUserDetails = (req, res) => {
+    let userData = {};
+
+    db.doc(`users/${req.params.handle}`).get()
+        .then(doc => {
+            if(!doc.exists) {
+                return res.status(404).send({error: "User not found!"});
+            }
+            userData.user = doc.data();
+            return db.collection("posts")
+                .orderBy("createdAt", "desc")
+                .where("userHandle", "==", req.params.handle)
+                .get();
+        })
+        .then(data => {
+            userData.posts = [];
+            data.forEach(post => {
+                userData.likes.push({
+                    postId: post.id,
+                    bodyMeta: post.data().bodyMeta,
+                    createdAt: post.data().createdAt,
+                    userHandle: post.data().userHandle,
+                    imageUrl: post.data().imageUrl,
+                    likeCount: post.data().likeCount,
+                    commentCount: post.data().commentCount,
+                    
+                });
+            });
+            return res.status(200).send(userData);
+        })
+        .catch(err => {
+            console.error(err);
+            return res.status(500).send({error: err.toString()});
+        });
 }
