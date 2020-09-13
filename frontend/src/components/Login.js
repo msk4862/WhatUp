@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-import "./styles/Login.css";
+import "../styles/Login.css";
 import { login, clearAlert } from "../actions/index";
 import history from "../history";
 import { LOGIN_TITLE } from "../utilities/Constants";

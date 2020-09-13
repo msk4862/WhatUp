@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import "../styles/Blogs/Blog.css";
+import "../../styles/Blogs/Blog.css";
 import UserHeader from "../UserHeader";
 import { connect } from "react-redux";
 

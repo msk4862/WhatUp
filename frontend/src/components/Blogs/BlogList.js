@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { fetchBlogs, login } from "../../actions";
 import Blog from "./Blog";
 
-import "../styles/Blogs/BlogList.css";
+import "../../styles/Blogs/BlogList.css";
 
 const BlogList = (props) => {
   useEffect(() => {

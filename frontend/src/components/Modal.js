@@ -1,7 +1,7 @@
 import React from "react";
 import { createPortal } from "react-dom";
 
-import "./styles/Modal.css";
+import "../styles/Modal.css";
 
 const Modal = ({ header, content, actions, onDismiss }) => {
   return createPortal(

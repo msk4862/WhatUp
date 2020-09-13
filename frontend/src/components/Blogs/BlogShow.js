@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { fetchBlog } from "../../actions";
 import UserHeader from "../UserHeader";
-import "../styles/Blogs/BlogShow.css";
+import "../../styles/Blogs/BlogShow.css";
 
 const BlogShow = (props) => {
   // replacement of componentDidMount()

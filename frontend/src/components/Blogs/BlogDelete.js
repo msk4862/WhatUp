@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import "../styles/Blogs/Blog.css";
+import "../../styles/Blogs/Blog.css";
 import Modal from "../Modal";
 import { deleteBlog, fetchBlog } from "../../actions";
 import history from "../../history";

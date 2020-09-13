@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-import "./styles/Signup.css";
+import "../styles/Signup.css";
 import { signup, clearAlert } from "../actions";
 import history from "../history";
 import { SIGNUP_TITLE } from "../utilities/Constants";

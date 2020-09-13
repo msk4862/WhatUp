@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import "./styles/Header.css";
+import "../styles/Header.css";
 import { logout } from "../actions/index";
 import history from "../history";
 import { APP_TITLE, MY_PROFILE_TEXT } from "../utilities/Constants";

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-import "../styles/Blogs/BlogCreate.css";
+import "../../styles/Blogs/BlogCreate.css";
 import { createBlog } from "../../actions";
 import history from "../../history";
 
