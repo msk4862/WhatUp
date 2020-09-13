@@ -1,6 +1,7 @@
 const { db } = require("../../utils/admin");
 
 exports.getAllPosts = (req, res) => {
+
     db.collection("posts")
     .orderBy("createdAt", "desc")
     .get()
@@ -48,6 +49,7 @@ exports.createPost = (req, res) => {
 
 // get one post
 exports.getOnePost = (req, res) => {
+ 
     let postData = {}
     db.doc(`/posts/${req.params.postId}`).get()
         .then(doc => {
@@ -60,13 +62,46 @@ exports.getOnePost = (req, res) => {
             return db.collection("comments").where("postId", "==", postData.id).get();
         })
         .then(data => {
-            postData.comments = {};
+            postData.comments = [];
             data.forEach(doc => {
                 postData.comments.push(doc.data());
             });
+
+            return res.status(200).send(postData);
         })
         .catch(err => {
             console.log(err)
+            return res.status(500).send({error: err.toString()});
+        });
+}
+
+// update a post
+exports.updateOnePost = (req, res) => {
+    const data = req.body;
+    const updatedPost = {
+        bodyMeta: data.bodyMeta,
+        body: data.body,
+    }
+
+    db.doc(`/posts/${req.params.postId}`).update(updatedPost)
+        .then(() => {
+            return res.status(200).send({message:"Post updated successfully!"});
+        })
+        .catch(err => {
+            console.error(err);
+            return res.status(500).send({error: err.toString()});
+        });
+}
+
+// delete a post
+exports.deleteOnePost = (req, res) => {
+
+    db.doc(`/posts/${req.params.postId}`).delete()
+        .then(() => {
+            return res.status(200).send({message:"Post deleted successfully!"});
+        })
+        .catch(err => {
+            console.error(err);
             return res.status(500).send({error: err.toString()});
         });
 }

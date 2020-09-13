@@ -153,7 +153,7 @@ exports.addUserDetails = (req, res) => {
         });
 }
 
-// get user details
+// get authenticated user details
 exports.getUserDeatils = (req, res) => {
     let userData = {};
 

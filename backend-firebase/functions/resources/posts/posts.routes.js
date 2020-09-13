@@ -1,5 +1,5 @@
 const app = require("express");
-const { getAllPosts, createPost, getOnePost } = require("./posts.controllers");
+const { getAllPosts, createPost, getOnePost, updateOnePost, deleteOnePost } = require("./posts.controllers");
 
 const Router = app.Router();
 
@@ -9,8 +9,9 @@ Router
     .post(createPost);
 
 Router
-    .route("/:id")
+    .route("/:postId")
     .get(getOnePost)
-    .put()
-    .delete();
+    .put(updateOnePost)
+    .delete(deleteOnePost);
+
 module.exports = Router;
