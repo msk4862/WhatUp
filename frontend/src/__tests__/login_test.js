@@ -7,6 +7,6 @@
 //   ReactDOM.render(<Login />, div);
 // });
 
-test('sum numbers', ()=> {
-    expect(1+2).toEqual(3);
-})
+test("sum numbers", () => {
+    expect(1 + 2).toEqual(3);
+});

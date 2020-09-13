@@ -1,11 +1,6 @@
 .login-form-container {
-  margin-top: 2rem;
-}
-
-.login-form {
-  margin-top: 1rem;
-}
-
-.login-welcome {
-  text-align: center;
+    margin-top: 4.25rem;
+    background-color: var(--primary-light-color);
+    padding: 1.5rem;
+    box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.4);
 }

@@ -38,10 +38,13 @@
       "last 1 safari version"
     ]
   },
-  "jest" : {
+  "jest": {
     "displayName": "WhatUp",
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}"
     ]
+  },
+  "devDependencies": {
+    "prettier": "^2.1.1"
   }
 }
