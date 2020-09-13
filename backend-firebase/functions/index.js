@@ -26,7 +26,7 @@ exports.createNotifictionOnLike = functions.firestore.document("likes/{id}")
                     return;
                 }
                 else {
-                    return db.doc(`/notification/${likeDoc.id}`).set({
+                    return db.doc(`/notifications/${likeDoc.id}`).set({
                         recipient: post.data().userHandle,
                         sender: likeDoc.data().userHandle,
                         type: "like",
@@ -47,7 +47,7 @@ exports.createNotifictionOnLike = functions.firestore.document("likes/{id}")
 exports.deleteNotifictionOnUnlike = functions.firestore.document("likes/{id}")
     .onDelete((likeDoc) => {
         // notification ids are same as likeDoc/commentDoc
-        return db.doc(`/posts/${likeDoc.id}`).delete()
+        return db.doc(`/notifications/${likeDoc.id}`).delete()
         .then(() => {
             return;
         })
@@ -67,7 +67,7 @@ exports.createNotifictionOnComment = functions.firestore.document("comments/{id}
                     return res.status(404).send({error: "Post doesn't exist!"});
                 }
                 else {
-                    return db.doc(`/notification/${commentDoc.id}`).set({
+                    return db.doc(`/notifications/${commentDoc.id}`).set({
                         recipient: post.data().userHandle,
                         sender: commentDoc.data().userHandle,
                         type: "comment",
