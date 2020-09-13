@@ -11,6 +11,7 @@ const {
     onPostDeleteHandler,
     
 } = require("./utils/dbTriggerHandlers");
+
 // Routes
 app.use("/posts", FBAuth,  postRoute);
 app.use("/users", userRoute)
