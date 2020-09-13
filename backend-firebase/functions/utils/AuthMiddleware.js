@@ -3,30 +3,35 @@ const { admin, db } = require("./admin");
 // firebase request authentication middleware
 module.exports = (req, res, next) => {
     let idToken;
-    if(req.headers.authorization && req.headers.authorization.startsWith("Bearer ")) {
+    if (
+        req.headers.authorization &&
+        req.headers.authorization.startsWith("Bearer ")
+    ) {
         idToken = req.headers.authorization.split(" ")[1];
-    }
-    else {
+    } else {
         console.error("No token found!");
-        return res.status(403).send({error: "Unauthorized!"})
+        return res.status(403).send({ error: "Unauthorized!" });
     }
 
-    admin.auth().verifyIdToken(idToken)
-        .then(decodedToken => {
+    admin
+        .auth()
+        .verifyIdToken(idToken)
+        .then((decodedToken) => {
             req.user = decodedToken;
-            return db.collection("users")
+            return db
+                .collection("users")
                 .where("userId", "==", req.user.uid)
                 .limit(1)
-                .get()
+                .get();
         })
-        .then(data => {
+        .then((data) => {
             req.user.handle = data.docs[0].data().handle;
             req.user.imageUrl = data.docs[0].data().imageUrl;
 
             return next();
         })
-        .catch(err => {
+        .catch((err) => {
             console.error(err);
-            return res.status(403).send({error: err.toString()});
-        })
-}
+            return res.status(403).send({ error: err.toString() });
+        });
+};
