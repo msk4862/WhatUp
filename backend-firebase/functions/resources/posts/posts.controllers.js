@@ -123,24 +123,19 @@ exports.commentOnPost = (req, res) => {
         createdAt: new Date().toISOString(),
     }
 
-    const postDoc = db.doc(`/posts/${req.params.postId}`);
-    let postData;
-
-    postDoc.get()
+    db.doc(`/posts/${req.params.postId}`).get()
         .then(doc => {
             if(!doc.exists) {
                 return res.status(404).send({error: "Post doesn't exist!"});
             }
 
-            postData = doc.data();
+            return doc.ref.update({commentCount: doc.data().commentCount+1});
+        })
+        .then(() => {
             return db.collection("comments").add(commentData);
         })
         .then(() => {
-            postData.commentCount ++;
-            return postDoc.update({commentCount : postData.commentCount})
-        })
-        .then(() => {
-            return res.status(201).send(postData);
+            return res.status(201).send(commentData);
         })
         .catch(err => {
             console.error(err);
@@ -173,7 +168,7 @@ exports.likeAPost = (req, res) => {
             return postDoc.update({commentCount : postData.likeCount})
         })
         .then(() => {
-            return res.status(201).send(postData);
+            return res.status(200).send(postData);
         })
         .catch(err => {
             console.error(err);
