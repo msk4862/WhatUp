@@ -196,18 +196,36 @@ exports.getUserDetails = (req, res) => {
         .then(data => {
             userData.posts = [];
             data.forEach(post => {
-                userData.likes.push({
+                userData.posts.push({
                     postId: post.id,
                     bodyMeta: post.data().bodyMeta,
                     createdAt: post.data().createdAt,
                     userHandle: post.data().userHandle,
-                    imageUrl: post.data().imageUrl,
+                    imageUrl: post.data().userImage,
                     likeCount: post.data().likeCount,
                     commentCount: post.data().commentCount,
                     
                 });
             });
             return res.status(200).send(userData);
+        })
+        .catch(err => {
+            console.error(err);
+            return res.status(500).send({error: err.toString()});
+        });
+}
+
+// update notifications as read
+exports.markNotificationRead = (req, res) => {
+    const batch = db.batch();
+    req.body.forEach(noticationId => {
+        const notification = db.doc(`/notification/${noticationId}`);
+        batch.update(notification, {read : true});
+    });
+
+    batch.commit()
+        .then(() => {
+            return res.status(200).send({message : "Notifications marked read!"});
         })
         .catch(err => {
             console.error(err);
