@@ -7,6 +7,7 @@ const {
     addUserDetails, 
     getAuthenticatedUserDetails,
     getUserDetails,
+    markNotificationRead,
 } = require("./users.controllers");
 
 const Router = app.Router();
@@ -26,7 +27,7 @@ Router
 Router
     .get("/:handle", getUserDetails);
 
-// Router
-//     .put()
+Router
+    .post("/notification", markNotificationRead);
 
 module.exports = Router;
