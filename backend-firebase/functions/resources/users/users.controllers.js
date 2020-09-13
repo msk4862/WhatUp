@@ -77,7 +77,8 @@ exports.login = (req, res) => {
         })
         .catch(err => {
             console.error(err);
-            if(err.code === "auth/wrong-password") res.status(403).send({credential: "Incorrect credentials!"})
+            if(err.code === "auth/wrong-password" || err.code === "auth/user-not-found") 
+                return res.status(404).send({credential: "Incorrect credentials!"})
             return res.status(500).send({error: err.toString()});
         })
 }
