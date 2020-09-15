@@ -18,15 +18,18 @@ const BlogShow = (props) => {
         if (props.blog) {
             if (props.blog.Author) {
                 return (
-                    <div className="container-fluid blog-body">
-                        <h1 className="blog-title">{props.blog.Title}</h1>
-                        <div className="blog-meta">
-                            <UserHeader author_id={props.blog.Author} />
-                            <span> | {props.blog.DateCreated}</span>
+                    <div className="row justify-content-center">
+                        <div className="col-12 col-sm-12 blog-body">
+                            <h1 className="blog-title">{props.blog.Title}</h1>
+                            <div className="blog-meta">
+                                <UserHeader author_id={props.blog.Author} />
+                                <span> | {props.blog.DateCreated}</span>
+                            </div>
+                            <div className="blog-text mt-4">
+                                <p>{props.blog.Body}</p>
+                            </div>
                         </div>
-                        <div className="blog-body">
-                            <p>{props.blog.Body}</p>
-                        </div>
+
                     </div>
                 );
             }

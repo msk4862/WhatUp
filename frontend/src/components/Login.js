@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import "../styles/Login.css";
@@ -106,6 +107,9 @@ const Login = (props) => {
                         </div>
                     </div>
                 </form>
+                <div className="text-center">
+                    Don't have an account ? <Link to="/signup"> Sign up here</Link>
+                </div>
             </div>
         </div>
     );

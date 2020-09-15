@@ -1,6 +1,6 @@
 import _ from "lodash";
-
 import DjangoREST from "../apis/DjangoREST";
+import FirebaseAPI from "../apis/FirebaseAPI";
 import ACTIONS from "./actionTypes";
 import history from "../history";
 
@@ -8,10 +8,14 @@ import history from "../history";
 
 //SAME below
 export const fetchBlogs = () => {
-    return async (dispatch) => {
-        const response = await DjangoREST.get("/blogs");
-
-        dispatch({ type: ACTIONS.FETCH_BLOGS, payload: response.data });
+    return (dispatch) => {
+        // const response = await FirebaseAPI.get("/posts");
+        FirebaseAPI.get("/posts")
+        .then(res => {
+            console.log(res);
+            dispatch({ type: ACTIONS.FETCH_BLOGS, payload: res.data });
+        })
+        .catch(err => console.log(err));
     };
 };
 

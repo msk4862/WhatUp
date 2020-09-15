@@ -2,7 +2,6 @@ const functions = require("firebase-functions");
 const app = require("express")();
 const postRoute = require("./resources/posts/posts.routes");
 const userRoute = require("./resources/users/users.routes");
-const FBAuth = require("./utils/authMiddleware");
 const {
     createNotifictionOnLikeHandler,
     deleteNotifictionOnUnlikeHandler,
@@ -12,7 +11,7 @@ const {
 } = require("./utils/dbTriggerHandlers");
 
 // Routes
-app.use("/posts", FBAuth, postRoute);
+app.use("/posts", postRoute);
 app.use("/users", userRoute);
 
 exports.api = functions.https.onRequest(app);

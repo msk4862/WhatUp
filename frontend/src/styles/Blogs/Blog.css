@@ -2,9 +2,15 @@
     background-color: var(--primary-light-color);
     box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.4);
     margin-bottom: 1.25rem;
+    border-radius: 18px;
+}
+
+.card-title a {
+    color: var(--primary-dark-color);
 }
 
 .card-text  {
+    color: var(--font-dark-color);
     margin-bottom: 0.675rem;    
 }
 
@@ -18,8 +24,26 @@ a:hover {
     color: var(--font-gray-color);
 }
 
+.meta-data img {
+    width: 40px;
+    height: 100%;
+    margin-right: 5px;
+}
+
 .meta-data,
 .meta-data a {
     font-size: var(--small);
     text-transform: capitalize;
+}
+
+.meta-data a {
+    color: var(--primary-dark-color);
+}
+
+.meta-data a::after {
+    content: "\2605";
+    color: var(--font-dark-color);
+    display: inline;
+    margin-left: 5px;
+    margin-right: 5px;
 }

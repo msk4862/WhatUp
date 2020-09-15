@@ -1,10 +1,18 @@
 .blog-body {
     margin-top: 2rem;
+    margin-bottom: 2rem;
+    background-color: var(--primary-light-color);
+    padding: 1.5rem;
+    box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.4);
+}
+
+.blog-text p {
+    color: var(--font-gray-color);
 }
 
 .blog-meta {
     margin-top: 20px;
     font-size: 0.85rem;
-    color: #d8b9c3;
+    color: var(--font-dark-color);
     text-transform: capitalize;
 }

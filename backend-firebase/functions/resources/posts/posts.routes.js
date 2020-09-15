@@ -1,4 +1,5 @@
 const app = require("express");
+const FBAuth = require("../../utils/authMiddleware");
 const {
     getAllPosts,
     createPost,
@@ -15,14 +16,14 @@ const Router = app.Router();
 Router.route("/").get(getAllPosts).post(createPost);
 
 Router.route("/:postId")
-    .get(getOnePost)
-    .put(updateOnePost)
-    .delete(deleteOnePost);
+    .get(FBAuth, getOnePost)
+    .put(FBAuth, updateOnePost)
+    .delete(FBAuth, deleteOnePost);
 
-Router.route("/:postId/comment").post(commentOnPost);
+Router.route("/:postId/comment").post(FBAuth, commentOnPost);
 
-Router.route("/:postId/like").post(likeAPost);
+Router.route("/:postId/like").post(FBAuth, likeAPost);
 
-Router.route("/:postId/unlike").post(unlikeAPost);
+Router.route("/:postId/unlike").post(FBAuth, unlikeAPost);
 
 module.exports = Router;

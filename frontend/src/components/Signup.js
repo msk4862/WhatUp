@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import "../styles/Signup.css";
@@ -8,10 +9,9 @@ import { SIGNUP_TITLE } from "../utilities/Constants";
 
 const Signup = (props) => {
     const [email, setEmail] = useState("");
-    const [username, setUsername] = useState("");
-    const [firstname, setFirstname] = useState("");
-    const [lastname, setLastname] = useState("");
+    const [handle, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [alert, setAlert] = useState("");
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -35,10 +35,9 @@ const Signup = (props) => {
         event.preventDefault();
         const data = {
             email: email,
-            username: username,
-            first_name: firstname,
-            last_name: lastname,
+            handle: handle,
             password: password,
+            confirmPassword: confirmPassword,
         };
 
         props.signup(data);
@@ -88,6 +87,7 @@ const Signup = (props) => {
                                 type="email"
                                 className="form-control"
                                 required
+                                placeholder="Enter email"
                                 value={email}
                                 onChange={(event) => {
                                     event.preventDefault();
@@ -102,41 +102,13 @@ const Signup = (props) => {
                                 type="text"
                                 className="form-control"
                                 required
-                                value={username}
+                                placeholder="Enter username"
+                                value={handle}
                                 onChange={(event) => {
                                     event.preventDefault();
                                     setUsername(event.target.value);
                                 }}
                             />
-                        </div>
-
-                        <div className="row">
-                            <div className="col-6 col-sm-6 form-group">
-                                <label>Firstname</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    required
-                                    value={firstname}
-                                    onChange={(event) => {
-                                        event.preventDefault();
-                                        setFirstname(event.target.value);
-                                    }}
-                                />
-                            </div>
-                            <div className="col-6 col-sm-6 form-group">
-                                <label>Lastname</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    required
-                                    value={lastname}
-                                    onChange={(event) => {
-                                        event.preventDefault();
-                                        setLastname(event.target.value);
-                                    }}
-                                />
-                            </div>
                         </div>
 
                         <div className="form-group">
@@ -145,10 +117,26 @@ const Signup = (props) => {
                                 type="password"
                                 className="form-control"
                                 required
+                                placeholder="Enter password"
                                 value={password}
                                 onChange={(event) => {
                                     event.preventDefault();
                                     setPassword(event.target.value);
+                                }}
+                            />
+                        </div>
+                        
+                        <div className="form-group">
+                            <label>Confirm Password</label>
+                            <input
+                                type="password"
+                                className="form-control"
+                                required
+                                placeholder="Confirm password"
+                                value={confirmPassword}
+                                onChange={(event) => {
+                                    event.preventDefault();
+                                    setConfirmPassword(event.target.value);
                                 }}
                             />
                         </div>
@@ -159,6 +147,9 @@ const Signup = (props) => {
                         </div>
                     </div>
                 </form>
+                <div className="text-center">
+                    Already have an account ? <Link to="/login">Login here</Link>
+                </div>
             </div>
         </div>
     );

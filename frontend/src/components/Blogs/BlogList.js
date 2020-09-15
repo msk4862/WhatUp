@@ -17,7 +17,7 @@ const BlogList = (props) => {
     }, []);
 
     function renderBlogs() {
-        if (props.blogs) {
+        if (props.blogs != []) {
             if (
                 (props.location.pathname === "/blogs/my-blogs") &
                 props.auth.isLoggedIn
@@ -43,18 +43,22 @@ const BlogList = (props) => {
                 return props.blogs.map((blog) => {
                     return (
                         <Blog
-                            key={blog.id}
-                            id={blog.id}
-                            title={blog.Title}
-                            desc={blog.BodyMeta}
-                            date={blog.DateCreated}
-                            author={blog.Author}
+                            key={blog.postId}
+                            id={blog.postId}
+                            title={blog.bodyMeta}
+                            desc={blog.bodyMeta}
+                            date={blog.createdAt}
+                            likeCount={blog.likeCount}
+                            commentCount={blog.commentCount}
+                            userImage={blog.userImage}
+                            author={blog.userHandle}
                         />
                     );
                 });
             }
         } else {
-            return <h2>Sorry! No blogs yet written.</h2>;
+            console.log("asasasas")
+            return <h2>Loading...</h2>;
         }
     }
 
