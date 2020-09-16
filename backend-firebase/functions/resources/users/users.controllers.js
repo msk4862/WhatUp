@@ -190,13 +190,26 @@ exports.getAuthenticatedUserDetails = (req, res) => {
             userData.credentials = doc.data();
             return db
                 .collection("likes")
-                .where("userHandle", "==", req.user.handle);
+                .where("userHandle", "==", req.user.handle)
+                .get();
         })
         .then((data) => {
             userData.likes = [];
             data.forEach((doc) => {
                 userData.likes.push(doc.data());
             });
+
+            return db
+                .collection("notifications")
+                .where("userHandle", "==", req.user.handle)
+                .get();
+        })
+        .then(data => {
+            userData.notifications = [];
+            data.forEach(doc => {
+                userData.notifications.push(doc.data());
+            });
+
             return res.status(200).send(userData);
         })
         .catch((err) => {
