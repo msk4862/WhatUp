@@ -79,13 +79,13 @@ const Header = (props) => {
 
             {/* Nav Links */}
             <div className="collapse navbar-collapse" id="myNavbar">
-                {props.auth.isLoggedIn ? renderUserLinks() : renderGuestLinks()}
+                {props.authenticated ? renderUserLinks() : renderGuestLinks()}
             </div>
         </nav>
     );
 };
 
 const mapStateToProps = (state) => {
-    return { auth: state.user.auth };
+    return { authenticated: state.user.authenticated };
 };
 export default connect(mapStateToProps, { logout })(Header);
