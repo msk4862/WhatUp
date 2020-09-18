@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import "../styles/Signup.css";
-import { signup } from "../actions";
+import { signup, authenticate } from "../actions";
 import history from "../history";
 import { SIGNUP_TITLE } from "../utilities/Constants";
 import { isBlank, isEmptyObj } from "../utilities/dataValidation";
@@ -14,6 +14,13 @@ const Signup = (props) => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState({});
+
+    useEffect(() => {
+        let token = localStorage.getItem("jwtToken");
+        if(token) props.authenticate(token);
+
+        if(props.user.authenticated) history.push("/");
+    }, []);
 
     useEffect(() => {
         if(props.ui.errors) setErrors(props.ui.errors);
@@ -146,4 +153,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { signup })(Signup);
+export default connect(mapStateToProps, { signup, authenticate })(Signup);

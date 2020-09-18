@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import "../styles/Login.css";
-import { login } from "../actions/index";
+import { login, authenticate } from "../actions/index";
 import history from "../history";
 import { LOGIN_TITLE } from "../utilities/Constants";
 import { isBlank, isEmptyObj } from "../utilities/dataValidation";
@@ -12,6 +12,14 @@ const Login = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({});
+
+    
+    useEffect(() => {
+        let token = localStorage.getItem("jwtToken");
+        if(token) props.authenticate(token);
+
+        if(props.user.authenticated) history.push("/");
+    }, []);
 
     useEffect(() => {
         if(props.ui.errors) setErrors(props.ui.errors);
@@ -113,4 +121,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { login })(Login);
+export default connect(mapStateToProps, { login, authenticate })(Login);
