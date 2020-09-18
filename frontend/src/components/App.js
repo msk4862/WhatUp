@@ -5,6 +5,7 @@ import "../styles/base.css";
 import Header from "./Header";
 import Login from "./Login";
 import Signup from "./Signup";
+import Profile from "./Profile";
 import BlogList from "./Blogs/BlogList";
 import BlogShow from "./Blogs/BlogShow";
 import BlogCreate from "./Blogs/BlogCreate";
@@ -26,6 +27,8 @@ function App() {
                             {/* Authentication Routes */}
                             <Route exact path="/login" component={Login} />
                             <Route exact path="/signup" component={Signup} />
+
+                            <Route exact path="/:handle" component={Profile} />
 
                             {/* Blogs Routes */}
                             <Route path="/blogs" exact component={BlogList} />

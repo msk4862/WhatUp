@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import "../styles/Header.css";
 import { logout } from "../actions/index";
 import history from "../history";
-import { APP_TITLE, MY_PROFILE_TEXT } from "../utilities/Constants";
+import { APP_TITLE } from "../utilities/Constants";
 
 const Header = (props) => {
     function Logout(event) {
@@ -25,10 +25,13 @@ const Header = (props) => {
                         className="nav-link dropdown-toggle"
                         id="navbardrop"
                         data-toggle="dropdown">
-                        <img src={props.user.credentials.imageUrl} alt="profile-image"/>
+                        <img src={props.user.credentials.imageUrl} alt="profile"/>
                     </div>
         
                     <div className="dropdown-menu">
+                        <Link className="dropdown-item" to={`/${props.user.credentials.handle}`}>
+                            Profile
+                        </Link>
                         <Link className="dropdown-item" to="/blogs/create">
                             Write Blog
                         </Link>
