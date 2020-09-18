@@ -1,5 +1,4 @@
 import ACTIONS from "../actions/actionTypes";
-import jwt_decode from "jwt-decode";
 
 let initialState = {
     authenticated: false,

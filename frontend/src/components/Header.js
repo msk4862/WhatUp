@@ -25,7 +25,7 @@ const Header = (props) => {
                         className="nav-link dropdown-toggle"
                         id="navbardrop"
                         data-toggle="dropdown">
-                        <img src={props.user.credentials.imageUrl} alt="profile"/>
+                        <img className="rounded-circle" src={props.user.credentials.imageUrl} alt="profile"/>
                     </div>
         
                     <div className="dropdown-menu">
