@@ -21,13 +21,13 @@ const Header = (props) => {
             <ul className="navbar-nav my-account">
                 {/* <!-- Dropdown --> */}
                 <li className="nav-item dropdown">
-                    <a
+                    <div 
                         className="nav-link dropdown-toggle"
                         id="navbardrop"
-                        data-toggle="dropdown"
-                    >
-                        {MY_PROFILE_TEXT}
-                    </a>
+                        data-toggle="dropdown">
+                        <img src={props.user.credentials.imageUrl} alt="profile-image"/>
+                    </div>
+        
                     <div className="dropdown-menu">
                         <Link className="dropdown-item" to="/blogs/create">
                             Write Blog
@@ -79,13 +79,13 @@ const Header = (props) => {
 
             {/* Nav Links */}
             <div className="collapse navbar-collapse" id="myNavbar">
-                {props.authenticated ? renderUserLinks() : renderGuestLinks()}
+                {props.user.authenticated ? renderUserLinks() : renderGuestLinks()}
             </div>
         </nav>
     );
 };
 
 const mapStateToProps = (state) => {
-    return { authenticated: state.user.authenticated };
+    return { user: state.user };
 };
 export default connect(mapStateToProps, { logout })(Header);
