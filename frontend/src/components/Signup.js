@@ -16,10 +16,11 @@ const Signup = (props) => {
     const [errors, setErrors] = useState({});
 
     useEffect(() => {
-        let token = localStorage.getItem("jwtToken");
-        if(token) props.authenticate(token);
-
-        if(props.user.authenticated) history.push("/");
+        if(props.authenticated) history.push("/");
+        else {
+            let token = localStorage.getItem("jwtToken");
+            if(token) props.authenticate(token);
+        }
     }, []);
 
     useEffect(() => {
@@ -148,7 +149,7 @@ const Signup = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.user,
+        authenticated: state.user.authenticated,
         ui: state.ui,
     };
 };

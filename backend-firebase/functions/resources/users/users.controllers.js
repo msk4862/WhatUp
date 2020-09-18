@@ -56,9 +56,11 @@ exports.signup = (req, res) => {
             return res.status(201).send({ token });
         })
         .catch((err) => {
-            console.log(err);
             if (err.code === "auth/email-already-in-use") {
                 return res.status(500).send({ email: "Email already in use!" });
+            }
+            else if (err.code === "auth/weak-password") {
+                return res.status(500).send({ password: "Password should be at least 6 characters!" });
             }
             return res.status(500).send({ error: err.toString() });
         });
