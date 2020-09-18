@@ -97,6 +97,7 @@ exports.login = (req, res) => {
 
 // uplaod image handler
 exports.uploadImage = (req, res) => {
+
     // parsing form data using busboy
     const Busboy = require("busboy");
     const os = require("os");
@@ -104,9 +105,12 @@ exports.uploadImage = (req, res) => {
     const path = require("path");
 
     const busboy = new Busboy({ headers: req.headers });
-    let imageToBeUploaded, imageFileName;
+
+    let imageToBeUploaded = {}, imageFileName;
 
     busboy.on("file", (fieldname, file, filename, encoding, mimetype) => {
+        console.log("Form data received!");
+
         if (
             mimetype !== "image/jpg" &&
             mimetype !== "image/jpeg" &&
@@ -118,6 +122,7 @@ exports.uploadImage = (req, res) => {
         const imageFileExt = filename.split(".")[
             filename.split(".").length - 1
         ];
+
         imageFileName = `${Math.round(
             Math.random() * 1000000000
         )}.${imageFileExt}`;
@@ -130,13 +135,16 @@ exports.uploadImage = (req, res) => {
 
     busboy.on("finish", () => {
         console.log("Done parsing form!");
+
         admin
             .storage()
             .bucket()
             .upload(imageToBeUploaded.filePath, {
                 resumable: false,
                 metadata: {
-                    contentType: imageToBeUploaded.mimetype,
+                    metadata : {
+                        contentType: imageToBeUploaded.mimetype,
+                    }
                 },
             })
             .then(() => {
