@@ -3,33 +3,21 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import "../styles/Signup.css";
-import { signup, clearAlert } from "../actions";
+import { signup } from "../actions";
 import history from "../history";
 import { SIGNUP_TITLE } from "../utilities/Constants";
+import { isBlank, isEmptyObj } from "../utilities/dataValidation";
 
 const Signup = (props) => {
     const [email, setEmail] = useState("");
     const [handle, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [alert, setAlert] = useState("");
+    const [errors, setErrors] = useState({});
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
-        if (props.auth.isLoggedIn) {
-            history.push("/");
-        }
-
-        if (props.alert.isError) {
-            setAlert(props.alert.message);
-
-            // workin as componentWillUnmount(), To clear alert
-            return function cleanAlert() {
-                props.clearAlert();
-            };
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    });
+        if(props.ui.errors) setErrors(props.ui.errors);
+    }, [props.ui.errors]);
 
     function Register(event) {
         event.preventDefault();
@@ -40,40 +28,36 @@ const Signup = (props) => {
             confirmPassword: confirmPassword,
         };
 
-        props.signup(data);
+        let credErrors = {};
+
+        if(isBlank(data.email)) credErrors.email = "Email can't be blank!";
+        if(isBlank(data.password)) credErrors.password = "Password can't be blank!";
+        if(isBlank(data.confirmPassword)) credErrors.confirmPassword = "Confirm Password can't be blank!";
+        if(isBlank(data.handle)) credErrors.handle = "Handle can't be blank!";        
+        
+        if(isEmptyObj(credErrors)) {
+            props.signup(data);
+            setErrors({});
+        }
+        else setErrors(credErrors);
     }
 
     function renderMessage() {
-        /*
-            rendering info message
-        */
-        if (alert !== "") {
-            const meta = {
-                color: "red",
-                symbol: "\u2715",
-            };
-
-            const style = {
-                color: `${meta.color}`,
-                border: `2px solid ${meta.color}`,
-            };
-            return (
-                <div className="error-message row justify-content-center">
-                    <p className="col-*" style={style}>
-                        {meta.symbol} {alert}
+        if (errors.error) {
+                return (
+                    <p className="text-center error-message mb-2 mt-0">
+                        {errors.error}
                     </p>
-                </div>
-            );
-        } else {
-            return null;
-        }
+                );
+            } 
+        else return null;
     }
 
     return (
         <div className="row justify-centent-center align-items-center">
             <div className="signup-form-container col-10 col-sm-4 ml-auto mr-auto">
-                <div className="text-center row justify-content-center">
-                    <h2 className="col-10 col-sm-6">{SIGNUP_TITLE}</h2>
+                <div className="text-center">
+                    <h2>{SIGNUP_TITLE}</h2>
                 </div>
                 <form
                     className="row justify-content-center mt-4"
@@ -86,7 +70,6 @@ const Signup = (props) => {
                             <input
                                 type="email"
                                 className="form-control"
-                                required
                                 placeholder="Enter email"
                                 value={email}
                                 onChange={(event) => {
@@ -94,6 +77,7 @@ const Signup = (props) => {
                                     setEmail(event.target.value);
                                 }}
                             />
+                            {errors.email ? <small className="error-message">{errors.email}</small> : null}  
                         </div>
 
                         <div className="form-group">
@@ -101,7 +85,6 @@ const Signup = (props) => {
                             <input
                                 type="text"
                                 className="form-control"
-                                required
                                 placeholder="Enter username"
                                 value={handle}
                                 onChange={(event) => {
@@ -109,6 +92,7 @@ const Signup = (props) => {
                                     setUsername(event.target.value);
                                 }}
                             />
+                            {errors.handle ? <small className="error-message">{errors.handle}</small> : null}  
                         </div>
 
                         <div className="form-group">
@@ -116,7 +100,6 @@ const Signup = (props) => {
                             <input
                                 type="password"
                                 className="form-control"
-                                required
                                 placeholder="Enter password"
                                 value={password}
                                 onChange={(event) => {
@@ -124,6 +107,7 @@ const Signup = (props) => {
                                     setPassword(event.target.value);
                                 }}
                             />
+                            {errors.password ? <small className="error-message">{errors.password}</small> : null}  
                         </div>
                         
                         <div className="form-group">
@@ -131,7 +115,6 @@ const Signup = (props) => {
                             <input
                                 type="password"
                                 className="form-control"
-                                required
                                 placeholder="Confirm password"
                                 value={confirmPassword}
                                 onChange={(event) => {
@@ -139,6 +122,7 @@ const Signup = (props) => {
                                     setConfirmPassword(event.target.value);
                                 }}
                             />
+                        {errors.confirmPassword ? <small className="error-message">{errors.confirmPassword}</small> : null}                  
                         </div>
                         <div className="signup-form button form-group row justify-content-center">
                             <button type="submit" className="btn">
@@ -157,9 +141,9 @@ const Signup = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        auth: state.user.auth,
-        alert: state.alert,
+        user: state.user,
+        ui: state.ui,
     };
 };
 
-export default connect(mapStateToProps, { signup, clearAlert })(Signup);
+export default connect(mapStateToProps, { signup })(Signup);

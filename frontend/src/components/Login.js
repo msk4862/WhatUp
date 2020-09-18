@@ -3,79 +3,65 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import "../styles/Login.css";
-import { login, clearAlert } from "../actions/index";
+import { login } from "../actions/index";
 import history from "../history";
 import { LOGIN_TITLE } from "../utilities/Constants";
+import { isBlank, isEmptyObj } from "../utilities/dataValidation";
 
 const Login = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [alert, setAlert] = useState("");
+    const [errors, setErrors] = useState({});
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
-        //navigating to home if logged in
-        if (props.auth.isLoggedIn) {
-            history.push("/");
-        }
-
-        if (props.alert.isError) {
-            setAlert(props.alert.message);
-
-            // workin as componentWillUnmount(), To clear alert
-            return function cleanAlert() {
-                props.clearAlert();
-            };
-        }
-    });
+        if(props.ui.errors) setErrors(props.ui.errors);
+    }, [props.ui.errors]);
 
     function onLogin(event) {
         event.preventDefault();
         const cred = {
-            email: email,
-            password: password,
+            email,
+            password,
         };
-        props.login(cred);
+
+        let credErrors = {};
+
+        if(isBlank(cred.email)) credErrors.email = "Email can't be blank!";
+        if(isBlank(cred.email)) credErrors.password = "Password can't be blank!";
+
+        if(isEmptyObj(credErrors)) {
+            setErrors({});
+            props.login(cred);
+        }
+        else setErrors(credErrors);
     }
 
-    function renderMessage() {
-        /*
-            rendering alert
-        */
-        const meta = {
-            color: "red",
-            symbol: "\u2715",
-        };
-
-        if (alert !== "") {
-            const style = {
-                color: `${meta.color}`,
-                border: `2px solid ${meta.color}`,
-            };
+    /*
+        rendering errors
+    */
+    function renderErrors() {
+        if (errors.credential) {
             return (
-                <div className="row justify-content-center">
-                    <p className="col-*" style={style}>
-                        {meta.symbol} {alert}
-                    </p>
-                </div>
+                <p className="text-center error-message mb-2 mt-0">
+                    {errors.credential}
+                </p>
             );
-        } else {
-            return null;
-        }
+        } 
+        else return null;
     }
 
     return (
         <div className="row justify-centent-center align-items-center">
             <div className="login-form-container col-10 col-sm-4 ml-auto mr-auto">
-                <div className="text-center row justify-content-center">
-                    <h2 className="col">{LOGIN_TITLE}</h2>
+                <div className="text-center">
+                    <h2>{LOGIN_TITLE}</h2>
                 </div>
                 <form
                     className="row justify-content-center mt-4"
                     onSubmit={onLogin}
                 >
                     <div className="col">
-                        {renderMessage()}
+                        {renderErrors()}
                         <div className="form-group">
                             <label>Email</label>
                             <input
@@ -87,7 +73,10 @@ const Login = (props) => {
                                     setEmail(event.target.value);
                                 }}
                             />
+                            {errors.email ? <small className="error-message">{errors.email}</small> : null}  
                         </div>
+
+
                         <div className="form-group">
                             <label>Password</label>
                             <input
@@ -99,7 +88,10 @@ const Login = (props) => {
                                     setPassword(event.target.value);
                                 }}
                             />
+                            {errors.password ? <small className="error-message">{errors.password}</small> : null}  
                         </div>
+
+
                         <div className="form-group  row justify-content-center">
                             <button type="submit" className="btn">
                                 Login
@@ -117,9 +109,8 @@ const Login = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        auth: state.user.auth,
-        alert: state.alert,
+        ui: state.ui,
     };
 };
 
-export default connect(mapStateToProps, { login, clearAlert })(Login);
+export default connect(mapStateToProps, { login })(Login);
