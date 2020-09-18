@@ -1,4 +1,5 @@
 import _ from "lodash";
+import jwtDecode from "jwt-decode";
 import DjangoREST from "../apis/DjangoREST";
 import FirebaseAPI from "../apis/FirebaseAPI";
 import ACTIONS from "./actionTypes";
@@ -12,7 +13,6 @@ export const fetchBlogs = () => {
         // const response = await FirebaseAPI.get("/posts");
         FirebaseAPI.get("/posts")
         .then(res => {
-            console.log(res);
             dispatch({ type: ACTIONS.FETCH_BLOGS, payload: res.data });
         })
         .catch(err => console.log(err));
@@ -70,56 +70,64 @@ export const deleteBlog = (id) => {
 };
 
 export const signup = (data) => {
-    return async (dispatch) => {
-        DjangoREST.post(`/users/register`, data)
-            .then((response) => {
-                localStorage.setItem(
-                    "jwtToken",
-                    response.data.tokens["access"]
-                );
-
-                dispatch({ type: ACTIONS.SIGNUP, payload: response.data });
+    return (dispatch) => {
+        FirebaseAPI.post("/users/signup", data)
+            .then(res => {
+                setAuthorizationHeader(res.data["token"]);
+                dispatch(fetchUserData());
+                dispatch({ type: ACTIONS.CLEAR_ERROR });
+                history.push("/");
             })
-            .catch((error) => {
-                console.log(error.response.data);
+            .catch(error => {
                 dispatch({
-                    type: ACTIONS.SET_ALERT,
-                    payload: error.response.data["email"][0],
+                    type: ACTIONS.SET_ERROR,
+                    payload: error.response.data,
                 });
             });
     };
 };
 
 export const login = (data = null) => {
-    if (data) {
-        return async (dispatch) => {
-            DjangoREST.post(`/users/login`, data)
-                .then((response) => {
-                    localStorage.setItem("jwtToken", response.data["access"]);
-                    dispatch({ type: ACTIONS.LOGIN, payload: response.data });
-                })
-                .catch((error) => {
-                    console.log(error.response.data);
-                    dispatch({
-                        type: ACTIONS.SET_ALERT,
-                        payload: error.response.data["detail"],
-                    });
+    return (dispatch) => {
+        FirebaseAPI.post(`/users/login`, data)
+            .then(res => {
+                setAuthorizationHeader(res.data["token"]);
+                dispatch(fetchUserData());
+                dispatch({ type: ACTIONS.CLEAR_ERROR });
+                history.push("/");
+            })
+            .catch(error => {
+                console.log(error)
+                dispatch({
+                    type: ACTIONS.SET_ERROR,
+                    payload: error.response.data,
                 });
-        };
-    }
-    // using browser cache to login
-    const response = {
-        access: localStorage.getItem("jwtToken"),
+            });
     };
-    return {
-        type: ACTIONS.LOGIN,
-        payload: response,
-    };
+    
 };
 
-export const logout = () => {
-    localStorage.removeItem("jwtToken");
+// authenticate using localstorage token
+export const authenticate = (token) => {
+    return (dispatch) => {
+        const decodedToken = jwtDecode(token);
+        // expired
+        if(decodedToken.exp * 1000 < Date.now()) {
+            dispatch(logout());
+            history.push("/login");
+        }
+        else {            
+            setAuthorizationHeader(token);
+            dispatch(fetchUserData());
+            dispatch({ type: ACTIONS.CLEAR_ERROR });
+            history.push("/");
+        }
+    }
+}
 
+export const logout = () => {
+    localStorage.removeItem("jwtToken");  
+    delete FirebaseAPI.defaults.headers.common["Authorization"];  
     return {
         type: ACTIONS.LOGOUT,
     };
@@ -150,6 +158,31 @@ const _fetchUser = _.memoize(async (id, dispatch) => {
     dispatch({ type: ACTIONS.FETCH_USER, payload: response.data });
 });
 
+export const fetchUserData = () => {
+
+    return (dispatch) => {
+        FirebaseAPI.get("/users")
+            .then(res => {
+                dispatch({
+                    type: ACTIONS.SET_USER,
+                    payload: res.data,
+                });
+            })
+            .catch(error => {
+                dispatch({
+                    type: ACTIONS.SET_ERROR,
+                    payload: error.response.data,
+                });
+            });
+    }
+}
+
 export const clearAlert = () => {
     return { type: ACTIONS.CLEAR_ALERT };
 };
+
+
+export const setAuthorizationHeader = (token) => {
+    localStorage.setItem("jwtToken", token);
+    FirebaseAPI.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
