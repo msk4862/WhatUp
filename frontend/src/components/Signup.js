@@ -21,7 +21,7 @@ const Signup = (props) => {
             let token = localStorage.getItem("jwtToken");
             if(token) props.authenticate(token);
         }
-    }, []);
+    }, [props.authenticated]);
 
     useEffect(() => {
         if(props.ui.errors) setErrors(props.ui.errors);
@@ -63,6 +63,8 @@ const Signup = (props) => {
 
     return (
         <div className="row justify-centent-center align-items-center">
+            {props.ui.loading && <p>loading...</p>}
+            {!props.ui.loading &&
             <div className="signup-form-container col-10 col-sm-4 ml-auto mr-auto">
                 <div className="text-center">
                     <h2>{SIGNUP_TITLE}</h2>
@@ -143,6 +145,7 @@ const Signup = (props) => {
                     Already have an account ? <Link to="/login">Login here</Link>
                 </div>
             </div>
+            }
         </div>
     );
 };

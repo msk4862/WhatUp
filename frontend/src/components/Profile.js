@@ -31,72 +31,77 @@ const Profile = (props) => {
 
     return (
         <div className="profile container">
+            {loading && <p>Loading...</p>}
+            {!loading &&
+                <div className="row justify-content-center">
+                    <div className="col-12 col-sm-6 ml-auto mr-auto">
+                        <div className="text-center">
+                            <img className="rounded-circle" src={imageUrl} alt="profile"/>
+                            <input 
+                                type="file"
+                                id="imageInput"
+                                name="image"
+                                hidden="hidden"
+                                onChange={handleImageChange}/>
+                            <div className="edit-ic">
+                                <button onClick={editImage}><i className="fas fa-pencil-alt"></i> Edit</button>
+                            </div>
+                        </div>
 
-            <div className="row justify-content-center">
-                <div className="col-12 col-sm-6 ml-auto mr-auto">
-                    <div className="text-center">
-                        <img className="rounded-circle" src={imageUrl} alt="profile"/>
-                        <input 
-                            type="file"
-                            id="imageInput"
-                            name="image"
-                            hidden="hidden"
-                            onChange={handleImageChange}/>
-                        <div className="edit-ic">
-                            <button onClick={editImage}><i className="fas fa-pencil-alt"></i> Edit</button>
-                        </div>
-                    </div>
+                        <div className="details mt-5">
+                            <div className="mb-4">
+                                <h4>Profile</h4>
+                            </div>
+                            <div className="row justify-content-center">
+                                <div className="col">
+                                    <p>Username</p>
+                                </div>
+                                <div className="col">
+                                    <p>@{handle}</p>
+                                </div>
+                            </div>
+                            <div className="row justify-content-center">
+                            <div className="col">
+                                    <p>Bio</p>
+                                </div>
+                                <div className="col">
+                                    <p>{bio}</p>
+                                </div>
+                            </div>
+                            <div className="row justify-content-center">
+                                <div className="col">
+                                    <p>Website</p>
+                                </div>
+                                <div className="col">
+                                    <a href={website} target="_blank" >{website}</a>
+                                </div>
+                            </div>
+                            <div className="row justify-content-center">
+                                <div className="col">
+                                    <p>Location</p>
+                                </div>
+                                <div className="col">
+                                    <p>{location}</p>
+                                </div>
+                            </div>
+                            
 
-                    <div className="details mt-5">
-                        <div className="mb-4">
-                            <h4>Profile</h4>
                         </div>
-                        <div className="row justify-content-center">
-                            <div className="col">
-                                <p>Username</p>
-                            </div>
-                            <div className="col">
-                                <p>@{handle}</p>
-                            </div>
-                        </div>
-                        <div className="row justify-content-center">
-                        <div className="col">
-                                <p>Bio</p>
-                            </div>
-                            <div className="col">
-                                <p>{bio}</p>
-                            </div>
-                        </div>
-                        <div className="row justify-content-center">
-                            <div className="col">
-                                <p>Website</p>
-                            </div>
-                            <div className="col">
-                                <a href={website} target="_blank" >{website}</a>
-                            </div>
-                        </div>
-                        <div className="row justify-content-center">
-                            <div className="col">
-                                <p>Location</p>
-                            </div>
-                            <div className="col">
-                                <p>{location}</p>
-                            </div>
-                        </div>
+
                         
-
                     </div>
-
-                    
                 </div>
-            </div>
+            }
         </div>
     )
 
 }
 
 const mapStateToProps = (state) => {
-    return {user: state.user}
+    return {
+        user: state.user,
+        loading: state.ui.loading,
+    }
 }
 
 export default connect(mapStateToProps, { authenticate, uploadImage })(Profile);
