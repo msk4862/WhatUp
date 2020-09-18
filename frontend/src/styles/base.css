@@ -1,5 +1,5 @@
 :root {
-    --base-size: calc(18px + 0.125vh);
+    --base-size: calc(16px + 0.125vh);
     --type-scale: 1.2;
 
     --h5: calc(var(--base-size) * var(--type-scale));
@@ -75,4 +75,15 @@ small {
 
 .btn:hover {
     background-color: var(--secondary-color);
+}
+
+.error-message {
+    border-color: var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+.error-message::before {
+    content: "\26A0";
+    color: var(--secondary-color);
+    margin-right: 5px;
 }
