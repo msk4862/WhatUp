@@ -1,7 +1,7 @@
 const { admin, db } = require("../../utils/admin");
 const firebase = require("firebase");
 const config = require("../../utils/config");
-const { validateSignupData } = require("../../utils/dataValidators");
+const { validateSignupData, cleanEditUserData } = require("../../utils/dataValidators");
 
 firebase.initializeApp(config);
 
@@ -174,8 +174,10 @@ exports.addUserDetails = (req, res) => {
         location: data.location,
     };
 
+    const cleanedData = cleanEditUserData(userDetails);
+
     db.doc(`/users/${req.user.handle}`)
-        .update(userDetails)
+        .update(cleanedData)
         .then(() => {
             return res
                 .status(200)

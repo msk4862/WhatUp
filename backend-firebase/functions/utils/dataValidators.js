@@ -4,6 +4,10 @@ const isEmpty = (string) => {
     return false;
 };
 
+const isDefined = (data) => {
+    return data !== undefined; 
+}
+
 const isEmail = (email) => {
     const emailRegEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -26,3 +30,14 @@ exports.validateSignupData = (data) => {
         ? { valid: true, errors }
         : { valid: false, errors };
 };
+
+exports.cleanEditUserData = (data) => {
+    const {bio, website, location} = data;
+
+    cleanData = {};
+    if(isDefined(bio) && !isEmpty(bio)) cleanData.bio = bio;
+    if(isDefined(website) && !isEmpty(website)) cleanData.website = website;
+    if(isDefined(location) && !isEmpty(location)) cleanData.location = location;
+
+    return cleanData;
+}
