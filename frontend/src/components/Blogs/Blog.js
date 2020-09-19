@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "../../styles/Blogs/Blog.css";
-import UserHeader from "../UserHeader";
 
 const Blog = ({ id, title, desc, date, userImage, author, auth }) => {
 
@@ -54,7 +53,7 @@ const Blog = ({ id, title, desc, date, userImage, author, auth }) => {
                         </div>
                     </div>
                 </div>
-                {auth.isLoggedIn ? renderAdmin() : null}
+                {/* {auth.isLoggedIn ? renderAdmin() : null} */}
             </div>
         </div>
     );

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { authenticate, uploadImage } from "../actions/index";
+import EditProfile from "./EditProfile"; 
 import "../styles/profile.css";
 
 const Profile = (props) => {
@@ -31,8 +32,8 @@ const Profile = (props) => {
 
     return (
         <div className="profile container">
-            {loading && <p>Loading...</p>}
-            {!loading &&
+            {props.loading && <p>Loading...</p>}
+            {!props.loading &&
                 <div className="row justify-content-center">
                     <div className="col-12 col-sm-6 ml-auto mr-auto">
                         <div className="text-center">
@@ -43,12 +44,17 @@ const Profile = (props) => {
                                 name="image"
                                 hidden="hidden"
                                 onChange={handleImageChange}/>
+
                             <div className="edit-ic">
-                                <button onClick={editImage}><i className="fas fa-pencil-alt"></i> Edit</button>
+                                <button onClick={editImage}>
+                                    <span className="custom-tooltip" data-text="Change your profile picture">
+                                        <i className="fas fa-pencil-alt"></i>
+                                    </span>
+                                </button>
                             </div>
                         </div>
 
-                        <div className="details mt-5">
+                        <div className="details mt-3">
                             <div className="mb-4">
                                 <h4>Profile</h4>
                             </div>
@@ -85,10 +91,15 @@ const Profile = (props) => {
                                 </div>
                             </div>
                             
-
+                            <div className="row justify-content-end">
+                                <EditProfile 
+                                    initialBio={bio}
+                                    initialWebsite={website}
+                                    initialLocation={location}/>
+                            </div>
+                        
                         </div>
 
-                        
                     </div>
                 </div>
             }

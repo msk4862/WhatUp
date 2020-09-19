@@ -1,6 +1,5 @@
 .profile {
     margin-top: 2rem;
-    margin-bottom: 2rem;
 }
 
 .profile img {
@@ -15,7 +14,7 @@
 
 .profile .edit-ic button {
     position: absolute;
-    right: 5.5rem;
+    right: 20%;
     bottom: 1rem;
 }
 
@@ -27,7 +26,7 @@
 
 .profile .details {
     background-color: var(--primary-light-color);
-    padding: 2rem;
+    padding: 1rem 2rem;
     box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
     text-align: start;
 }
@@ -55,11 +54,12 @@
     outline: none;
     cursor: pointer;
     background-color: transparent;
-    width: 40px;
-    height: 40px;
-    border-radius: 50px;
-    padding: 0.2rem;
-    font-size: 1.2rem;
+    color: var(--primary-dark-color);
+    width: 45px;
+    height: 45px;
+    border-radius: 45px;
+    padding: 0.25rem;
+    font-size: 1.5rem;
 }
 
 .profile button:hover {
