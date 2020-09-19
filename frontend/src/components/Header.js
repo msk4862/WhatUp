@@ -19,6 +19,14 @@ const Header = (props) => {
     function renderUserLinks() {
         return (
             <ul className="navbar-nav my-account">
+                <li className="nav-item">
+                    <span className="custom-tooltip" data-text="Your notifications">
+                        <button className="nav-link">
+                            <i className="far fa-bell"></i>
+                        </button> 
+                    </span>
+                </li>
+
                 {/* <!-- Dropdown --> */}
                 <li className="nav-item dropdown">
                     <div 

@@ -77,6 +77,31 @@ small {
     background-color: var(--secondary-color);
 }
 
+.custom-tooltip {
+    position: relative;
+    top: 0;
+}
+
+.custom-tooltip::before {
+    display: none;
+    content: attr(data-text);
+    position: absolute;
+    top: 50px;
+    transform:translateX(-55%);
+    background-color: black;
+    color: var(--font-light-color);
+    font-size: var(--small-xs);
+    width: 100px;
+    padding: 3px 5px;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 1;
+}
+
+.custom-tooltip:hover::before {
+    display: block;
+}  
+
 .error-message {
     border-color: var(--secondary-color);
     color: var(--secondary-color);

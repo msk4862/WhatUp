@@ -1,6 +1,7 @@
 .navbar {
     background-color: var(--primary-dark-color);
     box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.4);
+    padding: 0 10px;
 }
 
 .navbar .navbar-brand h2 {
@@ -13,14 +14,30 @@
     margin-left: auto;
 }
 
+.my-account .nav-item button {
+    font-size: 1.2rem;
+    color: var(--font-light-color);
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.my-account .navbar-nav .nav-item {
+    margin-right: 5px;
+}
+
 .my-account img {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
+}
+
+.my-account .dropdown {
+    cursor: pointer;
 }
 
 .my-account .dropdown-menu {
-    left: -4rem;
-    font-size: var(2.5rem);
+    left: -5.25rem;
+    font-size: 1rem;
     background-color: var(--primary-dark-color);
     transform-origin: top;
     animation: reveal-menu 0.25s ease-out; 
