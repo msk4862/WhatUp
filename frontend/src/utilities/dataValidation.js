@@ -10,5 +10,6 @@ export const isEmptyObj = (obj) => {
 
 export const isUrl = (url) => {
     return url.startsWith("https://") && 
+            url.split(".").length > 1 && 
             url.split(".")[url.split(".").length-1].length > 0;
 }

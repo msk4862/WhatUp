@@ -99,7 +99,7 @@ export const fetchUserData = () => {
 
 export const uploadImage = (formData) => {
     return (dispatch) => {
-        dispatch({ type: ACTIONS.LOADING_USER });
+        dispatch({ type: ACTIONS.LOADING_UI });
 
         FirebaseAPI.post("/users/upload", formData)
             .then(() => {
@@ -117,13 +117,7 @@ export const editUserDetails = (data) => {
             .then(() => {
                 dispatch(fetchUserData());
             })
-            .catch(err => {
-                console.log(err)
-                // dispatch({
-                //     type: ACTIONS.SET_ERROR,
-                //     payload: err.response.data,
-                // });
-            })
+            .catch(err => console.error(err));
     }
 }
 

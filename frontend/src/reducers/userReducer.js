@@ -2,6 +2,7 @@ import ACTIONS from "../actions/actionTypes";
 
 let initialState = {
     authenticated: false,
+    loading: false,
     credentials: {},
     likes: [],
     notifications: [],
@@ -9,17 +10,19 @@ let initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case ACTIONS.SIGNUP:
-            return { authenticated : true, ...action.payload };
-
-        case ACTIONS.LOGIN:
-            return { authenticated : true, ...action.payload };
-
+        
         case ACTIONS.LOGOUT:
             return initialState;
 
         case ACTIONS.SET_USER:
-            return { authenticated : true, ...action.payload };
+            return { 
+                authenticated : true, 
+                loading: false,
+                ...action.payload 
+            };
+
+        case ACTIONS.LOADING_USER:
+            return {...state, loading: true};
 
         default:
             return state;

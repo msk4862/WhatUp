@@ -8,11 +8,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal-content {
     border-radius: 5px;
-    max-height: 50%;
-    max-width: 50%;
+    max-width: 45%;
+}
+
+/* accept button */
+.modal-footer button:first-child{ 
+    background-color: var(--secondary-color);
+}
+
+/* cancel button */
+.modal-footer button:last-child{ 
+    background-color: transparent;
+    color: var(--font-dark-color);
 }
