@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import Modal from "./Modal";
 import { editUserDetails } from "../actions/index";
-import { isEmptyObj, isUrl } from "../utilities/dataValidation";
+import { isBlank, isEmptyObj, isUrl } from "../utilities/dataValidation";
 // import "../styles/EditProfile.css";
 
 const EditProfile = (props) => {
@@ -23,7 +23,7 @@ const EditProfile = (props) => {
         }
 
         let Errs = {};
-        if(!isUrl(website)) Errs.website = "Must start with https:// and contain a valid domain (.com, .me, etc.)";
+        if(website && !isUrl(website)) Errs.website = "Must start with https:// and contain a valid domain (.com, .me, etc.)";
         
         if(isEmptyObj(Errs)) {
             props.editUserDetails(updatedDetails);

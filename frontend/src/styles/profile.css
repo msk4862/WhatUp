@@ -1,10 +1,11 @@
 .profile {
     margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 .profile img {
-    width: 250px;
-    height: 250px;
+    width: 230px;
+    height: 230px;
     box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
 }
 
@@ -20,8 +21,15 @@
 
 .profile .edit-ic .custom-tooltip::before {
     width: 160px;
-    top: 35px;
-    left: 200%;
+    margin-left: 120px;
+}
+
+.profile .custom-tooltip::before {
+    left: 50%;
+    margin-left: 80px;
+    top: 50%;
+    margin-top: -10px;
+
 }
 
 .profile .details {
@@ -61,6 +69,7 @@
     padding: 0.25rem;
     font-size: 1.5rem;
 }
+
 
 .profile button:hover {
     color: var(--font-light-color);

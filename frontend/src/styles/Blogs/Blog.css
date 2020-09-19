@@ -5,6 +5,9 @@
     border-radius: 18px;
 }
 
+.card-body {
+    padding: 10px 1rem;
+}
 .card-title a {
     color: var(--primary-dark-color);
 }
@@ -20,8 +23,10 @@ a:hover {
     color: var(--font-dark-color);
 }
 
- .card .meta-data small {
-    color: var(--font-gray-color);
+.meta-data i {
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--primary-dark-color);
 }
 
 .meta-data img {
@@ -30,13 +35,12 @@ a:hover {
     margin-right: 5px;
 }
 
-.meta-data,
 .meta-data a {
-    font-size: var(--small);
+    font-weight: 500;
 }
 
-.meta-data a {
-    color: var(--primary-dark-color);
+.meta-data {
+    font-size: var(--small);
 }
 
 .meta-data a::after {
@@ -45,4 +49,12 @@ a:hover {
     display: inline;
     margin-left: 5px;
     margin-right: 5px;
+}
+
+@media only screen and (max-width: 575px) {
+
+    .meta-data div:nth-child(2) {
+        text-align: center;
+        margin-top: 0.25rem;
+    }
 }
