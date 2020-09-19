@@ -68,7 +68,7 @@ small {
 .btn {
     color: var(--font-light-color);
     background-color: var(--primary-dark-color);
-    box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.4);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
     border-radius: 4rem;
     padding: 0.5rem 1rem 0.5rem 1rem;
 }
@@ -88,7 +88,7 @@ small {
     position: absolute;
     top: 50px;
     transform:translateX(-55%);
-    background-color: black;
+    background-color: var(--font-dark-color);
     color: var(--font-light-color);
     font-size: var(--small-xs);
     width: 100px;

@@ -51,8 +51,6 @@ export const login = (data = null) => {
 // authenticate using localstorage token
 export const authenticate = (token) => {
     return (dispatch) => {
-        dispatch({ type: ACTIONS.LOADING_USER });
-
         const decodedToken = jwtDecode(token);
         // expired
         if(decodedToken.exp * 1000 < Date.now()) {
@@ -61,7 +59,6 @@ export const authenticate = (token) => {
         else {            
             setAuthorizationHeader(token);
             dispatch(fetchUserData());
-            dispatch({ type: ACTIONS.CLEAR_ERROR });
         }
     }
 }
@@ -71,32 +68,17 @@ export const setAuthorizationHeader = (token) => {
 }
 
 export const logout = () => {
-    localStorage.removeItem("jwtToken");  
-    delete FirebaseAPI.defaults.headers.common["Authorization"];  
-    return {
-        type: ACTIONS.LOGOUT,
-    };
-};
-
-/*
-MultiFetch Solution-1 (Using Lodash memoize())
-*/
-export const fetchUser = (id) => {
     return (dispatch) => {
-        _fetchUser(id, dispatch);
-    };
+        localStorage.removeItem("jwtToken");  
+        delete FirebaseAPI.defaults.headers.common["Authorization"];  
+        dispatch({type: ACTIONS.LOGOUT});
+    }
 };
-
-const _fetchUser = _.memoize(async (id, dispatch) => {
-    const response = await DjangoREST.get(`/users/${id}`);
-
-    dispatch({ type: ACTIONS.FETCH_USER, payload: response.data });
-});
 
 export const fetchUserData = () => {
 
     return (dispatch) => {
-        dispatch({ type: ACTIONS.LOADING_USER });
+        dispatch({ type: ACTIONS.LOADING_UI });
 
         FirebaseAPI.get("/users")
             .then(res => {
@@ -104,6 +86,7 @@ export const fetchUserData = () => {
                     type: ACTIONS.SET_USER,
                     payload: res.data,
                 });
+                dispatch({ type: ACTIONS.CLEAR_ERROR });
             })
             .catch(error => {
                 dispatch({
@@ -130,34 +113,49 @@ export const editUserDetails = (data) => {
     return (dispatch) => {
         dispatch({ type: ACTIONS.LOADING_UI });
 
-        FirebaseAPI.post("/users")
+        FirebaseAPI.post("/users", data)
             .then(() => {
-                
+                dispatch(fetchUserData());
             })
             .catch(err => {
-                dispatch({
-                    type: ACTIONS.SET_ERROR,
-                    payload: err.response.data,
-                });
+                console.log(err)
+                // dispatch({
+                //     type: ACTIONS.SET_ERROR,
+                //     payload: err.response.data,
+                // });
             })
     }
 }
 
-export const clearAlert = () => {
-    return { type: ACTIONS.CLEAR_ALERT };
-};
 
-//SAME below
 export const fetchBlogs = () => {
     return (dispatch) => {
-        // const response = await FirebaseAPI.get("/posts");
+        dispatch({ type: ACTIONS.LOADING_UI });
+
         FirebaseAPI.get("/posts")
         .then(res => {
             dispatch({ type: ACTIONS.FETCH_BLOGS, payload: res.data });
+            dispatch({ type: ACTIONS.STOP_LOADING_UI });
         })
         .catch(err => console.log(err));
     };
 };
+
+
+/*
+MultiFetch Solution-1 (Using Lodash memoize())
+*/
+export const fetchUser = (id) => {
+    return (dispatch) => {
+        _fetchUser(id, dispatch);
+    };
+};
+
+const _fetchUser = _.memoize(async (id, dispatch) => {
+    const response = await DjangoREST.get(`/users/${id}`);
+
+    dispatch({ type: ACTIONS.FETCH_USER, payload: response.data });
+});
 
 export const fetchBlog = (id) => {
     return async (dispatch) => {
@@ -207,4 +205,9 @@ export const deleteBlog = (id) => {
                 // dispatch({type: ACTIONS.SET_ALERT, payload: error.response.data['email'][0]})
             });
     };
+};
+
+
+export const clearAlert = () => {
+    return { type: ACTIONS.CLEAR_ALERT };
 };

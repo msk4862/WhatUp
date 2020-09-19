@@ -37,7 +37,7 @@ const Header = (props) => {
                     </div>
         
                     <div className="dropdown-menu">
-                        <Link className="dropdown-item" to={`/${props.user.credentials.handle}`}>
+                        <Link className="dropdown-item" to={`/user/${props.user.credentials.handle}`}>
                             Profile
                         </Link>
                         <Link className="dropdown-item" to="/blogs/create">

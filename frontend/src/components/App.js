@@ -28,7 +28,7 @@ function App() {
                             <Route exact path="/login" component={Login} />
                             <Route exact path="/signup" component={Signup} />
 
-                            <Route exact path="/:handle" component={Profile} />
+                            <Route exact path="/user/:handle" component={Profile} />
 
                             {/* Blogs Routes */}
                             <Route path="/blogs" exact component={BlogList} />

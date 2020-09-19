@@ -15,18 +15,15 @@
 
 .profile .edit-ic button {
     position: absolute;
-    cursor: pointer;
     right: 5.5rem;
     bottom: 1rem;
-    background-color: var(--primary-dark-color);
-    font-size: 1rem;
-    color: var(--font-light-color);
-    padding: 5px 10px;
-    border-radius: 15px;
-    outline: none;
-    border: none;
 }
 
+.profile .edit-ic .custom-tooltip::before {
+    width: 160px;
+    top: 35px;
+    left: 200%;
+}
 
 .profile .details {
     background-color: var(--primary-light-color);
@@ -40,12 +37,7 @@
     text-decoration: underline;
 }
 
-/* 
-.profile .details p {
-    margin-bottom: 0.2rem;
-} */
-
-.profile .details > div:not(:first-child):not(:last-child)::after {
+.details > div:not(:first-child):not(:last-child)::after {
     content: "";
     display: block;
     width: 100%;
@@ -54,6 +46,24 @@
     background-color: var(--primary-dark-color);
 }
 
-.profile .details > div div:first-child {
+.details > div div:first-child {
     color: var(--font-gray-color);
+}
+
+.profile button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: transparent;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    padding: 0.2rem;
+    font-size: 1.2rem;
+}
+
+.profile button:hover {
+    color: var(--font-light-color);
+    background-color: var(--secondary-color)
+
 }
