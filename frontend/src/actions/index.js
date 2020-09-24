@@ -11,13 +11,13 @@ export const signup = (data) => {
         dispatch({ type: ACTIONS.LOADING_UI });
 
         FirebaseAPI.post("/users/signup", data)
-            .then(res => {
+            .then((res) => {
                 setAuthorizationHeader(res.data["token"]);
                 dispatch(fetchUserData());
                 dispatch({ type: ACTIONS.CLEAR_ERROR });
                 history.push("/");
             })
-            .catch(error => {
+            .catch((error) => {
                 dispatch({
                     type: ACTIONS.SET_ERROR,
                     payload: error.response.data,
@@ -31,20 +31,19 @@ export const login = (data = null) => {
         dispatch({ type: ACTIONS.LOADING_UI });
 
         FirebaseAPI.post(`/users/login`, data)
-            .then(res => {
+            .then((res) => {
                 setAuthorizationHeader(res.data["token"]);
                 dispatch(fetchUserData());
                 dispatch({ type: ACTIONS.CLEAR_ERROR });
                 history.push("/");
             })
-            .catch(error => {
+            .catch((error) => {
                 dispatch({
                     type: ACTIONS.SET_ERROR,
                     payload: error.response.data,
                 });
             });
     };
-    
 };
 
 // authenticate using localstorage token
@@ -52,49 +51,47 @@ export const authenticate = (token) => {
     return (dispatch) => {
         const decodedToken = jwtDecode(token);
         // expired
-        if(decodedToken.exp * 1000 < Date.now()) {
+        if (decodedToken.exp * 1000 < Date.now()) {
             dispatch(logout());
-        }
-        else {            
+        } else {
             setAuthorizationHeader(token);
             dispatch(fetchUserData());
         }
-    }
-}
+    };
+};
 export const setAuthorizationHeader = (token) => {
     localStorage.setItem("jwtToken", token);
     FirebaseAPI.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-}
+};
 
 export const logout = () => {
     return (dispatch) => {
-        localStorage.removeItem("jwtToken");  
-        delete FirebaseAPI.defaults.headers.common["Authorization"];  
-        dispatch({type: ACTIONS.LOGOUT});
-    }
+        localStorage.removeItem("jwtToken");
+        delete FirebaseAPI.defaults.headers.common["Authorization"];
+        dispatch({ type: ACTIONS.LOGOUT });
+    };
 };
 
 export const fetchUserData = () => {
-
     return (dispatch) => {
         dispatch({ type: ACTIONS.LOADING_UI });
 
         FirebaseAPI.get("/users")
-            .then(res => {
+            .then((res) => {
                 dispatch({
                     type: ACTIONS.SET_USER,
                     payload: res.data,
                 });
                 dispatch({ type: ACTIONS.CLEAR_ERROR });
             })
-            .catch(error => {
+            .catch((error) => {
                 dispatch({
                     type: ACTIONS.SET_ERROR,
                     payload: error.response.data,
                 });
             });
-    }
-}
+    };
+};
 
 export const uploadImage = (formData) => {
     return (dispatch) => {
@@ -104,9 +101,9 @@ export const uploadImage = (formData) => {
             .then(() => {
                 dispatch(fetchUserData());
             })
-            .catch(err => console.error(err));
-    }
-}
+            .catch((err) => console.error(err));
+    };
+};
 
 export const editUserDetails = (data) => {
     return (dispatch) => {
@@ -116,10 +113,9 @@ export const editUserDetails = (data) => {
             .then(() => {
                 dispatch(fetchUserData());
             })
-            .catch(err => console.error(err));
-    }
-}
-
+            .catch((err) => console.error(err));
+    };
+};
 
 // Data actions
 export const fetchBlogs = () => {
@@ -127,13 +123,13 @@ export const fetchBlogs = () => {
         dispatch({ type: ACTIONS.LOADING_UI });
 
         FirebaseAPI.get("/posts")
-            .then(res => {
+            .then((res) => {
                 dispatch({ type: ACTIONS.FETCH_BLOGS, payload: res.data });
                 dispatch({ type: ACTIONS.STOP_LOADING_UI });
             })
             .catch((err) => {
-                console.log(err)
-                dispatch({ type: ACTIONS.FETCH_BLOGS, payload: [] }); 
+                console.log(err);
+                dispatch({ type: ACTIONS.FETCH_BLOGS, payload: [] });
             });
     };
 };
@@ -141,25 +137,22 @@ export const fetchBlogs = () => {
 export const likeBlog = (postId) => {
     return (dispatch) => {
         FirebaseAPI.post(`/posts/${postId}/like`)
-            .then(res => {
+            .then((res) => {
                 dispatch({ type: ACTIONS.LIKE_BLOG, payload: res.data });
             })
-            .catch(err => console.log(err));
+            .catch((err) => console.log(err));
     };
 };
 
 export const unlikeBlog = (postId) => {
     return (dispatch) => {
         FirebaseAPI.post(`/posts/${postId}/unlike`)
-            .then(res => {
+            .then((res) => {
                 dispatch({ type: ACTIONS.UNLIKE_BLOG, payload: res.data });
             })
-            .catch(err => console.log(err));
+            .catch((err) => console.log(err));
     };
 };
-
-
-
 
 /*
 MultiFetch Solution-1 (Using Lodash memoize())
@@ -181,18 +174,17 @@ export const fetchBlog = (id) => {
         dispatch({ type: ACTIONS.LOADING_UI });
 
         FirebaseAPI.get(`/posts/${id}`)
-        .then(res => {
-            dispatch({ type: ACTIONS.FETCH_BLOG, payload: res.data });
-            dispatch({ type: ACTIONS.CLEAR_ERROR });
-        })
-        .catch(err => {
-            console.log(err);
-            dispatch({
-                type: ACTIONS.SET_ERROR,
-                payload: err.response.data,
+            .then((res) => {
+                dispatch({ type: ACTIONS.FETCH_BLOG, payload: res.data });
+                dispatch({ type: ACTIONS.CLEAR_ERROR });
+            })
+            .catch((err) => {
+                console.log(err);
+                dispatch({
+                    type: ACTIONS.SET_ERROR,
+                    payload: err.response.data,
+                });
             });
-        })
-
     };
 };
 
@@ -206,7 +198,7 @@ export const createBlog = (data) => {
                 });
                 history.push("/");
             })
-            .catch(err => {
+            .catch((err) => {
                 console.log(err);
                 dispatch({
                     type: ACTIONS.SET_ERROR,
@@ -236,7 +228,7 @@ export const deleteBlog = (id) => {
             .then(() => {
                 dispatch({ type: ACTIONS.DELETE_BLOG, payload: id });
             })
-            .catch(error => {
+            .catch((error) => {
                 console.log(error);
             });
     };
@@ -245,15 +237,14 @@ export const deleteBlog = (id) => {
 export const submitComment = (id, data) => {
     return (dispatch) => {
         FirebaseAPI.post(`/posts/${id}/comment`, data)
-            .then(res => {
+            .then((res) => {
                 dispatch({ type: ACTIONS.SUBMIT_COMMENT, payload: res.data });
             })
-            .catch(error => {
+            .catch((error) => {
                 console.log(error);
             });
     };
 };
-
 
 export const clearAlert = () => {
     return { type: ACTIONS.CLEAR_ALERT };

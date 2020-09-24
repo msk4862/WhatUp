@@ -9,33 +9,46 @@ const Comments = ({ comments }) => {
 
     return (
         <div className="comments">
-            {comments && comments.length > 0 ?
-            comments.map((comment, index) => {
-                const { userImage, userHandle, body, createdAt } = comment;
+            {comments && comments.length > 0
+                ? comments.map((comment, index) => {
+                      const {
+                          userImage,
+                          userHandle,
+                          body,
+                          createdAt,
+                      } = comment;
 
-                return (
-                <div key={index} className="row align-items-center">
-                    <div className="col-12 col-sm-10">
-                        <div className="media">
-                            <div className="media-left mr-2">
-                                <img className="media-object" src={userImage} alt={`${userHandle}`} />
-                            </div>
-                            <div className="media-body">
-                                <Link to="#">
-                                    <h5 className="media-heading mb-0">{userHandle}</h5>
-                                </Link> 
-                                <small>{dayjs(createdAt).fromNow()}</small>
+                      return (
+                          <div key={index} className="row align-items-center">
+                              <div className="col-12 col-sm-10">
+                                  <div className="media">
+                                      <div className="media-left mr-2">
+                                          <img
+                                              className="media-object"
+                                              src={userImage}
+                                              alt={`${userHandle}`}
+                                          />
+                                      </div>
+                                      <div className="media-body">
+                                          <Link to="#">
+                                              <h5 className="media-heading mb-0">
+                                                  {userHandle}
+                                              </h5>
+                                          </Link>
+                                          <small>
+                                              {dayjs(createdAt).fromNow()}
+                                          </small>
 
-                                <p>{body}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>  
-                )
-            }) : null
-            }
+                                          <p>{body}</p>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      );
+                  })
+                : null}
         </div>
-    )
-}
+    );
+};
 
 export default Comments;

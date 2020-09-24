@@ -13,18 +13,18 @@ const Login = (props) => {
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({});
 
-    const { from } = props.location.state || { from: { pathname: '/' } }
+    const { from } = props.location.state || { from: { pathname: "/" } };
 
     useEffect(() => {
-        if(props.authenticated) history.push(from);
+        if (props.authenticated) history.push(from);
         else {
             let token = localStorage.getItem("jwtToken");
-            if(token) props.authenticate(token);
+            if (token) props.authenticate(token);
         }
     }, [props.authenticated]);
 
     useEffect(() => {
-        if(props.ui.errors) setErrors(props.ui.errors);
+        if (props.ui.errors) setErrors(props.ui.errors);
     }, [props.ui.errors]);
 
     function onLogin(event) {
@@ -36,10 +36,11 @@ const Login = (props) => {
 
         let credErrors = {};
 
-        if(isBlank(cred.email)) credErrors.email = "Email can't be blank!";
-        if(isBlank(cred.email)) credErrors.password = "Password can't be blank!";
+        if (isBlank(cred.email)) credErrors.email = "Email can't be blank!";
+        if (isBlank(cred.email))
+            credErrors.password = "Password can't be blank!";
 
-        if(isEmptyObj(credErrors)) {
+        if (isEmptyObj(credErrors)) {
             props.login(cred);
         }
         setErrors(credErrors);
@@ -55,67 +56,73 @@ const Login = (props) => {
                     {errors.credential}
                 </p>
             );
-        } 
-        else return null;
+        } else return null;
     }
 
-    return ( 
-            <div className="row justify-centent-center align-items-center">
-                {props.ui.loading && <p>Loading...</p>}  
-                {!props.ui.loading &&
-                    <div className="login-form-container col-10 col-sm-4 ml-auto mr-auto">
-                        <div className="text-center">
-                            <h2>{LOGIN_TITLE}</h2>
-                        </div>
-                        <form
-                            className="row justify-content-center mt-4"
-                            onSubmit={onLogin}
-                        >
-                            <div className="col">
-                                {renderErrors()}
-                                <div className="form-group">
-                                    <label>Email</label>
-                                    <input
-                                        type="email"
-                                        className="form-control"
-                                        value={email}
-                                        onChange={(event) => {
-                                            event.preventDefault();
-                                            setEmail(event.target.value);
-                                        }}
-                                    />
-                                    {errors.email ? <small className="error-message">{errors.email}</small> : null}  
-                                </div>
-
-
-                                <div className="form-group">
-                                    <label>Password</label>
-                                    <input
-                                        type="password"
-                                        className="form-control"
-                                        value={password}
-                                        onChange={(event) => {
-                                            event.preventDefault();
-                                            setPassword(event.target.value);
-                                        }}
-                                    />
-                                    {errors.password ? <small className="error-message">{errors.password}</small> : null}  
-                                </div>
-
-
-                                <div className="form-group  row justify-content-center">
-                                    <button type="submit" className="btn">
-                                        Login
-                                    </button>
-                                </div>
+    return (
+        <div className="row justify-centent-center align-items-center">
+            {props.ui.loading && <p>Loading...</p>}
+            {!props.ui.loading && (
+                <div className="login-form-container col-10 col-sm-4 ml-auto mr-auto">
+                    <div className="text-center">
+                        <h2>{LOGIN_TITLE}</h2>
+                    </div>
+                    <form
+                        className="row justify-content-center mt-4"
+                        onSubmit={onLogin}
+                    >
+                        <div className="col">
+                            {renderErrors()}
+                            <div className="form-group">
+                                <label>Email</label>
+                                <input
+                                    type="email"
+                                    className="form-control"
+                                    value={email}
+                                    onChange={(event) => {
+                                        event.preventDefault();
+                                        setEmail(event.target.value);
+                                    }}
+                                />
+                                {errors.email ? (
+                                    <small className="error-message">
+                                        {errors.email}
+                                    </small>
+                                ) : null}
                             </div>
-                        </form>
-                        <div className="text-center">
-                            Don't have an account ? <Link to="/signup"> Sign up here</Link>
+
+                            <div className="form-group">
+                                <label>Password</label>
+                                <input
+                                    type="password"
+                                    className="form-control"
+                                    value={password}
+                                    onChange={(event) => {
+                                        event.preventDefault();
+                                        setPassword(event.target.value);
+                                    }}
+                                />
+                                {errors.password ? (
+                                    <small className="error-message">
+                                        {errors.password}
+                                    </small>
+                                ) : null}
+                            </div>
+
+                            <div className="form-group  row justify-content-center">
+                                <button type="submit" className="btn">
+                                    Login
+                                </button>
+                            </div>
                         </div>
-                    </div> 
-                }
-            </div>
+                    </form>
+                    <div className="text-center">
+                        Don't have an account ?{" "}
+                        <Link to="/signup"> Sign up here</Link>
+                    </div>
+                </div>
+            )}
+        </div>
     );
 };
 

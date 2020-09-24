@@ -26,13 +26,12 @@ const BlogCreate = (props) => {
             bodyMeta,
             body,
         };
-        
-        let err = {};
-        if(isBlank(bodyMeta)) err.bodyMeta = "this can't be empty!";
-        if(isBlank(body)) err.body = "This can't be empty!";
 
-        if(isEmptyObj(err))
-            props.createBlog(blog);
+        let err = {};
+        if (isBlank(bodyMeta)) err.bodyMeta = "this can't be empty!";
+        if (isBlank(body)) err.body = "This can't be empty!";
+
+        if (isEmptyObj(err)) props.createBlog(blog);
 
         setErrors(err);
     }
@@ -46,9 +45,11 @@ const BlogCreate = (props) => {
                     type="text"
                     className="form-control"
                     value={title}
-                    onChange={event => setTitle(event.target.value)}
+                    onChange={(event) => setTitle(event.target.value)}
                 ></input>
-                {errors.title ? <small className="error-message">{errors.title}</small> : null}  
+                {errors.title ? (
+                    <small className="error-message">{errors.title}</small>
+                ) : null}
             </div>
             <div className="form-group">
                 <lable>Short Description</lable>
@@ -57,9 +58,11 @@ const BlogCreate = (props) => {
                     className="form-control"
                     rows="5"
                     value={bodyMeta}
-                    onChange={event => setBodyMeta(event.target.value)}
+                    onChange={(event) => setBodyMeta(event.target.value)}
                 ></textarea>
-                {errors.bodyMeta ? <small className="error-message">{errors.bodyMeta}</small> : null}  
+                {errors.bodyMeta ? (
+                    <small className="error-message">{errors.bodyMeta}</small>
+                ) : null}
             </div>
             <div className="form-group">
                 <lable>Blog Content</lable>
@@ -68,11 +71,13 @@ const BlogCreate = (props) => {
                     className="form-control"
                     rows="10"
                     value={body}
-                    onChange={event => setBody(event.target.value)}>
-                </textarea>
-                {errors.body ? <small className="error-message">{errors.body}</small> : null}  
+                    onChange={(event) => setBody(event.target.value)}
+                ></textarea>
+                {errors.body ? (
+                    <small className="error-message">{errors.body}</small>
+                ) : null}
             </div>
-            
+
             <div className="form-group row justify-content-center">
                 <button type="submit" className="btn">
                     Publish Blog

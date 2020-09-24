@@ -1,53 +1,67 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { authenticate, uploadImage } from "../actions/index";
-import EditProfile from "./EditProfile"; 
+import EditProfile from "./EditProfile";
 import "../styles/profile.css";
 
 const Profile = (props) => {
-
     useEffect(() => {
-        if(!props.user.authenticated) {
-            // fetch user details 
+        if (!props.user.authenticated) {
+            // fetch user details
             let token = localStorage.getItem("jwtToken");
-            if(token) props.authenticate(token);
+            if (token) props.authenticate(token);
         }
     }, [props.user.authenticated]);
 
     // upload new image
     const handleImageChange = (event) => {
         const image = event.target.files[0];
-        if(!image) return;
+        if (!image) return;
         const formData = new FormData();
         formData.append("image", image, image.name);
         props.uploadImage(formData);
-    }
+    };
 
     const editImage = () => {
         const fileInput = document.getElementById("imageInput");
         fileInput.click();
-    }
+    };
 
-    const { imageUrl, handle, bio, website, createdAt, location } = props.user.credentials;
+    const {
+        imageUrl,
+        handle,
+        bio,
+        website,
+        createdAt,
+        location,
+    } = props.user.credentials;
 
     return (
         <div className="profile container">
             {props.loading && <p>Loading...</p>}
-            {!props.loading &&
+            {!props.loading && (
                 <div className="row justify-content-center">
                     <div className="col-12 col-sm-6 ml-auto mr-auto">
                         <div className="text-center">
-                            <img className="rounded-circle" src={imageUrl} alt="profile"/>
-                            <input 
+                            <img
+                                className="rounded-circle"
+                                src={imageUrl}
+                                alt="profile"
+                            />
+                            <input
                                 type="file"
                                 id="imageInput"
                                 name="image"
                                 hidden="hidden"
-                                onChange={handleImageChange}/>
+                                onChange={handleImageChange}
+                            />
 
                             <div className="edit-ic">
                                 <button onClick={editImage}>
-                                    <span className="custom-tooltip" data-text="Change your profile picture">
+                                    <span
+                                        className="custom-tooltip"
+                                        data-text="Change your profile picture"
+                                    >
                                         <i className="fas fa-pencil-alt"></i>
                                     </span>
                                 </button>
@@ -67,7 +81,7 @@ const Profile = (props) => {
                                 </div>
                             </div>
                             <div className="row justify-content-center">
-                            <div className="col">
+                                <div className="col">
                                     <p>Bio</p>
                                 </div>
                                 <div className="col">
@@ -79,7 +93,9 @@ const Profile = (props) => {
                                     <p>Website</p>
                                 </div>
                                 <div className="col">
-                                    <a href={website} target="_blank" >{website}</a>
+                                    <a href={website} target="_blank">
+                                        {website}
+                                    </a>
                                 </div>
                             </div>
                             <div className="row justify-content-center">
@@ -90,29 +106,27 @@ const Profile = (props) => {
                                     <p>{location}</p>
                                 </div>
                             </div>
-                            
+
                             <div className="row justify-content-end">
-                                <EditProfile 
+                                <EditProfile
                                     initialBio={bio}
                                     initialWebsite={website}
-                                    initialLocation={location}/>
+                                    initialLocation={location}
+                                />
                             </div>
-                        
                         </div>
-
                     </div>
                 </div>
-            }
+            )}
         </div>
-    )
-
-}
+    );
+};
 
 const mapStateToProps = (state) => {
     return {
         user: state.user,
         loading: state.ui.loading,
-    }
-}
+    };
+};
 
 export default connect(mapStateToProps, { authenticate, uploadImage })(Profile);

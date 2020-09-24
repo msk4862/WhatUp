@@ -10,9 +10,7 @@ const Modal = ({ header, content, actions, onDismiss }) => {
                 <div className="modal-header">
                     <h4 className="modal-title">{header}</h4>
                 </div>
-                <div className="modal-body">
-                    {content}
-                </div>
+                <div className="modal-body">{content}</div>
                 <div className="modal-footer">{actions}</div>
             </div>
         </div>,

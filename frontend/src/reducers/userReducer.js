@@ -10,15 +10,14 @@ let initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        
         case ACTIONS.LOGOUT:
             return initialState;
 
         case ACTIONS.SET_USER:
-            return { 
-                authenticated : true, 
+            return {
+                authenticated: true,
                 loading: false,
-                ...action.payload 
+                ...action.payload,
             };
 
         case ACTIONS.LIKE_BLOG:
@@ -29,20 +28,22 @@ export default (state = initialState, action) => {
                     {
                         userHandle: state.credentials.handle,
                         postId: action.payload.postId,
-                    }
-                ]
+                    },
+                ],
             };
 
         case ACTIONS.UNLIKE_BLOG:
-            const updatedLikes = state.likes.filter(like=> action.payload.postId !== like.postId);
-            
+            const updatedLikes = state.likes.filter(
+                (like) => action.payload.postId !== like.postId
+            );
+
             return {
                 ...state,
-                likes: updatedLikes
+                likes: updatedLikes,
             };
-    
+
         case ACTIONS.LOADING_USER:
-            return {...state, loading: true};
+            return { ...state, loading: true };
 
         default:
             return state;

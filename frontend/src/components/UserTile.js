@@ -8,10 +8,13 @@ const UserTile = ({ userImage, userHandle, createdAt }) => {
 
     return (
         <div className="user-tile">
-            <img src={userImage} alt={`${userHandle}`}/>
-            <span><a href="#">{userHandle}</a>{dayjs(createdAt).fromNow()}</span>
+            <img src={userImage} alt={`${userHandle}`} />
+            <span>
+                <a href="#">{userHandle}</a>
+                {dayjs(createdAt).fromNow()}
+            </span>
         </div>
     );
-}
+};
 
 export default UserTile;

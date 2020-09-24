@@ -40,7 +40,7 @@
     font-size: 1rem;
     background-color: var(--primary-dark-color);
     transform-origin: top;
-    animation: reveal 0.25s ease-out; 
+    animation: reveal 0.25s ease-out;
 }
 
 .my-account .dropdown-item {
@@ -69,6 +69,10 @@
 }
 
 @keyframes reveal {
-    0% {transform: scaleY(0);}
-    100% {transform: scaleY(100%);}
+    0% {
+        transform: scaleY(0);
+    }
+    100% {
+        transform: scaleY(100%);
+    }
 }

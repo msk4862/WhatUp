@@ -20,34 +20,48 @@ const Header = (props) => {
         return (
             <ul className="navbar-nav my-account">
                 <li className="nav-item">
-                    <span className="custom-tooltip" data-text="Your notifications">
+                    <span
+                        className="custom-tooltip"
+                        data-text="Your notifications"
+                    >
                         <button className="nav-link">
                             <i className="far fa-bell"></i>
-                        </button> 
+                        </button>
                     </span>
                 </li>
 
                 <li className="nav-item">
                     <Link to="/blogs/new">
-                        <span className="custom-tooltip" data-text="Create blog">
+                        <span
+                            className="custom-tooltip"
+                            data-text="Create blog"
+                        >
                             <button className="nav-link">
                                 <i className="fas fa-plus"></i>
-                            </button> 
+                            </button>
                         </span>
                     </Link>
                 </li>
 
                 {/* <!-- Dropdown --> */}
                 <li className="nav-item dropdown">
-                    <div 
+                    <div
                         className="nav-link dropdown-toggle"
                         id="navbardrop"
-                        data-toggle="dropdown">
-                        <img className="rounded-circle" src={props.user.credentials.imageUrl} alt="profile"/>
+                        data-toggle="dropdown"
+                    >
+                        <img
+                            className="rounded-circle"
+                            src={props.user.credentials.imageUrl}
+                            alt="profile"
+                        />
                     </div>
-        
+
                     <div className="dropdown-menu">
-                        <Link className="dropdown-item" to={`/user/${props.user.credentials.handle}`}>
+                        <Link
+                            className="dropdown-item"
+                            to={`/user/${props.user.credentials.handle}`}
+                        >
                             Profile
                         </Link>
                         <Link className="dropdown-item" to="/blogs/my-blogs">
@@ -97,7 +111,9 @@ const Header = (props) => {
 
             {/* Nav Links */}
             <div className="collapse navbar-collapse" id="myNavbar">
-                {props.user.authenticated ? renderUserLinks() : renderGuestLinks()}
+                {props.user.authenticated
+                    ? renderUserLinks()
+                    : renderGuestLinks()}
             </div>
         </nav>
     );

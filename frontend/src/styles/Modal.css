@@ -17,12 +17,12 @@
 }
 
 /* accept button */
-.modal-footer button:first-child{ 
+.modal-footer button:first-child {
     background-color: var(--secondary-color);
 }
 
 /* cancel button */
-.modal-footer button:last-child{ 
+.modal-footer button:last-child {
     background-color: transparent;
     color: var(--font-dark-color);
 }

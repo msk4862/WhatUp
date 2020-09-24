@@ -11,9 +11,9 @@
     color: var(--primary-dark-color);
 }
 
-.card-text  {
+.card-text {
     color: var(--font-dark-color);
-    margin-bottom: 0.675rem;    
+    margin-bottom: 0.675rem;
 }
 
 a,
@@ -47,7 +47,6 @@ a:hover {
 }
 
 @media only screen and (max-width: 575px) {
-
     .meta-data div:nth-child(2) {
         text-align: center;
         margin-top: 0.25rem;

@@ -10,17 +10,16 @@ import "../../styles/Blogs/BlogShow.css";
 import CommentForm from "./CommentForm";
 
 const BlogShow = (props) => {
-
     dayjs.extend(relativeTime);
 
     const [showComments, setShowComments] = useState(true);
 
-    const { authenticated, credentials: {handle} } = props.user;
+    const { authenticated } = props.user;
 
     useEffect(() => {
-        if(!authenticated) {
+        if (!authenticated) {
             let token = localStorage.getItem("jwtToken");
-            if(token) props.authenticate(token);
+            if (token) props.authenticate(token);
         }
     }, [authenticated]);
 
@@ -29,53 +28,76 @@ const BlogShow = (props) => {
         props.fetchBlog(id);
     }, []);
 
-    const { postId, bodyMeta, body, createdAt, userImage, userHandle, likeCount, commentCount, comments} = props.blog;        
+    const {
+        postId,
+        bodyMeta,
+        body,
+        createdAt,
+        userImage,
+        userHandle,
+        likeCount,
+        commentCount,
+        comments,
+    } = props.blog;
     const { loading } = props.ui;
 
     return (
         <div>
             {loading && <p>Loading...</p>}
-            {!loading && 
+            {!loading && (
                 <div className="blog-show">
                     <div className="row justify-content-center">
                         <div className="col-12 blog-body">
                             <h1 className="blog-title">{bodyMeta}</h1>
                             <div className="blog-meta">
-                                <UserTile 
-                                    userImage={userImage} 
+                                <UserTile
+                                    userImage={userImage}
                                     userHandle={userHandle}
-                                    createdAt={createdAt}/>
+                                    createdAt={createdAt}
+                                />
                             </div>
                             <div className="blog-text mt-4">
                                 <p>{body}</p>
                             </div>
                         </div>
-                        
                     </div>
                     <div className="blog-footer">
                         <div className="row">
                             <div className="col">
-                                <span><LikeButton postId={postId}/>  {likeCount} Likes</span>
-                                <span className="ml-4" onClick={() => setShowComments(prevState => !prevState)} ><i className="far fa-comment"></i> {commentCount} Comments</span>
+                                <span>
+                                    <LikeButton postId={postId} /> {likeCount}{" "}
+                                    Likes
+                                </span>
+                                <span
+                                    className="ml-4"
+                                    onClick={() =>
+                                        setShowComments(
+                                            (prevState) => !prevState
+                                        )
+                                    }
+                                >
+                                    <i className="far fa-comment"></i>{" "}
+                                    {commentCount} Comments
+                                </span>
                             </div>
                         </div>
 
                         <hr />
-                        {showComments &&
+                        {showComments && (
                             <>
                                 <CommentForm />
                                 <Comments comments={comments} />
                             </>
-                        }
+                        )}
                     </div>
                 </div>
-            }
+            )}
         </div>
     );
 };
 
 const mapStateToProps = (state) => {
-    return { 
+    return {
         blog: state.blogs.blog,
         user: state.user,
         ui: state.ui,

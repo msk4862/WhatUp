@@ -10,10 +10,6 @@ const BlogEdit = (props) => {
     const [body, setBody] = useState("");
 
     useEffect(() => {
-        if (!props.auth.isLoggedIn) {
-            history.push("/login");
-        }
-
         if (props.blog) {
             const { Title, Body, BodyMeta } = props.blog;
             setTitle(Title);
