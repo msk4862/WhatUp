@@ -21,6 +21,26 @@ export default (state = initialState, action) => {
                 ...action.payload 
             };
 
+        case ACTIONS.LIKE_BLOG:
+            return {
+                ...state,
+                likes: [
+                    ...state.likes,
+                    {
+                        userHandle: state.credentials.handle,
+                        postId: action.payload.postId,
+                    }
+                ]
+            };
+
+        case ACTIONS.UNLIKE_BLOG:
+            const updatedLikes = state.likes.filter(like=> action.payload.postId !== like.postId);
+            
+            return {
+                ...state,
+                likes: updatedLikes
+            };
+    
         case ACTIONS.LOADING_USER:
             return {...state, loading: true};
 
