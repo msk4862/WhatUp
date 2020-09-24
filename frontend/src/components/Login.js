@@ -13,8 +13,10 @@ const Login = (props) => {
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({});
 
+    const { from } = props.location.state || { from: { pathname: '/' } }
+
     useEffect(() => {
-        if(props.authenticated) history.push("/");
+        if(props.authenticated) history.push(from);
         else {
             let token = localStorage.getItem("jwtToken");
             if(token) props.authenticate(token);
@@ -38,10 +40,9 @@ const Login = (props) => {
         if(isBlank(cred.email)) credErrors.password = "Password can't be blank!";
 
         if(isEmptyObj(credErrors)) {
-            setErrors({});
             props.login(cred);
         }
-        else setErrors(credErrors);
+        setErrors(credErrors);
     }
 
     /*

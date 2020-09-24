@@ -12,6 +12,7 @@ import BlogCreate from "./Blogs/BlogCreate";
 import BlogEdit from "./Blogs/BlogEdit";
 import BlogDelete from "./Blogs/BlogDelete";
 import history from "../history";
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
     return (
@@ -37,7 +38,7 @@ function App() {
                                 exact
                                 component={BlogList}
                             />
-                            <Route
+                            <ProtectedRoute
                                 path="/blogs/new"
                                 exact
                                 component={BlogCreate}
@@ -46,11 +47,6 @@ function App() {
                                 path="/blogs/edit/:id"
                                 exact
                                 component={BlogEdit}
-                            />
-                            <Route
-                                path="/blogs/delete/:id"
-                                exact
-                                component={BlogDelete}
                             />
                             <Route
                                 path="/blogs/:id"
