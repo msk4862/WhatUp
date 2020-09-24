@@ -1,0 +1,18 @@
+.user-tile img {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    margin-right: 5px;
+}
+
+.user-tile a {
+    font-weight: 500;
+}
+
+.user-tile a::after {
+    content: "\2605";
+    color: var(--font-dark-color);
+    display: inline;
+    margin-left: 5px;
+    margin-right: 5px;
+}
