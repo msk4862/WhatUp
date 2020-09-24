@@ -7,15 +7,14 @@ import "../../styles/Blogs/comments.css";
 const Comments = ({ comments }) => {
     dayjs.extend(relativeTime);
 
-    console.log(comments)
     return (
         <div className="comments">
             {comments && comments.length > 0 ?
-            comments.map(comment => {
+            comments.map((comment, index) => {
                 const { userImage, userHandle, body, createdAt } = comment;
 
                 return (
-                <div className="row align-items-center">
+                <div key={index} className="row align-items-center">
                     <div className="col-12 col-sm-10">
                         <div className="media">
                             <div className="media-left mr-2">

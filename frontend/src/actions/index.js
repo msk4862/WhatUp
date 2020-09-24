@@ -242,6 +242,18 @@ export const deleteBlog = (id) => {
     };
 };
 
+export const submitComment = (id, data) => {
+    return (dispatch) => {
+        FirebaseAPI.post(`/posts/${id}/comment`, data)
+            .then(res => {
+                dispatch({ type: ACTIONS.SUBMIT_COMMENT, payload: res.data });
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    };
+};
+
 
 export const clearAlert = () => {
     return { type: ACTIONS.CLEAR_ALERT };
