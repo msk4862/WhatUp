@@ -26,7 +26,7 @@ exports.getAllPosts = (req, res) => {
         });
 };
 
-exports.createPost = (req, res) => {
+exports.createOnePost = (req, res) => {
     const data = req.body;
     const newPost = {
         userHandle: req.user.handle,

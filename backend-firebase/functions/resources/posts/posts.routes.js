@@ -2,7 +2,7 @@ const app = require("express");
 const FBAuth = require("../../utils/authMiddleware");
 const {
     getAllPosts,
-    createPost,
+    createOnePost,
     getOnePost,
     updateOnePost,
     deleteOnePost,
@@ -13,7 +13,9 @@ const {
 
 const Router = app.Router();
 
-Router.route("/").get(getAllPosts).post(createPost);
+Router.route("/")
+    .get(getAllPosts)
+    .post(FBAuth, createOnePost);
 
 Router.route("/:postId")
     .get(FBAuth, getOnePost)
