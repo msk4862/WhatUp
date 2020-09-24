@@ -24,7 +24,7 @@ export default (state = initialState, action) => {
             return { ...state, 
                 blogs: {
                     ...state.blogs,
-                    [action.payload.id]: action.payload 
+                    [action.payload.postId]: action.payload 
                 }
             };
 
@@ -32,7 +32,10 @@ export default (state = initialState, action) => {
         //     return { ...state, [action.payload.id]: action.payload };
 
         case ACTIONS.DELETE_BLOG:
-            return _.omit(state.blogs, action.payload);
+            return {
+                ...state,
+                blogs: _.omit(state.blogs, action.payload)                    
+            }
 
         case ACTIONS.LIKE_BLOG:
             return {

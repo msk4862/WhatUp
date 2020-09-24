@@ -42,7 +42,7 @@ exports.createOnePost = (req, res) => {
         .add(newPost)
         .then((doc) => {
             const resPost = newPost;
-            resPost.id = doc.id;
+            resPost.postId = doc.id;
             return res.status(201).send(resPost);
         })
         .catch((err) => {

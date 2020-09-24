@@ -192,6 +192,7 @@ export const createBlog = (data) => {
                 dispatch({
                     type: ACTIONS.CLEAR_ERROR,
                 });
+                history.push("/");
             })
             .catch(err => {
                 console.log(err);
