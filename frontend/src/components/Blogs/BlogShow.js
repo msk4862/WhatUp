@@ -1,48 +1,73 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-
-import { fetchBlog } from "../../actions";
-import UserHeader from "../UserHeader";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { fetchBlog, authenticate } from "../../actions";
+import UserTile from "../UserTile";
+import LikeButton from "./LikeButton";
 import "../../styles/Blogs/BlogShow.css";
 
 const BlogShow = (props) => {
-    // replacement of componentDidMount()
-    // empty array is passed as second argument to use it like componentDidMount()
+
+    dayjs.extend(relativeTime);
+
+    const { authenticated, credentials: {handle} } = props.user;
+
+    useEffect(() => {
+        if(!authenticated) {
+            let token = localStorage.getItem("jwtToken");
+            if(token) props.authenticate(token);
+        }
+    }, [authenticated]);
+
     useEffect(() => {
         const { id } = props.match.params;
         props.fetchBlog(id);
-        // eslint-disable-next-line
     }, []);
 
-    function renderBlog() {
-        if (props.blog) {
-            if (props.blog.Author) {
-                return (
+    const { postId, bodyMeta, body, createdAt, userImage, userHandle, likeCount, commentCount} = props.blog;        
+    const { loading } = props.ui;
+
+    return (
+        <div>
+            {loading && <p>Loading...</p>}
+            {!loading && 
+                <div className="blog-show">
                     <div className="row justify-content-center">
-                        <div className="col-12 col-sm-12 blog-body">
-                            <h1 className="blog-title">{props.blog.Title}</h1>
+                        <div className="col-12 blog-body">
+                            <h1 className="blog-title">{bodyMeta}</h1>
                             <div className="blog-meta">
-                                <UserHeader author_id={props.blog.Author} />
-                                <span> | {props.blog.DateCreated}</span>
+                                <UserTile 
+                                    userImage={userImage} 
+                                    userHandle={userHandle}
+                                    createdAt={createdAt}/>
                             </div>
                             <div className="blog-text mt-4">
-                                <p>{props.blog.Body}</p>
+                                <p>{body}</p>
                             </div>
                         </div>
-
+                        
                     </div>
-                );
+                    
+                    <div className="row footer">
+                        <div className="col">
+                            <span><LikeButton postId={postId}/>  {likeCount} Likes</span>
+                            <span className="ml-4"><i className="far fa-comment"></i> {commentCount} Comments</span>
+                        </div>
+                    </div>
+                </div>
+            
             }
-        } else {
-            return <div>Loading...</div>;
-        }
-    }
-
-    return <div>{renderBlog()}</div>;
+        </div>
+    );
 };
 
-const mapStateToProps = (state, ownProps) => {
-    return { blog: state.blogs[ownProps.match.params.id] };
+const mapStateToProps = (state) => {
+    return { 
+        blog: state.blogs.blog,
+        user: state.user,
+        ui: state.ui,
+    };
 };
 
-export default connect(mapStateToProps, { fetchBlog })(BlogShow);
+export default connect(mapStateToProps, { fetchBlog, authenticate })(BlogShow);

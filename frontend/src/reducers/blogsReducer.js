@@ -17,8 +17,8 @@ export default (state = initialState, action) => {
                 loading: false,
             };
 
-        // case ACTIONS.FETCH_BLOG:
-        //     return { ...state, blog: action.payload };
+        case ACTIONS.FETCH_BLOG:
+            return { ...state, blog: action.payload };
 
         case ACTIONS.CREATE_BLOG:
             return { ...state, 
@@ -38,22 +38,28 @@ export default (state = initialState, action) => {
             }
 
         case ACTIONS.LIKE_BLOG:
-            return {
-                ...state,
-                blogs: {
-                    ...state.blogs,
-                    [action.payload.postId]: action.payload,
-                } 
-            }
         
         case ACTIONS.UNLIKE_BLOG:
+
+            // if current open post is liked or unliked
+            if(state.blog.postId === action.payload.postId)
+                return {
+                    ...state,
+                    blog: action.payload,
+                    blogs: {
+                        ...state.blogs,
+                        [action.payload.postId]: action.payload,
+                    } 
+                };            
+            
+            else 
             return {
                 ...state,
                 blogs: {
                     ...state.blogs,
                     [action.payload.postId]: action.payload,
                 } 
-            }
+            };
 
         default:
             return state;

@@ -36,7 +36,7 @@ const BlogDelete = (props) => {
 
     return (
         <div>
-            <span onClick={() => setShow(true)} >Delete</span>
+            <div onClick={() => setShow(true)} >Delete</div>
             {show &&
                 <Modal
                     header="Delete Blog"
@@ -47,12 +47,6 @@ const BlogDelete = (props) => {
             }
         </div>
     );
-};
-
-const mapStateToProps = (state) => {
-    return {
-        auth: state.user.auth,
-    };
 };
 
 export default connect(null, { deleteBlog })(BlogDelete);

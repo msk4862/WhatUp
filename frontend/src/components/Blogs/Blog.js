@@ -6,6 +6,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import LikeButton from "./LikeButton";
 import "../../styles/Blogs/Blog.css";
 import BlogDelete from "./BlogDelete";
+import UserTile from "../UserTile";
 
 const Blog = (props) => {
 
@@ -48,10 +49,10 @@ const Blog = (props) => {
                 <p className="card-text">{body}</p>
                 <div className="row meta-data align-items-center">
                     <div className="col-12 col-sm-6">
-                        <div>
-                            <img src={userImage}/>
-                            <span><a href="#">{userHandle}</a>{dayjs(createdAt).fromNow()}</span>
-                        </div>
+                        <UserTile 
+                            userImage={userImage} 
+                            userHandle={userHandle}
+                            createdAt={createdAt}/>
                     </div>
                     <div className="col-12 col-sm-6">
                         <span><LikeButton postId={postId}/>  {likeCount} Likes</span>
