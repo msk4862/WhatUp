@@ -61,6 +61,15 @@ export default (state = initialState, action) => {
                 } 
             };
 
+        case ACTIONS.SUBMIT_COMMENT:
+            return {
+                ...state,
+                blog: {
+                    ...state.blog,
+                    comments: [action.payload, ...state.blog.comments]
+                }
+            };
+
         default:
             return state;
     }

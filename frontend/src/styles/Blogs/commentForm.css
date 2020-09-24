@@ -1,0 +1,8 @@
+.comment-form .form-control {
+    font-size: var(--small);
+}
+
+.comment-form .btn {
+    font-size: var(--small);
+    padding: 0.2rem 0.75rem;
+}

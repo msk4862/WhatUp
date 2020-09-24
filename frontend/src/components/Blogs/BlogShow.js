@@ -7,6 +7,7 @@ import UserTile from "../UserTile";
 import LikeButton from "./LikeButton";
 import Comments from "./Comments";
 import "../../styles/Blogs/BlogShow.css";
+import CommentForm from "./CommentForm";
 
 const BlogShow = (props) => {
 
@@ -59,8 +60,12 @@ const BlogShow = (props) => {
                             </div>
                         </div>
 
+                        <hr />
                         {showComments &&
-                            <Comments comments={comments} />
+                            <>
+                                <CommentForm />
+                                <Comments comments={comments} />
+                            </>
                         }
                     </div>
                 </div>

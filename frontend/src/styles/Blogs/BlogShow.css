@@ -21,6 +21,10 @@
     text-transform: capitalize;
 }
 
+.blog-show hr {
+    border-top: 1px solid rgba(0,0,0,0.4);
+}
+
 .blog-show .blog-footer span {
     cursor: pointer;
 }
