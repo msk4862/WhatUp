@@ -183,7 +183,16 @@ exports.likeAPost = (req, res) => {
                 return res.status(404).send({ error: "Post doesn't exist!" });
             }
 
-            postData = doc.data();
+            postData = {
+                postId: doc.id,
+                bodyMeta: doc.data().bodyMeta,
+                body: doc.data().body,
+                createdAt: doc.data().createdAt,
+                likeCount: doc.data().likeCount,
+                commentCount: doc.data().commentCount,
+                userHandle: doc.data().userHandle,
+                userImage: doc.data().userImage,
+            };
             return db.collection("likes").add(likeData);
         })
         .then(() => {
@@ -216,8 +225,16 @@ exports.unlikeAPost = (req, res) => {
             if (!doc.exists) {
                 return res.status(404).send({ error: "Post doesn't exist!" });
             }
-
-            postData = doc.data();
+            postData = {
+                postId: doc.id,
+                bodyMeta: doc.data().bodyMeta,
+                body: doc.data().body,
+                createdAt: doc.data().createdAt,
+                likeCount: doc.data().likeCount,
+                commentCount: doc.data().commentCount,
+                userHandle: doc.data().userHandle,
+                userImage: doc.data().userImage,
+            };
             return likeDoc.get();
         })
         .then((data) => {

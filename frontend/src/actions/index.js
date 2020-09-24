@@ -5,8 +5,7 @@ import FirebaseAPI from "../apis/FirebaseAPI";
 import ACTIONS from "./actionTypes";
 import history from "../history";
 
-// USING THUNK MIDDLEWARE (for async request)
-
+// User actions
 export const signup = (data) => {
     return (dispatch) => {
         dispatch({ type: ACTIONS.LOADING_UI });
@@ -122,18 +121,44 @@ export const editUserDetails = (data) => {
 }
 
 
+// Data actions
 export const fetchBlogs = () => {
     return (dispatch) => {
         dispatch({ type: ACTIONS.LOADING_UI });
 
         FirebaseAPI.get("/posts")
-        .then(res => {
-            dispatch({ type: ACTIONS.FETCH_BLOGS, payload: res.data });
-            dispatch({ type: ACTIONS.STOP_LOADING_UI });
-        })
-        .catch(err => console.log(err));
+            .then(res => {
+                dispatch({ type: ACTIONS.FETCH_BLOGS, payload: res.data });
+                dispatch({ type: ACTIONS.STOP_LOADING_UI });
+            })
+            .catch((err) => {
+                console.log(err)
+                dispatch({ type: ACTIONS.FETCH_BLOGS, payload: [] }); 
+            });
     };
 };
+
+export const likeBlog = (postId) => {
+    return (dispatch) => {
+        FirebaseAPI.post(`/posts/${postId}/like`)
+            .then(res => {
+                dispatch({ type: ACTIONS.LIKE_BLOG, payload: res.data });
+            })
+            .catch(err => console.log(err));
+    };
+};
+
+export const unlikeBlog = (postId) => {
+    return (dispatch) => {
+        FirebaseAPI.post(`/posts/${postId}/unlike`)
+            .then(res => {
+                dispatch({ type: ACTIONS.UNLIKE_BLOG, payload: res.data });
+            })
+            .catch(err => console.log(err));
+    };
+};
+
+
 
 
 /*
@@ -160,15 +185,20 @@ export const fetchBlog = (id) => {
 };
 
 export const createBlog = (data) => {
-    return async (dispatch) => {
-        DjangoREST.post("/blogs/create", data)
+    return (dispatch) => {
+        FirebaseAPI.post("/posts", data)
             .then((response) => {
                 dispatch({ type: ACTIONS.CREATE_BLOG, payload: response.data });
-                history.push("/");
+                dispatch({
+                    type: ACTIONS.CLEAR_ERROR,
+                });
             })
-            .catch((error) => {
-                console.log(error.response.data);
-                // dispatch({type: ACTIONS.SET_ALERT, payload: error.response.data['email'][0]})
+            .catch(err => {
+                console.log(err);
+                dispatch({
+                    type: ACTIONS.SET_ERROR,
+                    payload: err.response.data,
+                });
             });
     };
 };
@@ -188,15 +218,13 @@ export const editBlog = (id, data) => {
 };
 
 export const deleteBlog = (id) => {
-    return async (dispatch) => {
-        DjangoREST.delete(`/blogs/${id}`)
+    return (dispatch) => {
+        FirebaseAPI.delete(`/posts/${id}`)
             .then(() => {
                 dispatch({ type: ACTIONS.DELETE_BLOG, payload: id });
-                history.push("/");
             })
-            .catch((error) => {
-                console.log(error.response.data);
-                // dispatch({type: ACTIONS.SET_ALERT, payload: error.response.data['email'][0]})
+            .catch(error => {
+                console.log(error);
             });
     };
 };

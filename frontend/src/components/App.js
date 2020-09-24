@@ -38,7 +38,7 @@ function App() {
                                 component={BlogList}
                             />
                             <Route
-                                path="/blogs/create"
+                                path="/blogs/new"
                                 exact
                                 component={BlogCreate}
                             />

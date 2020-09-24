@@ -23,7 +23,7 @@ const EditProfile = (props) => {
         }
 
         let Errs = {};
-        if(website && !isUrl(website)) Errs.website = "Must start with https:// and contain a valid domain (.com, .me, etc.)";
+        if(website && !isUrl(website)) Errs.website = "Enter a valid url!";
         
         if(isEmptyObj(Errs)) {
             props.editUserDetails(updatedDetails);
