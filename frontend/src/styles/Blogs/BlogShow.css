@@ -1,7 +1,8 @@
 .blog-show {
-    margin: 2rem;
+    margin: 2rem 1rem;
     background-color: var(--primary-light-color);
     padding: 1.5rem;
+    padding-bottom: 0.75rem;
     box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
 }
 
@@ -20,6 +21,12 @@
     text-transform: capitalize;
 }
 
-.blog-show .footer span {
+.blog-show .blog-footer span {
     cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+    .blog-show {
+        margin: 1rem 0;
+    }
 }

@@ -1,15 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { fetchBlog, authenticate } from "../../actions";
 import UserTile from "../UserTile";
 import LikeButton from "./LikeButton";
+import Comments from "./Comments";
 import "../../styles/Blogs/BlogShow.css";
 
 const BlogShow = (props) => {
 
     dayjs.extend(relativeTime);
+
+    const [showComments, setShowComments] = useState(true);
 
     const { authenticated, credentials: {handle} } = props.user;
 
@@ -25,7 +28,7 @@ const BlogShow = (props) => {
         props.fetchBlog(id);
     }, []);
 
-    const { postId, bodyMeta, body, createdAt, userImage, userHandle, likeCount, commentCount} = props.blog;        
+    const { postId, bodyMeta, body, createdAt, userImage, userHandle, likeCount, commentCount, comments} = props.blog;        
     const { loading } = props.ui;
 
     return (
@@ -48,15 +51,19 @@ const BlogShow = (props) => {
                         </div>
                         
                     </div>
-                    
-                    <div className="row footer">
-                        <div className="col">
-                            <span><LikeButton postId={postId}/>  {likeCount} Likes</span>
-                            <span className="ml-4"><i className="far fa-comment"></i> {commentCount} Comments</span>
+                    <div className="blog-footer">
+                        <div className="row">
+                            <div className="col">
+                                <span><LikeButton postId={postId}/>  {likeCount} Likes</span>
+                                <span className="ml-4" onClick={() => setShowComments(prevState => !prevState)} ><i className="far fa-comment"></i> {commentCount} Comments</span>
+                            </div>
                         </div>
+
+                        {showComments &&
+                            <Comments comments={comments} />
+                        }
                     </div>
                 </div>
-            
             }
         </div>
     );
