@@ -1,69 +1,58 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, {useState} from "react";
 import { connect } from "react-redux";
-
-import "../../styles/Blogs/Blog.css";
 import Modal from "../Modal";
-import { deleteBlog, fetchBlog } from "../../actions";
+import { deleteBlog } from "../../actions";
 import history from "../../history";
+import "../../styles/Blogs/Blog.css";
 
 const BlogDelete = (props) => {
-    useEffect(() => {
-        if (!props.auth.isLoggedIn) {
-            history.push("/login");
-        }
-        props.fetchBlog(props.match.params.id);
-    }, []);
+
+    const { id, title } = props;
+    const [show, setShow] = useState(false);
 
     function actions() {
-        // to avoid an extra div
-        const { id } = props.match.params;
+
         return (
             <>
                 <button
                     onClick={() => props.deleteBlog(id)}
-                    style={{ backgroundColor: "#d63447" }}
                     className="btn"
                 >
                     Delete
                 </button>
-                <Link
-                    to="/"
-                    style={{ backgroundColor: "grey" }}
+                <button
+                    onClick={() => setShow(false)}
                     className="btn"
                 >
                     Cancel
-                </Link>
+                </button>
             </>
         );
     }
 
     function renderContent() {
-        if (props.blog) {
-            return `Are you sure you want to delete the blog with title: ${props.blog.Title}?`;
-        } else {
-            return "Are you sure you want to delete the blog?";
-        }
+        return <span>Are you sure you want to delete the blog <strong>{title}</strong> ?</span>;
     }
 
     return (
         <div>
-            <h2>Stream Delete</h2>
-            <Modal
-                header="Delete Blog"
-                content={renderContent()}
-                actions={actions()}
-                onDismiss={() => history.push("/")}
-            />
+            <span onClick={() => setShow(true)} >Delete</span>
+            {show &&
+                <Modal
+                    header="Delete Blog"
+                    content={renderContent()}
+                    actions={actions()}
+                    onDismiss={() => setShow(false)}
+                />
+            }
         </div>
     );
 };
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
     return {
         auth: state.user.auth,
-        blog: state.blogs[ownProps.match.params.id],
     };
 };
 
-export default connect(mapStateToProps, { fetchBlog, deleteBlog })(BlogDelete);
+export default connect(null, { deleteBlog })(BlogDelete);

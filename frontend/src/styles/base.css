@@ -77,11 +77,13 @@ small {
     background-color: var(--secondary-color);
 }
 
+/* tooltip container */
 .custom-tooltip {
     position: relative;
     top: 0;
 }
 
+/* tooltip text */
 .custom-tooltip::before {
     display: none;
     content: attr(data-text);
@@ -91,7 +93,7 @@ small {
     background-color: var(--font-dark-color);
     color: var(--font-light-color);
     font-size: var(--small-xs);
-    width: 100px;
+    white-space:nowrap;
     padding: 3px 5px;
     border-radius: 10px;
     text-align: center;
