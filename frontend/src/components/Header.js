@@ -27,6 +27,16 @@ const Header = (props) => {
                     </span>
                 </li>
 
+                <li className="nav-item">
+                    <Link to="/blogs/new">
+                        <span className="custom-tooltip" data-text="Create blog">
+                            <button className="nav-link">
+                                <i className="fas fa-plus"></i>
+                            </button> 
+                        </span>
+                    </Link>
+                </li>
+
                 {/* <!-- Dropdown --> */}
                 <li className="nav-item dropdown">
                     <div 
@@ -39,9 +49,6 @@ const Header = (props) => {
                     <div className="dropdown-menu">
                         <Link className="dropdown-item" to={`/user/${props.user.credentials.handle}`}>
                             Profile
-                        </Link>
-                        <Link className="dropdown-item" to="/blogs/create">
-                            Write Blog
                         </Link>
                         <Link className="dropdown-item" to="/blogs/my-blogs">
                             My Blogs

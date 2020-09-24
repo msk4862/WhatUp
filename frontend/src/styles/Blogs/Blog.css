@@ -1,8 +1,7 @@
 .card {
     background-color: var(--primary-light-color);
-    box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
     margin-bottom: 1.25rem;
-    border-radius: 18px;
 }
 
 .card-body {
@@ -30,8 +29,8 @@ a:hover {
 }
 
 .meta-data img {
-    width: 40px;
-    height: 100%;
+    width: 30px;
+    height: 30px;
     margin-right: 5px;
 }
 
@@ -49,6 +48,20 @@ a:hover {
     display: inline;
     margin-left: 5px;
     margin-right: 5px;
+}
+
+/* Menu */
+.card .menu {
+    position: absolute;
+    cursor: pointer;
+    right: 5px;
+    top: 5px;
+    margin-left: 10px;
+    color: var(--primary-dark-color);
+}
+
+.card .menu .dropdown-toggle::before {
+    visibility: hidden;
 }
 
 @media only screen and (max-width: 575px) {
