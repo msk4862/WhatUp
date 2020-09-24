@@ -10,7 +10,6 @@ import BlogList from "./Blogs/BlogList";
 import BlogShow from "./Blogs/BlogShow";
 import BlogCreate from "./Blogs/BlogCreate";
 import BlogEdit from "./Blogs/BlogEdit";
-import BlogDelete from "./Blogs/BlogDelete";
 import history from "../history";
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -20,7 +19,7 @@ function App() {
             <Router history={history}>
                 <div>
                     <Header />
-                    <div className="container">
+                    <div className="container-fluid">
                         {/* Show only single route at a time (required beacuse /blogs/create=== blogs/:id ) */}
                         <Switch>
                             <Route exact path="/" component={BlogList} />

@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { likeBlog, unlikeBlog } from "../../actions";
-import "../../styles/Blogs/Blog.css";
+import history from "../../history";
+import "../../styles/Blogs/likeButton.css";
 
 const LikeButton = (props) => {
 
@@ -27,12 +28,12 @@ const LikeButton = (props) => {
     }
 
     return (
-        <>
+        <span className="like-button">
             {!authenticated && 
-                <i className="far fa-heart"></i>
+                <i className="far fa-heart" onClick={() => history.push("/login")}></i>
             }
             {authenticated && renderLike()}
-        </>
+        </span>
     );
 };
 

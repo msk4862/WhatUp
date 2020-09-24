@@ -177,10 +177,22 @@ const _fetchUser = _.memoize(async (id, dispatch) => {
 });
 
 export const fetchBlog = (id) => {
-    return async (dispatch) => {
-        const response = await DjangoREST.get(`/blogs/${id}`);
+    return (dispatch) => {
+        dispatch({ type: ACTIONS.LOADING_UI });
 
-        dispatch({ type: ACTIONS.FETCH_BLOG, payload: response.data });
+        FirebaseAPI.get(`/posts/${id}`)
+        .then(res => {
+            dispatch({ type: ACTIONS.FETCH_BLOG, payload: res.data });
+            dispatch({ type: ACTIONS.CLEAR_ERROR });
+        })
+        .catch(err => {
+            console.log(err);
+            dispatch({
+                type: ACTIONS.SET_ERROR,
+                payload: err.response.data,
+            });
+        })
+
     };
 };
 
