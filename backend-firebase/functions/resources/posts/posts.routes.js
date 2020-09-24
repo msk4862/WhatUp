@@ -18,7 +18,7 @@ Router.route("/")
     .post(FBAuth, createOnePost);
 
 Router.route("/:postId")
-    .get(FBAuth, getOnePost)
+    .get(getOnePost)
     .put(FBAuth, updateOnePost)
     .delete(FBAuth, deleteOnePost);
 

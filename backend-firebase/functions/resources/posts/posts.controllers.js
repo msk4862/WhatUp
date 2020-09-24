@@ -62,16 +62,16 @@ exports.getOnePost = (req, res) => {
             }
 
             postData = doc.data();
-            postData.id = doc.id;
+            postData.postId = doc.id;
             return db
                 .collection("comments")
                 .orderBy("createdAt", "desc")
-                .where("postId", "==", postData.id)
+                .where("postId", "==", postData.postId)
                 .get();
         })
-        .then((data) => {
+        .then(data => {
             postData.comments = [];
-            data.forEach((doc) => {
+            data.forEach(doc => {
                 postData.comments.push(doc.data());
             });
 
