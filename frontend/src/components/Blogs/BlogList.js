@@ -6,6 +6,8 @@ import Blog from "./Blog";
 const BlogList = (props) => {
     useEffect(() => {
         props.fetchBlogs();
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const { blogs, loading } = props.data;
@@ -13,7 +15,7 @@ const BlogList = (props) => {
     function renderBlogs() {
         const blogsValues = Object.values(blogs);
 
-        if (blogsValues != []) {
+        if (blogsValues !== []) {
             return blogsValues.map((blog) => {
                 return <Blog key={blog.postId} blog={blog} />;
             });

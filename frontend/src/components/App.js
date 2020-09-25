@@ -9,7 +9,7 @@ import User from "../pages/User";
 import BlogEdit from "../pages/BlogEdit";
 import BlogShow from "../pages/BlogShow";
 import Header from "./Header";
-import BlogCreate from "./Blogs/BlogCreate";
+import BlogCreate from "../pages/BlogCreate";
 import ProtectedRoute from "./ProtectedRoute";
 import "../styles/base.css";
 
@@ -40,7 +40,7 @@ function App() {
                                 exact
                                 component={BlogCreate}
                             />
-                            <Route
+                            <ProtectedRoute
                                 path="/blogs/edit/:id"
                                 exact
                                 component={BlogEdit}

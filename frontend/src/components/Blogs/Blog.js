@@ -21,6 +21,7 @@ const Blog = (props) => {
         likeCount,
         commentCount,
     } = props.blog;
+
     const {
         authenticated,
         credentials: { handle },
@@ -37,7 +38,7 @@ const Blog = (props) => {
                     <div className="dropdown-menu">
                         <Link
                             className="dropdown-item"
-                            to={`/user/${props.user.credentials.handle}`}
+                            to={`/blogs/edit/${postId}`}
                         >
                             Edit
                         </Link>

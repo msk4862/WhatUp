@@ -42,13 +42,24 @@ a:hover {
     color: var(--primary-dark-color);
 }
 
+.dropdown-menu {
+    animation: fade-in 0.2s ease-in;
+}
+
 .card .menu .dropdown-toggle::before {
     visibility: hidden;
 }
 
 @media only screen and (max-width: 575px) {
-    .meta-data div:nth-child(2) {
+    .meta-data > div:last-child {
         text-align: center;
-        margin-top: 0.25rem;
+        margin-top: 0.5rem;
+    }
+    .meta-data > div:last-child::before {
+        content: "";
+        display: block;
+        height: 1px;
+        background-color: rgba(0, 0, 0, 0.35);
+        margin-bottom: 5px;
     }
 }

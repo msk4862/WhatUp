@@ -33,8 +33,14 @@ export default (state = initialState, action) => {
                 },
             };
 
-        // case ACTIONS.EDIT_BLOG:
-        //     return { ...state, [action.payload.id]: action.payload };
+        case ACTIONS.EDIT_BLOG:
+            return {
+                ...state,
+                blogs: {
+                    ...state.blogs,
+                    [action.payload.postId]: action.payload,
+                },
+            };
 
         case ACTIONS.DELETE_BLOG:
             return {
@@ -70,6 +76,12 @@ export default (state = initialState, action) => {
                     ...state.blog,
                     comments: [action.payload, ...state.blog.comments],
                 },
+            };
+
+        case ACTIONS.LOADING_DATA:
+            return {
+                ...state,
+                loading: true,
             };
 
         default:

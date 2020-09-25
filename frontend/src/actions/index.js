@@ -127,7 +127,6 @@ export const fetchBlogs = () => {
         FirebaseAPI.get("/posts")
             .then((res) => {
                 dispatch({ type: ACTIONS.FETCH_BLOGS, payload: res.data });
-                dispatch({ type: ACTIONS.STOP_LOADING_UI });
             })
             .catch((err) => {
                 console.log(err);
@@ -222,15 +221,14 @@ export const createBlog = (data) => {
 };
 
 export const editBlog = (id, data) => {
-    return async (dispatch) => {
-        DjangoREST.put(`/blogs/${id}`, data)
+    return (dispatch) => {
+        FirebaseAPI.put(`/posts/${id}`, data)
             .then((response) => {
                 dispatch({ type: ACTIONS.EDIT_BLOG, payload: response.data });
                 history.push("/");
             })
             .catch((error) => {
                 console.log(error.response.data);
-                // dispatch({type: ACTIONS.SET_ALERT, payload: error.response.data['email'][0]})
             });
     };
 };

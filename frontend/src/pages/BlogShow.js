@@ -24,22 +24,23 @@ const BlogShow = (props) => {
     }, [authenticated]);
 
     useEffect(() => {
-        const { id } = props.match.params;
-        props.fetchBlog(id);
+        props.fetchBlog(props.match.params.id);
     }, []);
 
     const {
-        postId,
-        bodyMeta,
-        body,
-        createdAt,
-        userImage,
-        userHandle,
-        likeCount,
-        commentCount,
-        comments,
-    } = props.blog;
-    const { loading } = props.ui;
+        loading,
+        blog: {
+            postId,
+            bodyMeta,
+            body,
+            createdAt,
+            userImage,
+            userHandle,
+            likeCount,
+            commentCount,
+            comments,
+        },
+    } = props.data;
 
     return (
         <div>
@@ -98,9 +99,8 @@ const BlogShow = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        blog: state.data.blog,
+        data: state.data,
         user: state.user,
-        ui: state.ui,
     };
 };
 

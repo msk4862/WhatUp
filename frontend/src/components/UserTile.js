@@ -19,13 +19,9 @@ const UserTile = ({ userImage, userHandle, createdAt, body }) => {
                         />
                     </div>
                     <div className="media-body">
-                        <Link to="#">
-                            <p className="media-heading mb-0">
-                                <Link to={`/user/${userHandle}`}>
-                                    {userHandle}
-                                </Link>
-                            </p>
-                        </Link>
+                        <p className="media-heading mb-0">
+                            <Link to={`/user/${userHandle}`}>{userHandle}</Link>
+                        </p>
                         <small>{dayjs(createdAt).fromNow()}</small>
                         <p>{body}</p>
                     </div>

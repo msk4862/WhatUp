@@ -44,7 +44,11 @@ const StaticProfile = ({ profile }) => {
                             <div className="col-12">
                                 <p>
                                     <i className="fas fa-link"></i>{" "}
-                                    <a href={website} target="_blank">
+                                    <a
+                                        href={website}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
                                         {website}
                                     </a>
                                 </p>

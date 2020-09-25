@@ -48,14 +48,6 @@
     color: var(--font-light-color);
 }
 
-/* .my-account .dropdown-item::before, .my-account .dropdown-item::after {
-    content: "";
-    display: block;
-    height: 1px;
-    margin-bottom: 1rem;
-    background-color: var(--font-light-color);
-} */
-
 .my-account .dropdown-item:hover {
     background-color: var(--secondary-color);
 }

@@ -18,3 +18,9 @@
     color: var(--primary-dark-color);
     font-weight: 600;
 }
+
+@media only screen and (max-width: 600px) {
+    .user-tile .media-body {
+        text-align: start;
+    }
+}

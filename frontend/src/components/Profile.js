@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { authenticate, uploadImage } from "../actions/index";
+import { uploadImage } from "../actions/index";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import EditProfile from "./EditProfile";
@@ -9,14 +9,6 @@ import "../styles/profile.css";
 
 const Profile = (props) => {
     dayjs.extend(relativeTime);
-
-    useEffect(() => {
-        if (!props.user.authenticated) {
-            // fetch user details
-            let token = localStorage.getItem("jwtToken");
-            if (token) props.authenticate(token);
-        }
-    }, [props.user.authenticated]);
 
     // if user not logged in
     const renderLoginPanel = () => {
@@ -110,7 +102,11 @@ const Profile = (props) => {
                                 <div className="col-12">
                                     <p>
                                         <i className="fas fa-link"></i>{" "}
-                                        <a href={website} target="_blank">
+                                        <a
+                                            href={website}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
                                             {website}
                                         </a>
                                     </p>
@@ -143,4 +139,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { authenticate, uploadImage })(Profile);
+export default connect(mapStateToProps, { uploadImage })(Profile);
