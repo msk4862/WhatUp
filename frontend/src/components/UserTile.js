@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "../styles/Blogs/userTile.css";
 
-const UserTile = ({ userImage, userHandle, createdAt }) => {
+const UserTile = ({ userImage, userHandle, createdAt, body }) => {
     dayjs.extend(relativeTime);
 
     return (
@@ -27,6 +27,7 @@ const UserTile = ({ userImage, userHandle, createdAt }) => {
                             </p>
                         </Link>
                         <small>{dayjs(createdAt).fromNow()}</small>
+                        <p>{body}</p>
                     </div>
                 </div>
             </div>
