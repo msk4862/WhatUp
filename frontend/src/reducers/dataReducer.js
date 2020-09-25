@@ -18,7 +18,11 @@ export default (state = initialState, action) => {
             };
 
         case ACTIONS.FETCH_BLOG:
-            return { ...state, blog: action.payload };
+            return {
+                ...state,
+                blog: action.payload,
+                loading: false,
+            };
 
         case ACTIONS.CREATE_BLOG:
             return {

@@ -66,7 +66,7 @@ const CommentForm = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        blog: state.blogs.blog,
+        blog: state.data.blog,
         authenticated: state.user.authenticated,
         ui: state.ui,
     };

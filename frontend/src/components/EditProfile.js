@@ -95,7 +95,7 @@ const EditProfile = (props) => {
     return (
         <>
             <button
-                className="mr-4 custom-tooltip"
+                className="custom-tooltip"
                 data-text="Edit your details"
                 onClick={() => setShow(true)}
             >

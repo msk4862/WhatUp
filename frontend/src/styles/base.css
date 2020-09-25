@@ -89,16 +89,17 @@ small {
     display: none;
     content: attr(data-text);
     position: absolute;
-    top: 50px;
-    transform: translateX(-55%);
+    top: 40px;
+    transform: translateY(50%);
+    transform: translateX(-75%);
     background-color: var(--font-dark-color);
     color: var(--font-light-color);
     font-size: var(--small-xs);
     white-space: nowrap;
     padding: 3px 5px;
-    border-radius: 10px;
     text-align: center;
     z-index: 1;
+    animation: fade-in 0.2s ease-in;
 }
 
 .custom-tooltip:hover::before {
@@ -114,4 +115,22 @@ small {
     content: "\26A0";
     color: var(--secondary-color);
     margin-right: 5px;
+}
+
+@keyframes reveal {
+    0% {
+        transform: scaleY(0);
+    }
+    100% {
+        transform: scaleY(100%);
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }

@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
-import blogReducer from "./blogsReducer";
+import dataReducer from "./dataReducer";
 import userReducer from "./userReducer";
 import uiReducer from "./uiReducer";
 
 export default combineReducers({
-    blogs: blogReducer,
+    data: dataReducer,
     user: userReducer,
     ui: uiReducer,
 });

@@ -1,0 +1,5 @@
+@media only screen and (max-width: 600px) {
+    .blogs-list {
+        margin-top: 2rem;
+    }
+}

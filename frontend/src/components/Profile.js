@@ -48,11 +48,10 @@ const Profile = (props) => {
     };
 
     const {
+        loading,
         authenticated,
         credentials: { imageUrl, handle, bio, website, createdAt, location },
     } = props.user;
-
-    const { loading } = props;
 
     return (
         <div className="profile">
@@ -141,7 +140,6 @@ const Profile = (props) => {
 const mapStateToProps = (state) => {
     return {
         user: state.user,
-        loading: state.ui.loading,
     };
 };
 

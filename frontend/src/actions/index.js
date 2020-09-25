@@ -26,7 +26,7 @@ export const signup = (data) => {
     };
 };
 
-export const login = (data = null) => {
+export const login = (data) => {
     return (dispatch) => {
         dispatch({ type: ACTIONS.LOADING_UI });
 
@@ -59,6 +59,8 @@ export const authenticate = (token) => {
         }
     };
 };
+
+// set axios Authorization header
 export const setAuthorizationHeader = (token) => {
     localStorage.setItem("jwtToken", token);
     FirebaseAPI.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -74,7 +76,7 @@ export const logout = () => {
 
 export const fetchUserData = () => {
     return (dispatch) => {
-        dispatch({ type: ACTIONS.LOADING_UI });
+        dispatch({ type: ACTIONS.LOADING_USER });
 
         FirebaseAPI.get("/users")
             .then((res) => {
@@ -95,7 +97,7 @@ export const fetchUserData = () => {
 
 export const uploadImage = (formData) => {
     return (dispatch) => {
-        dispatch({ type: ACTIONS.LOADING_UI });
+        dispatch({ type: ACTIONS.LOADING_USER });
 
         FirebaseAPI.post("/users/upload", formData)
             .then(() => {
@@ -107,7 +109,7 @@ export const uploadImage = (formData) => {
 
 export const editUserDetails = (data) => {
     return (dispatch) => {
-        dispatch({ type: ACTIONS.LOADING_UI });
+        dispatch({ type: ACTIONS.LOADING_USER });
 
         FirebaseAPI.post("/users", data)
             .then(() => {
@@ -120,7 +122,7 @@ export const editUserDetails = (data) => {
 // Data actions
 export const fetchBlogs = () => {
     return (dispatch) => {
-        dispatch({ type: ACTIONS.LOADING_UI });
+        dispatch({ type: ACTIONS.LOADING_DATA });
 
         FirebaseAPI.get("/posts")
             .then((res) => {
@@ -182,7 +184,7 @@ MultiFetch Solution-1 (Using Lodash memoize())
 
 export const fetchBlog = (id) => {
     return (dispatch) => {
-        dispatch({ type: ACTIONS.LOADING_UI });
+        dispatch({ type: ACTIONS.LOADING_DATA });
 
         FirebaseAPI.get(`/posts/${id}`)
             .then((res) => {
@@ -257,6 +259,6 @@ export const submitComment = (id, data) => {
     };
 };
 
-export const clearAlert = () => {
+export const clearErrors = () => {
     return { type: ACTIONS.CLEAR_ALERT };
 };

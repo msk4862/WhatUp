@@ -98,7 +98,7 @@ const BlogShow = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        blog: state.blogs.blog,
+        blog: state.data.blog,
         user: state.user,
         ui: state.ui,
     };
