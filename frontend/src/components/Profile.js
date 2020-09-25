@@ -1,10 +1,15 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { authenticate, uploadImage } from "../actions/index";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 import EditProfile from "./EditProfile";
 import "../styles/profile.css";
 
 const Profile = (props) => {
+    dayjs.extend(relativeTime);
+
     useEffect(() => {
         if (!props.user.authenticated) {
             // fetch user details
@@ -12,6 +17,21 @@ const Profile = (props) => {
             if (token) props.authenticate(token);
         }
     }, [props.user.authenticated]);
+
+    // if user not logged in
+    const renderLoginPanel = () => {
+        return (
+            <div className="row justify-content-around m-0 profile-login-panel">
+                <h3 className="mb-4">Welcome to WhatUp!</h3>
+                <Link to="/login" className="col-5 btn">
+                    Login
+                </Link>
+                <Link to="/signup" className="col-5 btn">
+                    Signup
+                </Link>
+            </div>
+        );
+    };
 
     // upload new image
     const handleImageChange = (event) => {
@@ -28,25 +48,24 @@ const Profile = (props) => {
     };
 
     const {
-        imageUrl,
-        handle,
-        bio,
-        website,
-        createdAt,
-        location,
-    } = props.user.credentials;
+        authenticated,
+        credentials: { imageUrl, handle, bio, website, createdAt, location },
+    } = props.user;
+
+    const { loading } = props;
 
     return (
-        <div className="profile container">
-            {props.loading && <p>Loading...</p>}
-            {!props.loading && (
-                <div className="row justify-content-center">
-                    <div className="col-12 col-sm-6 ml-auto mr-auto">
+        <div className="profile">
+            {loading && <p>Loading...</p>}
+            {!loading && !authenticated && renderLoginPanel()}
+            {!loading && authenticated && (
+                <div className="row profile-panel justify-content-center">
+                    <div className="col-12 ml-auto mr-auto">
                         <div className="text-center">
                             <img
                                 className="rounded-circle"
                                 src={imageUrl}
-                                alt="profile"
+                                alt={`${handle}`}
                             />
                             <input
                                 type="file"
@@ -68,46 +87,43 @@ const Profile = (props) => {
                             </div>
                         </div>
 
-                        <div className="details mt-3">
-                            <div className="mb-4">
-                                <h4>Profile</h4>
+                        <div className="row justify-centent-center mt-2">
+                            <div className="col-12 mb-2">
+                                <a href={`#`}>
+                                    <h4>@{handle}</h4>
+                                </a>
                             </div>
-                            <div className="row justify-content-center">
-                                <div className="col">
-                                    <p>Username</p>
-                                </div>
-                                <div className="col">
-                                    <p>@{handle}</p>
-                                </div>
-                            </div>
-                            <div className="row justify-content-center">
-                                <div className="col">
-                                    <p>Bio</p>
-                                </div>
-                                <div className="col">
+                            {bio && (
+                                <div className="col-12">
                                     <p>{bio}</p>
                                 </div>
-                            </div>
-                            <div className="row justify-content-center">
-                                <div className="col">
-                                    <p>Website</p>
-                                </div>
-                                <div className="col">
-                                    <a href={website} target="_blank">
-                                        {website}
-                                    </a>
-                                </div>
-                            </div>
-                            <div className="row justify-content-center">
-                                <div className="col">
-                                    <p>Location</p>
-                                </div>
-                                <div className="col">
-                                    <p>{location}</p>
-                                </div>
-                            </div>
+                            )}
 
-                            <div className="row justify-content-end">
+                            {location && (
+                                <div className="col-12">
+                                    <p>
+                                        <i className="fas fa-map-marker-alt"></i>{" "}
+                                        {location}
+                                    </p>
+                                </div>
+                            )}
+                            {website && (
+                                <div className="col-12">
+                                    <p>
+                                        <i className="fas fa-link"></i>{" "}
+                                        <a href={website} target="_blank">
+                                            {website}
+                                        </a>
+                                    </p>
+                                </div>
+                            )}
+                            <div className="col-12">
+                                <p>
+                                    <i className="fas fa-calendar-alt"></i>{" "}
+                                    Joined {dayjs(createdAt).fromNow()}
+                                </p>
+                            </div>
+                            <div className="edit-profile">
                                 <EditProfile
                                     initialBio={bio}
                                     initialWebsite={website}

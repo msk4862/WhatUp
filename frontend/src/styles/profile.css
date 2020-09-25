@@ -1,74 +1,55 @@
 .profile {
-    margin-top: 2rem;
-    margin-top: 1rem;
+    background-color: var(--primary-light-color);
+    padding: 1rem 0.5rem;
+    box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.profile i {
+    color: var(--primary-dark-color);
 }
 
 .profile img {
-    width: 230px;
-    height: 230px;
-    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+    width: 130px;
+    height: 130px;
 }
 
+/* image edit button*/
 .profile .edit-ic {
     position: relative;
+    display: inline-block;
 }
 
 .profile .edit-ic button {
     position: absolute;
-    right: 20%;
-    bottom: 1rem;
+    left: -5px;
+    top: 10px;
 }
 
-.profile .edit-ic .custom-tooltip::before {
-    margin-left: 120px;
+.profile p {
+    margin-bottom: 5px;
 }
 
-.profile .custom-tooltip::before {
-    left: 50%;
-    margin-left: 80px;
-    top: 50%;
-    margin-top: -10px;
+/* edit profile button */
+.profile .edit-profile {
+    position: absolute;
+    right: 10px;
+    bottom: -10px;
 }
 
-.profile .details {
-    background-color: var(--primary-light-color);
-    padding: 1rem 2rem;
-    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-    text-align: start;
-}
-
-.profile .details a {
-    color: blue;
-    text-decoration: underline;
-}
-
-.details > div:not(:first-child):not(:last-child)::after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 1px;
-    margin-bottom: 0.75rem;
-    background-color: var(--primary-dark-color);
-}
-
-.details > div div:first-child {
-    color: var(--font-gray-color);
-}
-
-.profile button {
+.profile .profile-panel button {
     border: none;
     outline: none;
     cursor: pointer;
     background-color: transparent;
     color: var(--primary-dark-color);
-    width: 45px;
-    height: 45px;
-    border-radius: 45px;
-    padding: 0.25rem;
-    font-size: 1.5rem;
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+    font-size: 1.25rem;
 }
 
-.profile button:hover {
+.profile .profile-panel button:hover {
     color: var(--font-light-color);
     background-color: var(--secondary-color);
 }

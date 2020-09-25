@@ -154,20 +154,31 @@ export const unlikeBlog = (postId) => {
     };
 };
 
-/*
-MultiFetch Solution-1 (Using Lodash memoize())
-*/
-export const fetchUser = (id) => {
+export const fetchUser = (handle) => {
     return (dispatch) => {
-        _fetchUser(id, dispatch);
+        dispatch({ type: ACTIONS.LOADING_USER });
+        FirebaseAPI.get(`/users/${handle}`)
+            .then((res) => {
+                dispatch({ type: ACTIONS.SET_TEMP_USER, payload: res.data });
+            })
+            .catch((err) => console.log(err));
     };
 };
 
-const _fetchUser = _.memoize(async (id, dispatch) => {
-    const response = await DjangoREST.get(`/users/${id}`);
+/*
+MultiFetch Solution-1 (Using Lodash memoize())
+*/
+// export const fetchUser = (handle) => {
+//     return (dispatch) => {
+//         _fetchUser(handle, dispatch);
+//     };
+// };
 
-    dispatch({ type: ACTIONS.FETCH_USER, payload: response.data });
-});
+// const _fetchUser = _.memoize((handle, dispatch) => {
+//     const response = await DjangoREST.get(`/users/${handle}`);
+
+//     dispatch({ type: ACTIONS.FETCH_USER, payload: response.data });
+// });
 
 export const fetchBlog = (id) => {
     return (dispatch) => {

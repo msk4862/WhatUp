@@ -5,13 +5,13 @@ import "../styles/base.css";
 import Header from "./Header";
 import Login from "./Login";
 import Signup from "./Signup";
-import Profile from "./Profile";
-import BlogList from "./Blogs/BlogList";
+import User from "./User";
 import BlogShow from "./Blogs/BlogShow";
 import BlogCreate from "./Blogs/BlogCreate";
 import BlogEdit from "./Blogs/BlogEdit";
 import history from "../history";
 import ProtectedRoute from "./ProtectedRoute";
+import Home from "./Home";
 
 function App() {
     return (
@@ -22,7 +22,7 @@ function App() {
                     <div className="container-fluid">
                         {/* Show only single route at a time (required beacuse /blogs/create=== blogs/:id ) */}
                         <Switch>
-                            <Route exact path="/" component={BlogList} />
+                            <Route exact path="/" component={Home} />
 
                             {/* Authentication Routes */}
                             <Route exact path="/login" component={Login} />
@@ -31,16 +31,10 @@ function App() {
                             <Route
                                 exact
                                 path="/user/:handle"
-                                component={Profile}
+                                component={User}
                             />
 
                             {/* Blogs Routes */}
-                            <Route path="/blogs" exact component={BlogList} />
-                            <Route
-                                path="/blogs/my-blogs"
-                                exact
-                                component={BlogList}
-                            />
                             <ProtectedRoute
                                 path="/blogs/new"
                                 exact

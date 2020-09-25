@@ -1,7 +1,10 @@
 const { admin, db } = require("../../utils/admin");
 const firebase = require("firebase");
 const config = require("../../utils/config");
-const { validateSignupData, cleanEditUserData } = require("../../utils/dataValidators");
+const {
+    validateSignupData,
+    cleanEditUserData,
+} = require("../../utils/dataValidators");
 
 firebase.initializeApp(config);
 
@@ -58,9 +61,12 @@ exports.signup = (req, res) => {
         .catch((err) => {
             if (err.code === "auth/email-already-in-use") {
                 return res.status(500).send({ email: "Email already in use!" });
-            }
-            else if (err.code === "auth/weak-password") {
-                return res.status(500).send({ password: "Password should be at least 6 characters!" });
+            } else if (err.code === "auth/weak-password") {
+                return res
+                    .status(500)
+                    .send({
+                        password: "Password should be at least 6 characters!",
+                    });
             }
             return res.status(500).send({ error: err.toString() });
         });
@@ -97,7 +103,6 @@ exports.login = (req, res) => {
 
 // uplaod image handler
 exports.uploadImage = (req, res) => {
-
     // parsing form data using busboy
     const Busboy = require("busboy");
     const os = require("os");
@@ -106,7 +111,8 @@ exports.uploadImage = (req, res) => {
 
     const busboy = new Busboy({ headers: req.headers });
 
-    let imageToBeUploaded = {}, imageFileName;
+    let imageToBeUploaded = {},
+        imageFileName;
 
     busboy.on("file", (fieldname, file, filename, encoding, mimetype) => {
         console.log("Form data received!");
@@ -142,9 +148,9 @@ exports.uploadImage = (req, res) => {
             .upload(imageToBeUploaded.filePath, {
                 resumable: false,
                 metadata: {
-                    metadata : {
+                    metadata: {
                         contentType: imageToBeUploaded.mimetype,
-                    }
+                    },
                 },
             })
             .then(() => {
@@ -216,9 +222,9 @@ exports.getAuthenticatedUserDetails = (req, res) => {
                 .where("userHandle", "==", req.user.handle)
                 .get();
         })
-        .then(data => {
+        .then((data) => {
             userData.notifications = [];
-            data.forEach(doc => {
+            data.forEach((doc) => {
                 userData.notifications.push(doc.data());
             });
 
@@ -253,9 +259,10 @@ exports.getUserDetails = (req, res) => {
                 userData.posts.push({
                     postId: post.id,
                     bodyMeta: post.data().bodyMeta,
+                    body: post.data().body,
                     createdAt: post.data().createdAt,
                     userHandle: post.data().userHandle,
-                    imageUrl: post.data().userImage,
+                    userImage: post.data().userImage,
                     likeCount: post.data().likeCount,
                     commentCount: post.data().commentCount,
                 });
