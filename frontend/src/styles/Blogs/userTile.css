@@ -1,18 +1,20 @@
 .user-tile img {
-    width: 30px;
-    height: 30px;
-    border-radius: 30px;
-    margin-right: 5px;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
 }
 
-.user-tile a {
-    font-weight: 500;
+.user-tile .media-body small {
+    font-size: var(--small-xs);
+    color: var(--font-gray-color);
 }
 
-.user-tile a::after {
-    content: "\2605";
-    color: var(--font-dark-color);
-    display: inline;
-    margin-left: 5px;
-    margin-right: 5px;
+.user-tile .media-body p {
+    margin-bottom: 5px;
+    font-size: var(--small);
+}
+
+.user-tile p a {
+    color: var(--primary-dark-color);
+    font-weight: 600;
 }

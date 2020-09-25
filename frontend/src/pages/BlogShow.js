@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { fetchBlog, authenticate } from "../../actions";
-import UserTile from "../UserTile";
-import LikeButton from "./LikeButton";
-import Comments from "./Comments";
-import "../../styles/Blogs/BlogShow.css";
-import CommentForm from "./CommentForm";
+import { fetchBlog, authenticate } from "../actions";
+import UserTile from "../components/UserTile";
+import LikeButton from "../components/Blogs/LikeButton";
+import Comments from "../components/Blogs/Comments";
+import "../styles/Blogs/BlogShow.css";
+import CommentForm from "../components/Blogs/CommentForm";
 
 const BlogShow = (props) => {
     dayjs.extend(relativeTime);

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-
-import { fetchBlog, editBlog } from "../../actions";
-import history from "../../history";
+import { fetchBlog, editBlog } from "../actions";
+import history from "../history";
 
 const BlogEdit = (props) => {
     const [title, setTitle] = useState("");

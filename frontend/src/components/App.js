@@ -1,17 +1,17 @@
 import React from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import "../styles/base.css";
-import Header from "./Header";
-import Login from "./Login";
-import Signup from "./Signup";
-import User from "./User";
-import BlogShow from "./Blogs/BlogShow";
-import BlogCreate from "./Blogs/BlogCreate";
-import BlogEdit from "./Blogs/BlogEdit";
 import history from "../history";
+import Home from "../pages/Home";
+import Login from "../pages/Login";
+import Signup from "../pages/Signup";
+import User from "../pages/User";
+import BlogEdit from "../pages/BlogEdit";
+import BlogShow from "../pages/BlogShow";
+import Header from "./Header";
+import BlogCreate from "./Blogs/BlogCreate";
 import ProtectedRoute from "./ProtectedRoute";
-import Home from "./Home";
+import "../styles/base.css";
 
 function App() {
     return (

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { fetchUser, authenticate } from "../actions/index";
-import Blog from "./Blogs/Blog";
-import StaticProfile from "./StaticProfile";
+import Blog from "../components/Blogs/Blog";
+import StaticProfile from "../components/StaticProfile";
 
 const User = (props) => {
     const [blogs, setBlogs] = useState([]);

@@ -8,12 +8,28 @@ const UserTile = ({ userImage, userHandle, createdAt }) => {
     dayjs.extend(relativeTime);
 
     return (
-        <div className="user-tile">
-            <img src={userImage} alt={`${userHandle}`} />
-            <span>
-                <Link to={`/user/${userHandle}`}>{userHandle}</Link>
-                {dayjs(createdAt).fromNow()}
-            </span>
+        <div className="row user-tile align-items-center">
+            <div className="col-12 col-sm-10">
+                <div className="media">
+                    <div className="media-left mr-2">
+                        <img
+                            className="media-object"
+                            src={userImage}
+                            alt={`${userHandle}`}
+                        />
+                    </div>
+                    <div className="media-body">
+                        <Link to="#">
+                            <p className="media-heading mb-0">
+                                <Link to={`/user/${userHandle}`}>
+                                    {userHandle}
+                                </Link>
+                            </p>
+                        </Link>
+                        <small>{dayjs(createdAt).fromNow()}</small>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };

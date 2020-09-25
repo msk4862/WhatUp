@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { authenticate } from "../actions";
-import BlogList from "./Blogs/BlogList";
+import BlogList from "../components/Blogs/BlogList";
 import "../styles/Home.css";
-import Profile from "./Profile";
+import Profile from "../components/Profile";
 
 const Home = (props) => {
     useEffect(() => {
