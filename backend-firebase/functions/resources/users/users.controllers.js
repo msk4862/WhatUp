@@ -62,11 +62,9 @@ exports.signup = (req, res) => {
             if (err.code === "auth/email-already-in-use") {
                 return res.status(500).send({ email: "Email already in use!" });
             } else if (err.code === "auth/weak-password") {
-                return res
-                    .status(500)
-                    .send({
-                        password: "Password should be at least 6 characters!",
-                    });
+                return res.status(500).send({
+                    password: "Password should be at least 6 characters!",
+                });
             }
             return res.status(500).send({ error: err.toString() });
         });
@@ -219,13 +217,24 @@ exports.getAuthenticatedUserDetails = (req, res) => {
 
             return db
                 .collection("notifications")
-                .where("userHandle", "==", req.user.handle)
+                .where("recipient", "==", req.user.handle)
+                .orderBy("createdAt", "desc")
+                .limit(10)
                 .get();
         })
         .then((data) => {
             userData.notifications = [];
             data.forEach((doc) => {
-                userData.notifications.push(doc.data());
+                console.log(doc.data());
+                userData.notifications.push({
+                    recipient: doc.data().recipient,
+                    sender: doc.data().sender,
+                    createdAt: doc.data().createdAt,
+                    postId: doc.data().postId,
+                    type: doc.data().type,
+                    read: doc.data().read,
+                    notificationId: doc.id,
+                });
             });
 
             return res.status(200).send(userData);
