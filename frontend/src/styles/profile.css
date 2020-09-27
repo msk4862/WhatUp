@@ -30,8 +30,12 @@
     margin-bottom: 5px;
 }
 
-.profile .profile-panel a {
+.profile-panel a {
     color: var(--font-dark-color);
+}
+
+.profile-login-panel a:hover {
+    color: var(--font-light-color);
 }
 
 /* edit profile button */
