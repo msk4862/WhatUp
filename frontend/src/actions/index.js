@@ -5,7 +5,7 @@ import FirebaseAPI from "../apis/FirebaseAPI";
 import ACTIONS from "./actionTypes";
 import history from "../history";
 
-// User actions
+/* User actions */
 export const signup = (data) => {
     return (dispatch) => {
         dispatch({ type: ACTIONS.LOADING_UI });
@@ -119,7 +119,17 @@ export const editUserDetails = (data) => {
     };
 };
 
-// Data actions
+export const markNotificationRead = (notificationIds) => {
+    return (dispatch) => {
+        FirebaseAPI.post("/users/notification", notificationIds)
+            .then(() => {
+                dispatch({ type: ACTIONS.MARK_NOTIFICATION_READ });
+            })
+            .catch((err) => console.error(err));
+    };
+};
+
+/* Data actions */
 export const fetchBlogs = () => {
     return (dispatch) => {
         dispatch({ type: ACTIONS.LOADING_DATA });

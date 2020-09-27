@@ -1,25 +1,33 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { markNotificationRead } from "../actions";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "../styles/notifications.css";
 
-const Notifications = (props) => {
+const Notifications = ({ notifications, markNotificationRead }) => {
     dayjs.extend(relativeTime);
 
     const [open, setOpen] = useState(false);
     const [unreadNotifications, setUnreadNotifications] = useState([]);
 
-    const notifications = props.notifications;
-
+    // updating unread notifications
     useEffect(() => {
-        let unreadNotifications = notifications.filter((noti) => !noti.read);
+        let unreadNotifications = notifications.filter(
+            (noti) => noti.read === false
+        );
         setUnreadNotifications(unreadNotifications);
+    }, [notifications]);
 
-        let ids = unreadNotifications.map((noti) => noti.notificationId);
-        // props.markNotificationsRead(ids);
-    }, []);
+    // marking read all unread notifications
+    useEffect(() => {
+        if (open && unreadNotifications.length > 0) {
+            let ids = unreadNotifications.map((noti) => noti.notificationId);
+            markNotificationRead(ids);
+
+            setUnreadNotifications([]);
+        }
+    }, [open]);
 
     const renderNotifications = () => {
         if (notifications && notifications.length > 0) {
@@ -32,7 +40,10 @@ const Notifications = (props) => {
                 const user = noti.sender;
 
                 return (
-                    <div className="custom-dropdown-item">
+                    <div
+                        key={noti.notificationId}
+                        className="custom-dropdown-item"
+                    >
                         <span>
                             <i
                                 style={{ color: iconColor }}
@@ -50,14 +61,14 @@ const Notifications = (props) => {
         <li
             className="nav-item notifications custom-dropdown"
             open={open}
-            onClick={() => setOpen((p) => !p)}
+            onClick={() => setOpen((prev) => !prev)}
         >
             <span className="custom-tooltip" data-text="Your notifications">
                 <button className="nav-link">
                     <i className="far fa-bell"></i>
                     {/* if unread notications are present */}
                     {unreadNotifications.length > 0 && (
-                        <span class="badge badge-danger">
+                        <span className="badge badge-danger">
                             {unreadNotifications.length}
                         </span>
                     )}

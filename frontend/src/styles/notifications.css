@@ -1,10 +1,11 @@
 .notifications .badge {
     position: absolute;
     bottom: -20px;
+    left: 18px;
     font-size: var(--small-xs);
 }
 
 .notifications .custom-dropdown-item {
     font-size: var(--small);
-    padding: 0.35rem 0.5rem;
+    padding: 0.25rem 0.5rem;
 }

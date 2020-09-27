@@ -101,9 +101,11 @@ small {
     z-index: 1;
     animation: fade-in 0.2s ease-in;
 }
-
-.custom-tooltip:hover::before {
+.custom-tooltip:not(:active):hover::before {
     display: block;
+}
+.custom-tooltip:active::before {
+    pointer-events: none;
 }
 
 /* custom dropdown */

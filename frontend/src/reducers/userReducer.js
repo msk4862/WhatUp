@@ -50,6 +50,15 @@ export default (state = initialState, action) => {
                 likes: updatedLikes,
             };
 
+        case ACTIONS.MARK_NOTIFICATION_READ:
+            // marking notifications read
+            // let markedNotifications = state.notifications.filter(noti => !noti.read);
+            state.notifications.forEach((noti) => (noti.read = true));
+
+            return {
+                ...state,
+            };
+
         case ACTIONS.LOADING_USER:
             return { ...state, loading: true };
 

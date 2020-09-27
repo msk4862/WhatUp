@@ -7,7 +7,7 @@ exports.createNotifictionOnLikeHandler = (likeDoc) => {
         .then((post) => {
             // sender !== receiver
             if (
-                !post.exists &&
+                post.exists &&
                 post.data().userHandle !== likeDoc.data().userHandle
             ) {
                 return db.doc(`/notifications/${likeDoc.id}`).set({
@@ -16,6 +16,7 @@ exports.createNotifictionOnLikeHandler = (likeDoc) => {
                     type: "like",
                     read: false,
                     postId: post.id,
+                    createdAt: new Date().toISOString(),
                 });
             } else return true;
         })
@@ -38,7 +39,7 @@ exports.createNotifictionOnCommentHandler = (commentDoc) => {
             // sender !== receiver
             if (
                 post.exists &&
-                post.data().userHandle === commentDoc.data().userHandle
+                post.data().userHandle !== commentDoc.data().userHandle
             ) {
                 return db.doc(`/notifications/${commentDoc.id}`).set({
                     recipient: post.data().userHandle,
@@ -46,6 +47,7 @@ exports.createNotifictionOnCommentHandler = (commentDoc) => {
                     type: "comment",
                     read: false,
                     postId: post.id,
+                    createdAt: new Date().toISOString(),
                 });
             } else return true;
         })
