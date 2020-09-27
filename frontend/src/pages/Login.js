@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-
-import "../styles/Login.css";
 import { login, authenticate } from "../actions/index";
 import history from "../history";
 import { LOGIN_TITLE } from "../utilities/Constants";
+import Loader from "../components/Loader";
 import { isBlank, isEmptyObj } from "../utilities/dataValidation";
+import "../styles/Login.css";
 
 const Login = (props) => {
     const [email, setEmail] = useState("");
@@ -61,7 +61,7 @@ const Login = (props) => {
 
     return (
         <div className="row justify-centent-center align-items-center">
-            {props.ui.loading && <p>Loading...</p>}
+            {props.ui.loading && <Loader />}
             {!props.ui.loading && (
                 <div className="login-form-container col-10 col-sm-4 ml-auto mr-auto">
                     <div className="text-center">

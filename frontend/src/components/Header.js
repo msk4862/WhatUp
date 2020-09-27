@@ -56,9 +56,6 @@ const Header = (props) => {
                         >
                             Profile
                         </Link>
-                        <Link className="dropdown-item" to="/blogs/my-blogs">
-                            My Blogs
-                        </Link>
                         <Link className="dropdown-item" to="" onClick={Logout}>
                             Logout
                         </Link>

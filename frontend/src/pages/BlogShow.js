@@ -6,8 +6,9 @@ import { fetchBlog, authenticate } from "../actions";
 import UserTile from "../components/Blogs/UserTile";
 import LikeButton from "../components/Blogs/LikeButton";
 import Comments from "../components/Blogs/Comments";
-import "../styles/Blogs/BlogShow.css";
 import CommentForm from "../components/Blogs/CommentForm";
+import Loader from "../components/Loader";
+import "../styles/Blogs/BlogShow.css";
 
 const BlogShow = (props) => {
     dayjs.extend(relativeTime);
@@ -44,7 +45,7 @@ const BlogShow = (props) => {
 
     return (
         <div>
-            {loading && <p>Loading...</p>}
+            {loading && <Loader />}
             {!loading && (
                 <div className="blog-show">
                     <div className="row justify-content-center">
