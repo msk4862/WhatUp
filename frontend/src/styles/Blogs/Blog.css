@@ -19,7 +19,6 @@
 .card a,
 .card a:hover {
     text-decoration: none;
-    color: var(--font-dark-color);
 }
 
 .meta-data i {

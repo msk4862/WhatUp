@@ -13,3 +13,11 @@
     font-size: var(--small);
     padding: 0.25rem 0.5rem;
 }
+
+.notifications .custom-dropdown-item[read="unread"] a::before {
+    content: "\2022";
+    display: inline;
+    margin-right: 8px;
+    font-size: var(--h5);
+    color: #51adcf;
+}
