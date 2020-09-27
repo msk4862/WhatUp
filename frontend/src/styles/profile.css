@@ -14,18 +14,6 @@
     height: 130px;
 }
 
-/* image edit button*/
-.profile .edit-ic {
-    position: relative;
-    display: inline-block;
-}
-
-.profile .edit-ic button {
-    position: absolute;
-    left: -5px;
-    top: 10px;
-}
-
 .profile p {
     margin-bottom: 5px;
 }
@@ -36,6 +24,18 @@
 
 .profile-login-panel a:hover {
     color: var(--font-light-color);
+}
+
+/* image edit button*/
+.profile .edit-ic {
+    position: relative;
+    display: inline-block;
+}
+
+.profile .edit-ic button {
+    position: absolute;
+    left: -5px;
+    top: 10px;
 }
 
 /* edit profile button */
