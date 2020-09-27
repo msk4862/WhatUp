@@ -30,7 +30,7 @@
     margin-bottom: 5px;
 }
 
-.profile a {
+.profile .profile-panel a {
     color: var(--font-dark-color);
 }
 

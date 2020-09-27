@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchBlogs, login, authenticate } from "../../actions";
+import CardSkeleton from "../Skeletons/CardSkeleton";
 import Blog from "./Blog";
 
 const BlogList = (props) => {
@@ -26,7 +27,7 @@ const BlogList = (props) => {
 
     return (
         <div>
-            {loading && <p>Loading...</p>}
+            {loading && <CardSkeleton />}
             {!loading && renderBlogs()}
         </div>
     );

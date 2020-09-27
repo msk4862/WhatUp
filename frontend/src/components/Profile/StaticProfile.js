@@ -22,9 +22,7 @@ const StaticProfile = ({ profile }) => {
 
                     <div className="row justify-centent-center mt-2">
                         <div className="col-12 mb-2">
-                            <a href={`#`}>
-                                <h4>@{handle}</h4>
-                            </a>
+                            <h4>@{handle}</h4>
                         </div>
                         {bio && (
                             <div className="col-12">

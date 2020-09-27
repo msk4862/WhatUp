@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import EditProfile from "./EditProfile";
 import "../../styles/profile.css";
+import ProfileSkeleton from "../Skeletons/ProfileSkeleton";
 
 const Profile = (props) => {
     dayjs.extend(relativeTime);
@@ -47,7 +48,7 @@ const Profile = (props) => {
 
     return (
         <div className="profile">
-            {loading && <p>Loading...</p>}
+            {loading && <ProfileSkeleton />}
             {!loading && !authenticated && renderLoginPanel()}
             {!loading && authenticated && (
                 <div className="row profile-panel justify-content-center">

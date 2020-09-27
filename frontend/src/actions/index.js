@@ -1,6 +1,4 @@
-import _ from "lodash";
 import jwtDecode from "jwt-decode";
-import DjangoREST from "../apis/DjangoREST";
 import FirebaseAPI from "../apis/FirebaseAPI";
 import ACTIONS from "./actionTypes";
 import history from "../history";

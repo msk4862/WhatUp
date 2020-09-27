@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { fetchUser, authenticate } from "../actions/index";
 import Blog from "../components/Blogs/Blog";
 import StaticProfile from "../components/Profile/StaticProfile";
+import CardSkeleton from "../components/Skeletons/CardSkeleton";
+import ProfileSkeleton from "../components/Skeletons/ProfileSkeleton";
 
 const User = (props) => {
     const [blogs, setBlogs] = useState([]);
@@ -29,7 +31,7 @@ const User = (props) => {
     }, [tempUser]);
 
     const renderBlogs = () => {
-        if (loading) return <p>Loading...</p>;
+        if (loading) return <CardSkeleton />;
         if (blogs !== []) {
             return blogs.map((blog) => {
                 return <Blog key={blog.postId} blog={blog} />;
@@ -42,7 +44,11 @@ const User = (props) => {
     return (
         <div className="row justify-content-center mt-4">
             <section className="col-12 col-sm-3 order-sm-2">
-                {!user && <p>Loading...</p>}
+                {!user && (
+                    <div className="profile">
+                        <ProfileSkeleton />
+                    </div>
+                )}
                 {user && <StaticProfile profile={user} />}
             </section>
             <section className="col-12 col-sm-9 blogs-list">
