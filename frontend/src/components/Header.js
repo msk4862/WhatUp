@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-
-import "../styles/Header.css";
 import { logout } from "../actions/index";
 import history from "../history";
+import Notifications from "./Notifications";
 import { APP_TITLE } from "../utilities/Constants";
+import "../styles/Header.css";
 
 const Header = (props) => {
     function Logout(event) {
@@ -19,16 +19,8 @@ const Header = (props) => {
     function renderUserLinks() {
         return (
             <ul className="navbar-nav my-account">
-                <li className="nav-item">
-                    <span
-                        className="custom-tooltip"
-                        data-text="Your notifications"
-                    >
-                        <button className="nav-link">
-                            <i className="far fa-bell"></i>
-                        </button>
-                    </span>
-                </li>
+                {/* Notification */}
+                <Notifications />
 
                 <li className="nav-item">
                     <Link to="/blogs/new">
