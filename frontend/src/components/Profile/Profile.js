@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { uploadImage } from "../actions/index";
+import { uploadImage } from "../../actions/index";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import EditProfile from "./EditProfile";
