@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { markNotificationRead } from "../actions";
 import dayjs from "dayjs";
@@ -32,6 +33,7 @@ const Notifications = ({ notifications, markNotificationRead }) => {
     const renderNotifications = () => {
         if (notifications && notifications.length > 0) {
             return notifications.map((noti) => {
+                const read = noti.read ? "read" : "unread";
                 const verb = noti.type === "like" ? "liked" : "commented on";
                 const icon =
                     noti.type === "like" ? "fas fa-heart" : "fas fa-comment";
@@ -43,14 +45,15 @@ const Notifications = ({ notifications, markNotificationRead }) => {
                     <div
                         key={noti.notificationId}
                         className="custom-dropdown-item"
+                        read={read}
                     >
-                        <span>
+                        <Link to={`/blogs/${noti.postId}`}>
                             <i
                                 style={{ color: iconColor }}
                                 className={icon}
                             ></i>{" "}
                             <strong>{user}</strong> {verb} your blog {time}
-                        </span>
+                        </Link>
                     </div>
                 );
             });

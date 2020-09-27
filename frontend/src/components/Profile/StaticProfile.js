@@ -34,7 +34,7 @@ const StaticProfile = ({ profile }) => {
 
                         {location && (
                             <div className="col-12">
-                                <p>
+                                <p className="text-small">
                                     <i className="fas fa-map-marker-alt"></i>{" "}
                                     {location}
                                 </p>
@@ -42,7 +42,7 @@ const StaticProfile = ({ profile }) => {
                         )}
                         {website && (
                             <div className="col-12">
-                                <p>
+                                <p className="text-small">
                                     <i className="fas fa-link"></i>{" "}
                                     <a
                                         href={website}
@@ -55,7 +55,7 @@ const StaticProfile = ({ profile }) => {
                             </div>
                         )}
                         <div className="col-12">
-                            <p>
+                            <p className="text-small">
                                 <i className="fas fa-calendar-alt"></i> Joined{" "}
                                 {dayjs(createdAt).fromNow()}
                             </p>

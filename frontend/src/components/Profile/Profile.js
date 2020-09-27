@@ -80,9 +80,9 @@ const Profile = (props) => {
 
                         <div className="row justify-centent-center mt-2">
                             <div className="col-12 mb-2">
-                                <a href={`#`}>
+                                <Link to={`/user/${handle}`}>
                                     <h4>@{handle}</h4>
-                                </a>
+                                </Link>
                             </div>
                             {bio && (
                                 <div className="col-12">
@@ -92,7 +92,7 @@ const Profile = (props) => {
 
                             {location && (
                                 <div className="col-12">
-                                    <p>
+                                    <p className="text-small">
                                         <i className="fas fa-map-marker-alt"></i>{" "}
                                         {location}
                                     </p>
@@ -100,7 +100,7 @@ const Profile = (props) => {
                             )}
                             {website && (
                                 <div className="col-12">
-                                    <p>
+                                    <p className="text-small">
                                         <i className="fas fa-link"></i>{" "}
                                         <a
                                             href={website}
@@ -113,7 +113,7 @@ const Profile = (props) => {
                                 </div>
                             )}
                             <div className="col-12">
-                                <p>
+                                <p className="text-small">
                                     <i className="fas fa-calendar-alt"></i>{" "}
                                     Joined {dayjs(createdAt).fromNow()}
                                 </p>

@@ -66,6 +66,15 @@ small {
     font-size: var(--small);
 }
 
+.text-small {
+    font-size: var(--small);
+}
+
+a,
+a:hover {
+    text-decoration: none;
+}
+
 .btn {
     color: var(--font-light-color);
     background-color: var(--primary-dark-color);

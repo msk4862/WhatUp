@@ -5,6 +5,10 @@
     font-size: var(--small-xs);
 }
 
+.notifications a {
+    color: var(--font-light-color);
+}
+
 .notifications .custom-dropdown-item {
     font-size: var(--small);
     padding: 0.25rem 0.5rem;

@@ -12,7 +12,7 @@ import CommentForm from "../components/Blogs/CommentForm";
 const BlogShow = (props) => {
     dayjs.extend(relativeTime);
 
-    const [showComments, setShowComments] = useState(true);
+    const [showComments, setShowComments] = useState(false);
 
     const { authenticated } = props.user;
 
@@ -83,9 +83,9 @@ const BlogShow = (props) => {
                             </div>
                         </div>
 
-                        <hr />
                         {showComments && (
                             <>
+                                <hr />
                                 <CommentForm />
                                 <Comments comments={comments} />
                             </>

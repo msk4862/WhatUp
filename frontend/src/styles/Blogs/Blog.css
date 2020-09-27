@@ -16,8 +16,8 @@
     margin-bottom: 0.675rem;
 }
 
-a,
-a:hover {
+.card a,
+.card a:hover {
     text-decoration: none;
     color: var(--font-dark-color);
 }
