@@ -6,7 +6,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import LikeButton from "./LikeButton";
 import "../../styles/Blogs/Blog.css";
 import BlogDelete from "./BlogDelete";
-import UserTile from "../UserTile";
+import UserTile from "./UserTile";
 
 const Blog = (props) => {
     dayjs.extend(relativeTime);

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { authenticate } from "../actions";
 import BlogList from "../components/Blogs/BlogList";
 import "../styles/Home.css";
-import Profile from "../components/Profile";
+import Profile from "../components/Profile/Profile";
 
 const Home = (props) => {
     useEffect(() => {

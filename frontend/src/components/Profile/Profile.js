@@ -5,7 +5,7 @@ import { uploadImage } from "../../actions/index";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import EditProfile from "./EditProfile";
-import "../styles/profile.css";
+import "../../styles/profile.css";
 
 const Profile = (props) => {
     dayjs.extend(relativeTime);

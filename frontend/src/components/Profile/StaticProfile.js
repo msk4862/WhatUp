@@ -1,7 +1,7 @@
 import React from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import "../styles/profile.css";
+import "../../styles/profile.css";
 
 const StaticProfile = ({ profile }) => {
     dayjs.extend(relativeTime);

@@ -1,6 +1,6 @@
 import React from "react";
 import "../../styles/Blogs/comments.css";
-import UserTile from "../UserTile";
+import UserTile from "./UserTile";
 
 const Comments = ({ comments }) => {
     return (
