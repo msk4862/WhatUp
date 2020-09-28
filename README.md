@@ -5,12 +5,12 @@ A simple Blog web app implemented using React and Firebase Backend.
 ### Features implemented
 
 - User Login, SignUp and User Authentication
-- Add and edit posts
+- Add, delete and edit posts
 - Home page that displays all the posts posted by all the users
 - Comment and like feature for posts
-- Notification Section
+- Notification section
 - View other user profiles
-- Showing UI skeletons while fetching data is loading
+- Showing UI skeletons while fetching data
 
 ### Tools
 
