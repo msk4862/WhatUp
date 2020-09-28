@@ -35,6 +35,7 @@ const BlogShow = (props) => {
         post: {
             postId,
             title,
+            bodyMeta,
             body,
             createdAt,
             userImage,
@@ -51,8 +52,9 @@ const BlogShow = (props) => {
             {!loading && (
                 <div className="post-show">
                     <div className="row justify-content-center">
-                        <div className="col-12 blog-body">
+                        <div className="col-12 post-body">
                             <h1 className="post-title">{title}</h1>
+                            <h5 className="mt-3">{bodyMeta}</h5>
                             <div className="post-meta">
                                 <UserTile
                                     userImage={userImage}

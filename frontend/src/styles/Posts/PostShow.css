@@ -25,6 +25,11 @@
     border-top: 1px solid rgba(0, 0, 0, 0.4);
 }
 
+.post-body h5 {
+    color: var(--font-gray-color);
+    font-weight: 350;
+}
+
 .post-show .post-footer span {
     cursor: pointer;
 }
