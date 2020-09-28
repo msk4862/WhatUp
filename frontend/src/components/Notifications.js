@@ -58,6 +58,12 @@ const Notifications = ({ notifications, markNotificationRead }) => {
                     </div>
                 );
             });
+        } else {
+            return (
+                <div className="custom-dropdown-item">
+                    You don't have any notifications currently
+                </div>
+            );
         }
     };
 
