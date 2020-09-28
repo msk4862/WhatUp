@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { authenticate } from "../actions";
-import BlogList from "../components/Blogs/BlogList";
-import "../styles/Home.css";
 import Profile from "../components/Profile/Profile";
+import PostList from "../components/Posts/PostList";
+import "../styles/Home.css";
 
 const Home = (props) => {
     useEffect(() => {
@@ -20,7 +20,7 @@ const Home = (props) => {
                 <Profile />
             </section>
             <section className="col-12 col-sm-9 blogs-list">
-                <BlogList />
+                <PostList />
             </section>
         </div>
     );

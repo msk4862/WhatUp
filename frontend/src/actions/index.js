@@ -127,48 +127,49 @@ export const markNotificationRead = (notificationIds) => {
     };
 };
 
-/* Data actions */
-export const fetchBlogs = () => {
-    return (dispatch) => {
-        dispatch({ type: ACTIONS.LOADING_DATA });
-
-        FirebaseAPI.get("/posts")
-            .then((res) => {
-                dispatch({ type: ACTIONS.FETCH_BLOGS, payload: res.data });
-            })
-            .catch((err) => {
-                console.log(err);
-                dispatch({ type: ACTIONS.FETCH_BLOGS, payload: [] });
-            });
-    };
-};
-
-export const likeBlog = (postId) => {
-    return (dispatch) => {
-        FirebaseAPI.post(`/posts/${postId}/like`)
-            .then((res) => {
-                dispatch({ type: ACTIONS.LIKE_BLOG, payload: res.data });
-            })
-            .catch((err) => console.log(err));
-    };
-};
-
-export const unlikeBlog = (postId) => {
-    return (dispatch) => {
-        FirebaseAPI.post(`/posts/${postId}/unlike`)
-            .then((res) => {
-                dispatch({ type: ACTIONS.UNLIKE_BLOG, payload: res.data });
-            })
-            .catch((err) => console.log(err));
-    };
-};
-
+// get details of any user
 export const fetchUser = (handle) => {
     return (dispatch) => {
         dispatch({ type: ACTIONS.LOADING_USER });
         FirebaseAPI.get(`/users/${handle}`)
             .then((res) => {
                 dispatch({ type: ACTIONS.SET_TEMP_USER, payload: res.data });
+            })
+            .catch((err) => console.log(err));
+    };
+};
+
+/* Data actions */
+export const fetchPosts = () => {
+    return (dispatch) => {
+        dispatch({ type: ACTIONS.LOADING_DATA });
+
+        FirebaseAPI.get("/posts")
+            .then((res) => {
+                dispatch({ type: ACTIONS.FETCH_POSTS, payload: res.data });
+            })
+            .catch((err) => {
+                console.log(err);
+                dispatch({ type: ACTIONS.FETCH_POSTS, payload: [] });
+            });
+    };
+};
+
+export const likePost = (postId) => {
+    return (dispatch) => {
+        FirebaseAPI.post(`/posts/${postId}/like`)
+            .then((res) => {
+                dispatch({ type: ACTIONS.LIKE_POST, payload: res.data });
+            })
+            .catch((err) => console.log(err));
+    };
+};
+
+export const unlikePost = (postId) => {
+    return (dispatch) => {
+        FirebaseAPI.post(`/posts/${postId}/unlike`)
+            .then((res) => {
+                dispatch({ type: ACTIONS.UNLIKE_POST, payload: res.data });
             })
             .catch((err) => console.log(err));
     };
@@ -189,13 +190,13 @@ MultiFetch Solution-1 (Using Lodash memoize())
 //     dispatch({ type: ACTIONS.FETCH_USER, payload: response.data });
 // });
 
-export const fetchBlog = (id) => {
+export const fetchPost = (id) => {
     return (dispatch) => {
         dispatch({ type: ACTIONS.LOADING_DATA });
 
         FirebaseAPI.get(`/posts/${id}`)
             .then((res) => {
-                dispatch({ type: ACTIONS.FETCH_BLOG, payload: res.data });
+                dispatch({ type: ACTIONS.FETCH_POST, payload: res.data });
                 dispatch({ type: ACTIONS.CLEAR_ERROR });
             })
             .catch((err) => {
@@ -208,11 +209,11 @@ export const fetchBlog = (id) => {
     };
 };
 
-export const createBlog = (data) => {
+export const createPost = (data) => {
     return (dispatch) => {
         FirebaseAPI.post("/posts", data)
             .then((response) => {
-                dispatch({ type: ACTIONS.CREATE_BLOG, payload: response.data });
+                dispatch({ type: ACTIONS.CREATE_POST, payload: response.data });
                 dispatch({
                     type: ACTIONS.CLEAR_ERROR,
                 });
@@ -228,11 +229,11 @@ export const createBlog = (data) => {
     };
 };
 
-export const editBlog = (id, data) => {
+export const editPost = (id, data) => {
     return (dispatch) => {
         FirebaseAPI.put(`/posts/${id}`, data)
             .then((response) => {
-                dispatch({ type: ACTIONS.EDIT_BLOG, payload: response.data });
+                dispatch({ type: ACTIONS.EDIT_POST, payload: response.data });
                 history.push("/");
             })
             .catch((error) => {
@@ -241,11 +242,11 @@ export const editBlog = (id, data) => {
     };
 };
 
-export const deleteBlog = (id) => {
+export const deletePost = (id) => {
     return (dispatch) => {
         FirebaseAPI.delete(`/posts/${id}`)
             .then(() => {
-                dispatch({ type: ACTIONS.DELETE_BLOG, payload: id });
+                dispatch({ type: ACTIONS.DELETE_POST, payload: id });
             })
             .catch((error) => {
                 console.log(error);
@@ -263,8 +264,4 @@ export const submitComment = (id, data) => {
                 console.log(error);
             });
     };
-};
-
-export const clearErrors = () => {
-    return { type: ACTIONS.CLEAR_ALERT };
 };

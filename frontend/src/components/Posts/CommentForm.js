@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { submitComment } from "../../actions";
-import "../../styles/Blogs/commentForm.css";
+import "../../styles/Posts/commentForm.css";
 import { isBlank, isEmptyObj } from "../../utilities/dataValidation";
 
 const CommentForm = (props) => {

@@ -1,5 +1,5 @@
 import React from "react";
-import "../../styles/Blogs/comments.css";
+import "../../styles/Posts/comments.css";
 import UserTile from "./UserTile";
 
 const Comments = ({ comments }) => {

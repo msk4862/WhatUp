@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { fetchUser, authenticate } from "../actions/index";
-import Blog from "../components/Blogs/Blog";
+import Post from "../components/Posts/Post";
 import StaticProfile from "../components/Profile/StaticProfile";
 import CardSkeleton from "../components/Skeletons/CardSkeleton";
 import ProfileSkeleton from "../components/Skeletons/ProfileSkeleton";
 
 const User = (props) => {
-    const [blogs, setBlogs] = useState([]);
+    const [posts, setPosts] = useState([]);
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -27,19 +27,19 @@ const User = (props) => {
 
     useEffect(() => {
         if (tempUser && tempUser.posts && tempUser.user) {
-            setBlogs(tempUser.posts);
+            setPosts(tempUser.posts);
             setUser(tempUser.user);
         }
     }, [tempUser]);
 
-    const renderBlogs = () => {
+    const renderPosts = () => {
         if (loading) return <CardSkeleton />;
-        if (blogs !== []) {
-            return blogs.map((blog) => {
-                return <Blog key={blog.postId} blog={blog} />;
+        if (posts !== []) {
+            return posts.map((post) => {
+                return <Post key={post.postId} post={post} />;
             });
         } else {
-            return <h2>No blogs yet written!</h2>;
+            return <h2>No posts yet written!</h2>;
         }
     };
 
@@ -54,7 +54,7 @@ const User = (props) => {
                 {user && <StaticProfile profile={user} />}
             </section>
             <section className="col-12 col-sm-9 blogs-list">
-                {renderBlogs()}
+                {renderPosts()}
             </section>
         </div>
     );

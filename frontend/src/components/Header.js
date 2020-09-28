@@ -23,7 +23,7 @@ const Header = (props) => {
                 <Notifications />
 
                 <li className="nav-item">
-                    <Link to="/blogs/new">
+                    <Link to="/posts/new">
                         <span
                             className="custom-tooltip"
                             data-text="Create blog"

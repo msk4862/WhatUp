@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { likeBlog, unlikeBlog } from "../../actions";
+import { likePost, unlikePost } from "../../actions";
 import history from "../../history";
-import "../../styles/Blogs/likeButton.css";
+import "../../styles/Posts/likeButton.css";
 
 const LikeButton = (props) => {
     const {
@@ -13,11 +13,11 @@ const LikeButton = (props) => {
     const { postId } = props;
 
     const like = () => {
-        props.likeBlog(postId);
+        props.likePost(postId);
     };
 
     const unlike = () => {
-        props.unlikeBlog(postId);
+        props.unlikePost(postId);
     };
 
     const renderLike = () => {
@@ -48,4 +48,4 @@ const LikeButton = (props) => {
 const mapStateToProps = (state) => {
     return { user: state.user };
 };
-export default connect(mapStateToProps, { likeBlog, unlikeBlog })(LikeButton);
+export default connect(mapStateToProps, { likePost, unlikePost })(LikeButton);

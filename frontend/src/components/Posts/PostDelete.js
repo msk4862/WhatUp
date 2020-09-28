@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import Modal from "../Modal";
-import { deleteBlog } from "../../actions";
-import "../../styles/Blogs/Blog.css";
+import { deletePost } from "../../actions";
+import "../../styles/Posts/Post.css";
 
-const BlogDelete = (props) => {
+const PostDelete = (props) => {
     const { id, title } = props;
     const [show, setShow] = useState(false);
 
     function actions() {
         return (
             <>
-                <button onClick={() => props.deleteBlog(id)} className="btn">
+                <button onClick={() => props.deletePost(id)} className="btn">
                     Delete
                 </button>
                 <button onClick={() => setShow(false)} className="btn">
@@ -24,7 +24,7 @@ const BlogDelete = (props) => {
     function renderContent() {
         return (
             <span>
-                Are you sure you want to delete the blog{" "}
+                Are you sure you want to delete the post{" "}
                 <strong>{title}</strong> ?
             </span>
         );
@@ -45,4 +45,4 @@ const BlogDelete = (props) => {
     );
 };
 
-export default connect(null, { deleteBlog })(BlogDelete);
+export default connect(null, { deletePost })(PostDelete);

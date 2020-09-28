@@ -6,10 +6,10 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import User from "../pages/User";
-import BlogEdit from "../pages/BlogEdit";
-import BlogShow from "../pages/BlogShow";
+import PostEdit from "../pages/PostEdit";
+import PostShow from "../pages/PostShow";
 import Header from "./Header";
-import BlogCreate from "../pages/BlogCreate";
+import PostCreate from "../pages/PostCreate";
 import ProtectedRoute from "./ProtectedRoute";
 import "../styles/base.css";
 
@@ -36,19 +36,19 @@ function App() {
 
                             {/* Blogs Routes */}
                             <ProtectedRoute
-                                path="/blogs/new"
+                                path="/posts/new"
                                 exact
-                                component={BlogCreate}
+                                component={PostCreate}
                             />
                             <ProtectedRoute
-                                path="/blogs/edit/:id"
+                                path="/posts/edit/:id"
                                 exact
-                                component={BlogEdit}
+                                component={PostEdit}
                             />
                             <Route
-                                path="/blogs/:id"
+                                path="/posts/:id"
                                 exact
-                                component={BlogShow}
+                                component={PostShow}
                             />
                         </Switch>
                     </div>

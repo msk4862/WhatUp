@@ -4,11 +4,11 @@ import { connect } from "react-redux";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import LikeButton from "./LikeButton";
-import "../../styles/Blogs/Blog.css";
-import BlogDelete from "./BlogDelete";
+import PostDelete from "./PostDelete";
 import UserTile from "./UserTile";
+import "../../styles/Posts/Post.css";
 
-const Blog = (props) => {
+const Post = (props) => {
     dayjs.extend(relativeTime);
 
     const {
@@ -20,7 +20,7 @@ const Blog = (props) => {
         userHandle,
         likeCount,
         commentCount,
-    } = props.blog;
+    } = props.post;
 
     const {
         authenticated,
@@ -38,12 +38,12 @@ const Blog = (props) => {
                     <div className="dropdown-menu">
                         <Link
                             className="dropdown-item"
-                            to={`/blogs/edit/${postId}`}
+                            to={`/posts/edit/${postId}`}
                         >
                             Edit
                         </Link>
                         <div className="dropdown-item">
-                            <BlogDelete id={postId} title={bodyMeta} />
+                            <PostDelete id={postId} title={bodyMeta} />
                         </div>
                     </div>
                 </div>
@@ -56,7 +56,7 @@ const Blog = (props) => {
             {authenticated && userHandle === handle && renderAdmin()}
             <div className="card-body mr-1">
                 <h5 className="card-title">
-                    <Link to={`/blogs/${postId}`}>{bodyMeta}</Link>
+                    <Link to={`/posts/${postId}`}>{bodyMeta}</Link>
                 </h5>
                 <p className="card-text">{body}</p>
                 <div className="row meta-data align-items-center">
@@ -85,4 +85,4 @@ const Blog = (props) => {
 const mapStateToProps = (state) => {
     return { user: state.user };
 };
-export default connect(mapStateToProps, {})(Blog);
+export default connect(mapStateToProps, {})(Post);

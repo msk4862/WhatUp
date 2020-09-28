@@ -1,47 +1,63 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { createBlog } from "../actions";
+import { fetchPost, editPost } from "../actions";
 import { isBlank, isEmptyObj } from "../utilities/dataValidation";
 
-const BlogCreate = (props) => {
+const PostEdit = (props) => {
     const [title, setTitle] = useState("");
     const [bodyMeta, setBodyMeta] = useState("");
     const [body, setBody] = useState("");
     const [errors, setErrors] = useState({});
 
     useEffect(() => {
+        props.fetchPost(props.match.params.id);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    useEffect(() => {
+        if (props.post) {
+            const { body, bodyMeta } = props.post;
+            setBodyMeta(bodyMeta);
+            setBody(body);
+        }
+    }, [props.post]);
+
+    useEffect(() => {
         if (props.errors) setErrors(props.errors);
     }, [props.errors]);
 
-    function onCreateBlog(event) {
+    function onEditBlog(event) {
         event.preventDefault();
 
-        const blog = {
+        const post = {
             bodyMeta,
             body,
         };
 
         let err = {};
-        if (isBlank(blog.bodyMeta)) err.bodyMeta = "this can't be empty!";
-        if (isBlank(blog.body)) err.body = "This can't be empty!";
+        if (isBlank(post.bodyMeta)) err.bodyMeta = "This can't be empty!";
+        if (isBlank(post.body)) err.body = "This can't be empty!";
 
-        if (isEmptyObj(err)) props.createBlog(blog);
+        if (isEmptyObj(err)) props.editPost(props.post.postId, post);
 
         setErrors(err);
     }
 
     return (
         <div className="container">
-            <form className="blog-create-form mt-2" onSubmit={onCreateBlog}>
-                <h2>Create a new blog</h2>
+            <form className="blog-form mt-2" onSubmit={onEditBlog}>
+                <h2>Edit your post</h2>
                 <div className="form-group mt-4">
                     <label>Title</label>
-                    <input
-                        type="text"
+                    <textarea
+                        type="textarea"
                         className="form-control"
+                        rows="2"
                         value={title}
-                        onChange={(event) => setTitle(event.target.value)}
-                    ></input>
+                        onChange={(event) => {
+                            setTitle(event.target.value);
+                        }}
+                    ></textarea>
                     {errors.title ? (
                         <small className="error-message">{errors.title}</small>
                     ) : null}
@@ -53,7 +69,9 @@ const BlogCreate = (props) => {
                         className="form-control"
                         rows="5"
                         value={bodyMeta}
-                        onChange={(event) => setBodyMeta(event.target.value)}
+                        onChange={(event) => {
+                            setBodyMeta(event.target.value);
+                        }}
                     ></textarea>
                     {errors.bodyMeta ? (
                         <small className="error-message">
@@ -62,22 +80,23 @@ const BlogCreate = (props) => {
                     ) : null}
                 </div>
                 <div className="form-group">
-                    <label>Blog Content</label>
+                    <label>Post Content</label>
                     <textarea
                         type="textarea"
                         className="form-control"
                         rows="10"
                         value={body}
-                        onChange={(event) => setBody(event.target.value)}
+                        onChange={(event) => {
+                            setBody(event.target.value);
+                        }}
                     ></textarea>
                     {errors.body ? (
                         <small className="error-message">{errors.body}</small>
                     ) : null}
                 </div>
-
                 <div className="form-group row justify-content-center">
                     <button type="submit" className="btn">
-                        Publish Blog
+                        Save Changes
                     </button>
                 </div>
             </form>
@@ -88,7 +107,8 @@ const BlogCreate = (props) => {
 const mapStateToProps = (state) => {
     return {
         authenticated: state.user.authenticated,
-        errors: state.ui.errors,
+        post: state.data.post,
     };
 };
-export default connect(mapStateToProps, { createBlog })(BlogCreate);
+
+export default connect(mapStateToProps, { fetchPost, editPost })(PostEdit);

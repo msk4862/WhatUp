@@ -48,7 +48,7 @@ const Notifications = ({ notifications, markNotificationRead }) => {
                         className="custom-dropdown-item"
                         read={read}
                     >
-                        <Link to={`/blogs/${noti.postId}`}>
+                        <Link to={`/posts/${noti.postId}`}>
                             <i
                                 style={{ color: iconColor }}
                                 className={icon}

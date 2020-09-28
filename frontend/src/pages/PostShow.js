@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { fetchBlog, authenticate } from "../actions";
-import UserTile from "../components/Blogs/UserTile";
-import LikeButton from "../components/Blogs/LikeButton";
-import Comments from "../components/Blogs/Comments";
-import CommentForm from "../components/Blogs/CommentForm";
+import { fetchPost, authenticate } from "../actions";
+import UserTile from "../components/Posts/UserTile";
+import LikeButton from "../components/Posts/LikeButton";
+import Comments from "../components/Posts/Comments";
+import CommentForm from "../components/Posts/CommentForm";
 import Loader from "../components/Loader";
-import "../styles/Blogs/BlogShow.css";
+import "../styles/Posts/PostShow.css";
 
 const BlogShow = (props) => {
     dayjs.extend(relativeTime);
@@ -26,13 +26,13 @@ const BlogShow = (props) => {
     }, []);
 
     useEffect(() => {
-        props.fetchBlog(props.match.params.id);
+        props.fetchPost(props.match.params.id);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const {
         loading,
-        blog: {
+        post: {
             postId,
             bodyMeta,
             body,
@@ -49,23 +49,23 @@ const BlogShow = (props) => {
         <div>
             {loading && <Loader />}
             {!loading && (
-                <div className="blog-show">
+                <div className="post-show">
                     <div className="row justify-content-center">
                         <div className="col-12 blog-body">
-                            <h1 className="blog-title">{bodyMeta}</h1>
-                            <div className="blog-meta">
+                            <h1 className="post-title">{bodyMeta}</h1>
+                            <div className="post-meta">
                                 <UserTile
                                     userImage={userImage}
                                     userHandle={userHandle}
                                     createdAt={createdAt}
                                 />
                             </div>
-                            <div className="blog-text mt-4">
+                            <div className="post-text mt-4">
                                 <p>{body}</p>
                             </div>
                         </div>
                     </div>
-                    <div className="blog-footer">
+                    <div className="post-footer">
                         <div className="row">
                             <div className="col">
                                 <span>
@@ -107,4 +107,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { fetchBlog, authenticate })(BlogShow);
+export default connect(mapStateToProps, { fetchPost, authenticate })(BlogShow);

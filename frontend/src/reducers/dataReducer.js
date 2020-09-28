@@ -3,68 +3,68 @@ import _ from "lodash";
 import ACTIONS from "../actions/actionTypes";
 
 const initialState = {
-    blogs: {},
-    blog: {},
+    posts: {},
+    post: {},
     loading: false,
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case ACTIONS.FETCH_BLOGS:
+        case ACTIONS.FETCH_POSTS:
             return {
                 ...state,
-                blogs: { ..._.mapKeys(action.payload, "postId") },
+                posts: { ..._.mapKeys(action.payload, "postId") },
                 loading: false,
             };
 
-        case ACTIONS.FETCH_BLOG:
+        case ACTIONS.FETCH_POST:
             return {
                 ...state,
-                blog: action.payload,
+                post: action.payload,
                 loading: false,
             };
 
-        case ACTIONS.CREATE_BLOG:
+        case ACTIONS.CREATE_POST:
             return {
                 ...state,
-                blogs: {
-                    ...state.blogs,
+                posts: {
+                    ...state.posts,
                     [action.payload.postId]: action.payload,
                 },
             };
 
-        case ACTIONS.EDIT_BLOG:
+        case ACTIONS.EDIT_POST:
             return {
                 ...state,
-                blogs: {
-                    ...state.blogs,
+                posts: {
+                    ...state.posts,
                     [action.payload.postId]: action.payload,
                 },
             };
 
-        case ACTIONS.DELETE_BLOG:
+        case ACTIONS.DELETE_POST:
             return {
                 ...state,
-                blogs: _.omit(state.blogs, action.payload),
+                posts: _.omit(state.posts, action.payload),
             };
 
-        case ACTIONS.LIKE_BLOG:
-        case ACTIONS.UNLIKE_BLOG:
+        case ACTIONS.LIKE_POST:
+        case ACTIONS.UNLIKE_POST:
             // if current open post is liked or unliked
-            if (state.blog.postId === action.payload.postId)
+            if (state.post.postId === action.payload.postId)
                 return {
                     ...state,
-                    blog: action.payload,
-                    blogs: {
-                        ...state.blogs,
+                    post: action.payload,
+                    posts: {
+                        ...state.posts,
                         [action.payload.postId]: action.payload,
                     },
                 };
             else
                 return {
                     ...state,
-                    blogs: {
-                        ...state.blogs,
+                    posts: {
+                        ...state.posts,
                         [action.payload.postId]: action.payload,
                     },
                 };
@@ -72,8 +72,8 @@ export default (state = initialState, action) => {
         case ACTIONS.SUBMIT_COMMENT:
             return {
                 ...state,
-                blog: {
-                    ...state.blog,
+                post: {
+                    ...state.post,
                     comments: [action.payload, ...state.blog.comments],
                 },
             };
