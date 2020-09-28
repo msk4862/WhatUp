@@ -1,6 +1,15 @@
-## Blogs web app developed with React and Firebase.
-
-A simple Blog web app implemented using React and Firebase Backend.
+<div align="center">
+    <h1>WhatUp</h1>
+    <p>
+         <b>A simple Blog web app implemented using React and Firebase Backend.</b>
+    </p>
+      <img src="https://travis-ci.org/msk4862/WhatUp.svg?branch=master" width="100">
+      <img src="https://img.shields.io/github/license/msk4862/Anomly?style=flat-square" width="92">
+      <img src="https://forthebadge.com/images/badges/made-with-javascript.svg" width="150">
+      <img src="https://forthebadge.com/images/badges/powered-by-responsibility.svg" width="190">
+      <br />
+      <img src="https://forthebadge.com/images/badges/built-with-love.svg" width="180">
+</div>
 
 ### Features implemented
 
