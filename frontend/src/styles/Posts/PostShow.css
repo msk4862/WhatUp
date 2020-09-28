@@ -32,5 +32,6 @@
 @media only screen and (max-width: 600px) {
     .post-show {
         margin: 1rem 0;
+        padding: 1rem 0.5rem;
     }
 }

@@ -16,7 +16,8 @@ const PostEdit = (props) => {
 
     useEffect(() => {
         if (props.post) {
-            const { body, bodyMeta } = props.post;
+            const { body, bodyMeta, title } = props.post;
+            setTitle(title);
             setBodyMeta(bodyMeta);
             setBody(body);
         }
@@ -26,15 +27,17 @@ const PostEdit = (props) => {
         if (props.errors) setErrors(props.errors);
     }, [props.errors]);
 
-    function onEditBlog(event) {
+    function onEditPost(event) {
         event.preventDefault();
 
         const post = {
+            title,
             bodyMeta,
             body,
         };
 
         let err = {};
+        if (isBlank(post.title)) err.title = "This can't be empty!";
         if (isBlank(post.bodyMeta)) err.bodyMeta = "This can't be empty!";
         if (isBlank(post.body)) err.body = "This can't be empty!";
 
@@ -45,7 +48,7 @@ const PostEdit = (props) => {
 
     return (
         <div className="container">
-            <form className="blog-form mt-2" onSubmit={onEditBlog}>
+            <form className="blog-form mt-2" onSubmit={onEditPost}>
                 <h2>Edit your post</h2>
                 <div className="form-group mt-4">
                     <label>Title</label>

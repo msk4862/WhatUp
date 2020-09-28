@@ -1,5 +1,5 @@
 :root {
-    --base-size: calc(16px + 0.125vh);
+    --base-size: 16px;
     --type-scale: 1.2;
 
     --h5: calc(var(--base-size) * var(--type-scale));
@@ -182,5 +182,15 @@ a:hover {
     }
     100% {
         opacity: 1;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    :root {
+        --base-size: 16px;
+        --type-scale: 1.115;
+    }
+    .container-fluid {
+        padding: 0.2rem;
     }
 }

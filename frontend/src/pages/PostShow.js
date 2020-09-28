@@ -34,7 +34,7 @@ const BlogShow = (props) => {
         loading,
         post: {
             postId,
-            bodyMeta,
+            title,
             body,
             createdAt,
             userImage,
@@ -52,7 +52,7 @@ const BlogShow = (props) => {
                 <div className="post-show">
                     <div className="row justify-content-center">
                         <div className="col-12 blog-body">
-                            <h1 className="post-title">{bodyMeta}</h1>
+                            <h1 className="post-title">{title}</h1>
                             <div className="post-meta">
                                 <UserTile
                                     userImage={userImage}

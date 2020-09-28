@@ -8,6 +8,10 @@
     color: var(--font-light-color);
 }
 
+.navbar .navbar-toggler {
+    color: var(--font-light-color);
+}
+
 .navbar-nav,
 .my-account {
     color: var(--font-light-color);

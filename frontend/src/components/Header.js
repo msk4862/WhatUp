@@ -22,7 +22,7 @@ const Header = (props) => {
                 {/* Notification */}
                 <Notifications />
 
-                <li className="nav-item">
+                <li className="nav-item d-none d-sm-block">
                     <Link to="/posts/new">
                         <span
                             className="custom-tooltip"
@@ -55,6 +55,12 @@ const Header = (props) => {
                             to={`/user/${props.user.credentials.handle}`}
                         >
                             Profile
+                        </Link>
+                        <Link
+                            className="dropdown-item d-block d-sm-none"
+                            to={`/user/${props.user.credentials.handle}`}
+                        >
+                            Create Post
                         </Link>
                         <Link className="dropdown-item" to="" onClick={Logout}>
                             Logout
@@ -95,7 +101,7 @@ const Header = (props) => {
                 data-toggle="collapse"
                 data-target="#myNavbar"
             >
-                <span className="navbar-toggler-icon"></span>
+                <i className="fas fa-bars"></i>
             </button>
 
             {/* Nav Links */}

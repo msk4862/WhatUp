@@ -26,3 +26,9 @@
     background-color: transparent;
     color: var(--font-dark-color);
 }
+
+@media only screen and (max-width: 600px) {
+    .modal-content {
+        max-width: 95%;
+    }
+}

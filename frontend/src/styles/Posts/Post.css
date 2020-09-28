@@ -50,6 +50,10 @@
 }
 
 @media only screen and (max-width: 575px) {
+    .card-body {
+        padding: 0.75rem;
+    }
+
     .meta-data > div:last-child {
         text-align: center;
         margin-top: 0.5rem;

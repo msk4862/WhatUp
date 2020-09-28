@@ -17,12 +17,14 @@ const PostCreate = (props) => {
         event.preventDefault();
 
         const post = {
+            title,
             bodyMeta,
             body,
         };
 
         let err = {};
-        if (isBlank(post.bodyMeta)) err.bodyMeta = "this can't be empty!";
+        if (isBlank(post.title)) err.title = "This can't be empty!";
+        if (isBlank(post.bodyMeta)) err.bodyMeta = "This can't be empty!";
         if (isBlank(post.body)) err.body = "This can't be empty!";
 
         if (isEmptyObj(err)) props.createPost(post);

@@ -19,7 +19,7 @@ const Home = (props) => {
             <section className="col-12 col-sm-3 order-sm-2">
                 <Profile />
             </section>
-            <section className="col-12 col-sm-9 blogs-list">
+            <section className="col-12 col-sm-8 blogs-list">
                 <PostList />
             </section>
         </div>

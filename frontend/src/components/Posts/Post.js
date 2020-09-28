@@ -13,8 +13,8 @@ const Post = (props) => {
 
     const {
         postId,
+        title,
         bodyMeta,
-        body,
         createdAt,
         userImage,
         userHandle,
@@ -56,9 +56,9 @@ const Post = (props) => {
             {authenticated && userHandle === handle && renderAdmin()}
             <div className="card-body mr-1">
                 <h5 className="card-title">
-                    <Link to={`/posts/${postId}`}>{bodyMeta}</Link>
+                    <Link to={`/posts/${postId}`}>{title}</Link>
                 </h5>
-                <p className="card-text">{body}</p>
+                <p className="card-text">{bodyMeta}</p>
                 <div className="row meta-data align-items-center">
                     <div className="col-12 col-sm-6">
                         <UserTile
