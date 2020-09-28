@@ -10,6 +10,7 @@ A simple Blog web app implemented using React and Firebase Backend.
 - Comment and like feature for posts
 - Notification Section
 - View other user profiles
+- Showing UI skeletons while fetching data is loading
 
 ### Tools
 
