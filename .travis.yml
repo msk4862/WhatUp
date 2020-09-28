@@ -1,27 +1,25 @@
 language: node_js
 node_js:
-  - "stable"
+  	- "stable"
 cache: yarn
 
 notification:
-  email: false
+  	email: false
 
 before-install:
-  - cd frontend
+  	- cd frontend
 install:
-  - yarn
+  	- yarn
 
 script:
-  - yarn format
-  - yarn test
-  - yarn build
+  	- yarn format
+  	- yarn test
+  	- yarn build
 
 deploy:
-	on:
-		branch: master	  
-  provider: s3
-  skip_cleanup: true
-  access_key_id: $AWS_ACCESS
+	provider: s3
+  	skip_cleanup: true
+  	access_key_id: $AWS_ACCESS
 	secret_access_key: $AWS_SECRET
-	bucket: "what-up"
+	bucket: what-up
 	local_dir: build
