@@ -20,6 +20,8 @@ A simple Blog web app implemented using React and Firebase Backend.
 
 #### 1. Go to `frontend` folder
 
+> By default this project is using my firebase backend base url. You can also overwrite it by simply specifying your api base url in `.env` file (see `.env.example` for reference)
+
 First install dependencies:
 
 ```
