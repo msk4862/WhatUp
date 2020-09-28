@@ -33,7 +33,6 @@ export const login = (data) => {
                 setAuthorizationHeader(res.data["token"]);
                 dispatch(fetchUserData());
                 dispatch({ type: ACTIONS.CLEAR_ERROR });
-                history.push("/");
             })
             .catch((error) => {
                 dispatch({

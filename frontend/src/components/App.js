@@ -50,6 +50,10 @@ function App() {
                                 exact
                                 component={PostShow}
                             />
+                            <Route
+                                path="*"
+                                component={() => <h2>404 not found</h2>}
+                            />
                         </Switch>
                     </div>
                 </div>

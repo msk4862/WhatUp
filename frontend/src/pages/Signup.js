@@ -81,6 +81,7 @@ const Signup = (props) => {
                                     type="email"
                                     className="form-control"
                                     placeholder="Enter email"
+                                    autoComplete="on"
                                     value={email}
                                     onChange={(event) => {
                                         event.preventDefault();

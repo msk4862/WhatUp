@@ -13,13 +13,22 @@ const Login = (props) => {
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({});
 
-    const { from } = props.location.state || { from: { pathname: "/" } };
-
     useEffect(() => {
-        if (props.authenticated) history.push(from);
-        else {
+        if (!props.authenticated) {
             let token = localStorage.getItem("jwtToken");
             if (token) props.authenticate(token);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const {
+        location: { state },
+    } = props;
+
+    useEffect(() => {
+        if (props.authenticated) {
+            if (state && state.from) history.push(state.from);
+            else history.push("/");
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.authenticated]);
@@ -58,10 +67,14 @@ const Login = (props) => {
         } else return null;
     }
 
+    const { loading } = props.ui;
+    // when user is done loading then only props.authenticated is set
+    const { userLoading } = props;
+
     return (
         <div className="row justify-centent-center align-items-center">
-            {props.ui.loading && <Loader />}
-            {!props.ui.loading && (
+            {(loading || userLoading) && <Loader />}
+            {!loading && !userLoading && (
                 <div className="login-form-container col-10 col-sm-4 ml-auto mr-auto">
                     <div className="text-center">
                         <h2>{LOGIN_TITLE}</h2>
@@ -77,6 +90,7 @@ const Login = (props) => {
                                 <input
                                     type="email"
                                     className="form-control"
+                                    autoComplete="on"
                                     value={email}
                                     onChange={(event) => {
                                         event.preventDefault();
@@ -95,6 +109,7 @@ const Login = (props) => {
                                 <input
                                     type="password"
                                     className="form-control"
+                                    autoComplete="on"
                                     value={password}
                                     onChange={(event) => {
                                         event.preventDefault();
@@ -129,6 +144,7 @@ const mapStateToProps = (state) => {
     return {
         authenticated: state.user.authenticated,
         ui: state.ui,
+        userLoading: state.user.loading,
     };
 };
 
