@@ -1,23 +1,10 @@
-# pull official base image
-FROM node:13.12.0-alpine
+# stage build
+FROM node:13.12.0-alpine AS builder
+WORKDIR /app
+COPY  . .
+RUN yarn && yarn build
+# stage build end
 
-RUN mkdir /home/blog
-
-# set working directory
-WORKDIR /home/blog    
-
-# install app dependencies
-COPY package.json package-lock.json ./
-
-RUN npm ci
-
-COPY . .
-
-EXPOSE 3000
-EXPOSE 35729
-
-CMD ["npm", "start"]
-
-
-
-
+# from builder stage
+FROM nginx:alpine
+COPY --from=builder /app/build /usr/share/nginx/html

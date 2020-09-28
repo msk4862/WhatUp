@@ -1,6 +1,7 @@
 {
     "name": "blog",
     "version": "0.1.0",
+    "author": "Mohd Shoaib Asgar <msk4862@gmail.com>",
     "private": true,
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.14.0",
