@@ -12,6 +12,7 @@ const User = (props) => {
 
     useEffect(() => {
         props.fetchUser(props.match.params.handle);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
@@ -19,6 +20,7 @@ const User = (props) => {
             let token = localStorage.getItem("jwtToken");
             if (token) props.authenticate(token);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const { loading, tempUser } = props.user;

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchBlog, editBlog } from "../actions";
-import history from "../history";
 import { isBlank, isEmptyObj } from "../utilities/dataValidation";
 
 const BlogEdit = (props) => {
@@ -11,8 +10,8 @@ const BlogEdit = (props) => {
     const [errors, setErrors] = useState({});
 
     useEffect(() => {
-        if (!props.authenticated) history.push("/login");
-        else props.fetchBlog(props.match.params.id);
+        props.fetchBlog(props.match.params.id);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {

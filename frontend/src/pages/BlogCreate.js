@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { createBlog } from "../actions";
-import history from "../history";
 import { isBlank, isEmptyObj } from "../utilities/dataValidation";
 
 const BlogCreate = (props) => {
@@ -9,10 +8,6 @@ const BlogCreate = (props) => {
     const [bodyMeta, setBodyMeta] = useState("");
     const [body, setBody] = useState("");
     const [errors, setErrors] = useState({});
-
-    useEffect(() => {
-        if (!props.authenticated) history.push("/login");
-    }, []);
 
     useEffect(() => {
         if (props.errors) setErrors(props.errors);

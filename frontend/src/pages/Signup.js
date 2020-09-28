@@ -21,6 +21,7 @@ const Signup = (props) => {
             let token = localStorage.getItem("jwtToken");
             if (token) props.authenticate(token);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.authenticated]);
 
     useEffect(() => {

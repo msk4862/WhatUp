@@ -21,6 +21,7 @@ const Login = (props) => {
             let token = localStorage.getItem("jwtToken");
             if (token) props.authenticate(token);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.authenticated]);
 
     useEffect(() => {
@@ -46,9 +47,7 @@ const Login = (props) => {
         setErrors(credErrors);
     }
 
-    /*
-        rendering errors
-    */
+    // renders errors from server
     function renderErrors() {
         if (errors.credential) {
             return (

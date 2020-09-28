@@ -28,6 +28,7 @@ const Notifications = ({ notifications, markNotificationRead }) => {
 
             setUnreadNotifications([]);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [open]);
 
     const renderNotifications = () => {

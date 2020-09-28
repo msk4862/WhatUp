@@ -22,10 +22,12 @@ const BlogShow = (props) => {
             let token = localStorage.getItem("jwtToken");
             if (token) props.authenticate(token);
         }
-    }, [authenticated]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     useEffect(() => {
         props.fetchBlog(props.match.params.id);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const {

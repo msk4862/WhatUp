@@ -11,6 +11,7 @@ const Home = (props) => {
             let token = localStorage.getItem("jwtToken");
             if (token) props.authenticate(token);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
