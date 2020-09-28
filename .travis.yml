@@ -18,7 +18,7 @@ script:
 
 deploy:
   provider: s3
+  skip_cleanup: true
   access_key_id: $AWS_ACCESS
   secret_access_key: $AWS_SECRET
   bucket: "what-up"
-  skip_cleanup: true
