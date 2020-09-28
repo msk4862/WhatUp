@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { fetchPost, editPost } from "../actions";
+import { fetchPost, editPost } from "../redux/actions";
 import { isBlank, isEmptyObj } from "../utilities/dataValidation";
 
 const PostEdit = (props) => {

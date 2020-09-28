@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { submitComment } from "../../actions";
+import { submitComment } from "../../redux/actions";
 import "../../styles/Posts/commentForm.css";
 import { isBlank, isEmptyObj } from "../../utilities/dataValidation";
 
@@ -18,7 +18,7 @@ const CommentForm = (props) => {
         if (isBlank(data.body)) err.comment = "Can't be empty!";
 
         if (isEmptyObj(err)) {
-            props.submitComment(props.blog.postId, data);
+            props.submitComment(props.post.postId, data);
             setComment("");
         }
 
@@ -66,7 +66,7 @@ const CommentForm = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        blog: state.data.blog,
+        post: state.data.post,
         authenticated: state.user.authenticated,
         ui: state.ui,
     };

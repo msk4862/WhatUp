@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { logout } from "../actions/index";
+import { logout } from "../redux/actions";
 import history from "../history";
 import Notifications from "./Notifications";
 import { APP_TITLE } from "../utilities/Constants";

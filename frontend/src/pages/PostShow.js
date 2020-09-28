@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { fetchPost, authenticate } from "../actions";
+import { fetchPost, authenticate } from "../redux/actions";
 import UserTile from "../components/Posts/UserTile";
 import LikeButton from "../components/Posts/LikeButton";
 import Comments from "../components/Posts/Comments";

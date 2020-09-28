@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import Modal from "../Modal";
-import { editUserDetails } from "../../actions/index";
+import { editUserDetails } from "../../redux/actions";
 import { isEmptyObj, isUrl } from "../../utilities/dataValidation";
 // import "../styles/EditProfile.css";
 

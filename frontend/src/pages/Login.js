@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { login, authenticate } from "../actions/index";
+import { login, authenticate } from "../redux/actions";
 import history from "../history";
 import { LOGIN_TITLE } from "../utilities/Constants";
 import Loader from "../components/Loader";

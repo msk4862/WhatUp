@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-
-import "../styles/Signup.css";
-import { signup, authenticate } from "../actions";
+import { signup, authenticate } from "../redux/actions";
 import history from "../history";
 import { SIGNUP_TITLE } from "../utilities/Constants";
 import { isBlank, isEmptyObj } from "../utilities/dataValidation";
+import "../styles/Signup.css";
 
 const Signup = (props) => {
     const [email, setEmail] = useState("");

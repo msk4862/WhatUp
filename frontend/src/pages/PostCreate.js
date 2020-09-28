@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { createPost } from "../actions";
+import { createPost } from "../redux/actions";
 import { isBlank, isEmptyObj } from "../utilities/dataValidation";
 
 const PostCreate = (props) => {

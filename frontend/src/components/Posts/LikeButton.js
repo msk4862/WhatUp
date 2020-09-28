@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { likePost, unlikePost } from "../../actions";
+import { likePost, unlikePost } from "../../redux/actions";
 import history from "../../history";
 import "../../styles/Posts/likeButton.css";
 

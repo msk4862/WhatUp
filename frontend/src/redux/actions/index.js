@@ -1,7 +1,7 @@
 import jwtDecode from "jwt-decode";
-import FirebaseAPI from "../apis/FirebaseAPI";
+import FirebaseAPI from "../../apis/FirebaseAPI";
 import ACTIONS from "./actionTypes";
-import history from "../history";
+import history from "../../history";
 
 /* User actions */
 export const signup = (data) => {

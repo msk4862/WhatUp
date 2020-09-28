@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { fetchUser, authenticate } from "../actions/index";
+import { fetchUser, authenticate } from "../redux/actions";
 import Post from "../components/Posts/Post";
 import StaticProfile from "../components/Profile/StaticProfile";
 import CardSkeleton from "../components/Skeletons/CardSkeleton";

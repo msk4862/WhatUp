@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { fetchPosts, login, authenticate } from "../../actions";
+import { fetchPosts, login, authenticate } from "../../redux/actions";
 import CardSkeleton from "../Skeletons/CardSkeleton";
 import Post from "./Post";
 

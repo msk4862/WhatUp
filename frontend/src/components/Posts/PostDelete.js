@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import Modal from "../Modal";
-import { deletePost } from "../../actions";
+import { deletePost } from "../../redux/actions";
 import "../../styles/Posts/Post.css";
 
 const PostDelete = (props) => {

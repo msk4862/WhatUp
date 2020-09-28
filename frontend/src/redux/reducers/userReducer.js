@@ -28,7 +28,7 @@ export default (state = initialState, action) => {
                 loading: false,
             };
 
-        case ACTIONS.LIKE_BLOG:
+        case ACTIONS.LIKE_POST:
             return {
                 ...state,
                 likes: [
@@ -40,7 +40,7 @@ export default (state = initialState, action) => {
                 ],
             };
 
-        case ACTIONS.UNLIKE_BLOG:
+        case ACTIONS.UNLIKE_POST:
             const updatedLikes = state.likes.filter(
                 (like) => action.payload.postId !== like.postId
             );

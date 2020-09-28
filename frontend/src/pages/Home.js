@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { authenticate } from "../actions";
+import { authenticate } from "../redux/actions";
 import Profile from "../components/Profile/Profile";
 import PostList from "../components/Posts/PostList";
 import "../styles/Home.css";
