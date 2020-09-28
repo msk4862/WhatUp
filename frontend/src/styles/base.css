@@ -84,6 +84,7 @@ a:hover {
 }
 
 .btn:hover {
+    color: var(--font-light-color);
     background-color: var(--secondary-color);
 }
 
