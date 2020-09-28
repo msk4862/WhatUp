@@ -266,6 +266,7 @@ exports.getUserDetails = (req, res) => {
             data.forEach((post) => {
                 userData.posts.push({
                     postId: post.id,
+                    title: post.data().title,
                     bodyMeta: post.data().bodyMeta,
                     body: post.data().body,
                     createdAt: post.data().createdAt,

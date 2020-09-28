@@ -3,6 +3,7 @@ let db = {
         {
             userHandle: "user",
             imageUrl: "",
+            title: "title",
             bodyMeta: "this is body meta",
             body: "this is body",
             createdAt: "2020-09-08T11:04:03.724Z", //ISO string
@@ -18,18 +19,26 @@ let db = {
             body: "asuh ashiash",
             imageUrl: "user image",
             createdAt: "ISO string",
-        }
+        },
     ],
 
-    notification: [
+    likes: [
         {
+            userHandle: "user",
+            postId: "7wIhyf6oNo3jMiTzeZWG",
+        },
+    ],
+
+    notifications: [
+        {
+            notificationId: "id",
             recipient: "user",
             sender: "sender_user",
             read: "true | false",
             postId: "",
             type: "like|comment",
-            createdAt: "ISO string"
-        }
+            createdAt: "ISO string",
+        },
     ],
 
     users: [
@@ -44,16 +53,6 @@ let db = {
                 website: "https://a.com",
                 Location: "Delhi, IN",
             },
-            likes: [
-                {
-                    userHandle: "user",
-                    postId: "7wIhyf6oNo3jMiTzeZWG" 
-                },
-                {
-                    userHandle: "user",
-                    postId: "7wIhyf6oNo3jMiTzeZWG" 
-                }
-            ]
-        }
-    ]
-}
+        },
+    ],
+};

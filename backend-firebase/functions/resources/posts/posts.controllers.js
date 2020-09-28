@@ -9,6 +9,7 @@ exports.getAllPosts = (req, res) => {
             data.forEach((doc) => {
                 posts.push({
                     postId: doc.id,
+                    title: doc.data().title,
                     bodyMeta: doc.data().bodyMeta,
                     body: doc.data().body,
                     createdAt: doc.data().createdAt,
@@ -31,6 +32,7 @@ exports.createOnePost = (req, res) => {
     const newPost = {
         userHandle: req.user.handle,
         userImage: req.user.imageUrl,
+        title: data.title,
         bodyMeta: data.bodyMeta,
         body: data.body,
         createdAt: new Date().toISOString(),
@@ -69,9 +71,9 @@ exports.getOnePost = (req, res) => {
                 .where("postId", "==", postData.postId)
                 .get();
         })
-        .then(data => {
+        .then((data) => {
             postData.comments = [];
-            data.forEach(doc => {
+            data.forEach((doc) => {
                 postData.comments.push(doc.data());
             });
 
@@ -87,6 +89,7 @@ exports.getOnePost = (req, res) => {
 exports.updateOnePost = (req, res) => {
     const data = req.body;
     const updatedPost = {
+        title: data.title,
         bodyMeta: data.bodyMeta,
         body: data.body,
     };
@@ -185,6 +188,7 @@ exports.likeAPost = (req, res) => {
 
             postData = {
                 postId: doc.id,
+                title: doc.data().title,
                 bodyMeta: doc.data().bodyMeta,
                 body: doc.data().body,
                 createdAt: doc.data().createdAt,
@@ -227,6 +231,7 @@ exports.unlikeAPost = (req, res) => {
             }
             postData = {
                 postId: doc.id,
+                title: doc.data().title,
                 bodyMeta: doc.data().bodyMeta,
                 body: doc.data().body,
                 createdAt: doc.data().createdAt,
