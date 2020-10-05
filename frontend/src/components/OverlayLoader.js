@@ -7,10 +7,8 @@ export default function OverlayLoader() {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        toggleOverlay = () => toggleIsLoading(setIsLoading, isLoading);
+        toggleOverlay = () => setIsLoading((isLoading) => !isLoading);
     }, [isLoading]);
 
     return isLoading ? <Loader isOverlay /> : null;
 }
-
-const toggleIsLoading = (setIsLoading, isLoading) => setIsLoading(!isLoading);
