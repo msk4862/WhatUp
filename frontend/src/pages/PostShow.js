@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { fetchPost, authenticate } from "../redux/actions";
-import UserTile from "../components/Posts/UserTile";
-import LikeButton from "../components/Posts/LikeButton";
-import Comments from "../components/Posts/Comments";
-import CommentForm from "../components/Posts/CommentForm";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import Loader from "../components/Loader";
+import CommentForm from "../components/Posts/CommentForm";
+import Comments from "../components/Posts/Comments";
+import LikeButton from "../components/Posts/LikeButton";
+import UserTile from "../components/Posts/UserTile";
+import { authenticate, fetchPost } from "../redux/actions";
 import "../styles/Posts/PostShow.css";
 
 const BlogShow = (props) => {
@@ -26,7 +26,9 @@ const BlogShow = (props) => {
     }, []);
 
     useEffect(() => {
-        props.fetchPost(props.match.params.id);
+        if (!Object.keys(props.data.post).length) {
+            props.fetchPost(props.match.params.id);
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

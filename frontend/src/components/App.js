@@ -1,21 +1,23 @@
-import React from "react";
-import { Router, Route, Switch } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import React from "react";
+import { Route, Router, Switch } from "react-router-dom";
 import history from "../history";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
-import Signup from "../pages/Signup";
-import User from "../pages/User";
+import PostCreate from "../pages/PostCreate";
 import PostEdit from "../pages/PostEdit";
 import PostShow from "../pages/PostShow";
-import Header from "./Header";
-import PostCreate from "../pages/PostCreate";
-import ProtectedRoute from "./ProtectedRoute";
+import Signup from "../pages/Signup";
+import User from "../pages/User";
 import "../styles/base.css";
+import Header from "./Header";
+import OverlayLoader from "./OverlayLoader";
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
     return (
         <div>
+            <OverlayLoader />
             <Router history={history}>
                 <div>
                     <Header />

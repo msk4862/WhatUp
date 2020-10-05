@@ -1,7 +1,7 @@
 import jwtDecode from "jwt-decode";
 import FirebaseAPI from "../../apis/FirebaseAPI";
-import ACTIONS from "./actionTypes";
 import history from "../../history";
+import ACTIONS from "./actionTypes";
 
 /* User actions */
 export const signup = (data) => {
@@ -188,6 +188,12 @@ MultiFetch Solution-1 (Using Lodash memoize())
 
 //     dispatch({ type: ACTIONS.FETCH_USER, payload: response.data });
 // });
+
+export const setPost = (data) => {
+    return (dispatch) => {
+        dispatch({ type: ACTIONS.FETCH_POST, payload: data });
+    };
+};
 
 export const fetchPost = (id) => {
     return (dispatch) => {

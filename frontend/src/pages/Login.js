@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { login, authenticate } from "../redux/actions";
-import history from "../history";
-import { LOGIN_TITLE } from "../utilities/Constants";
+import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
-import { isBlank, isEmptyObj } from "../utilities/dataValidation";
+import history from "../history";
+import { authenticate, login } from "../redux/actions";
 import "../styles/Login.css";
+import { LOGIN_TITLE } from "../utilities/Constants";
+import { isBlank, isEmptyObj } from "../utilities/dataValidation";
 
 const Login = (props) => {
     const [email, setEmail] = useState("");
@@ -58,13 +58,13 @@ const Login = (props) => {
 
     // renders errors from server
     function renderErrors() {
-        if (errors.credential) {
-            return (
+        return (
+            errors.credential && (
                 <p className="text-center error-message mb-2 mt-0">
                     {errors.credential}
                 </p>
-            );
-        } else return null;
+            )
+        );
     }
 
     const { loading } = props.ui;
@@ -73,8 +73,8 @@ const Login = (props) => {
 
     return (
         <div className="row justify-centent-center align-items-center">
-            {(loading || userLoading) && <Loader />}
-            {!loading && !userLoading && (
+            {userLoading && <Loader isOverlay />}
+            {!userLoading && (
                 <div className="login-form-container col-10 col-sm-4 ml-auto mr-auto">
                     <div className="text-center">
                         <h2>{LOGIN_TITLE}</h2>
@@ -123,9 +123,16 @@ const Login = (props) => {
                                 ) : null}
                             </div>
 
-                            <div className="form-group  row justify-content-center">
-                                <button type="submit" className="btn">
+                            <div className="form-group row justify-content-center">
+                                <button
+                                    type="submit"
+                                    className="btn d-flex flex-row"
+                                    disabled={loading}
+                                >
                                     Login
+                                    {loading && (
+                                        <div className="ml-1 mt-1 spinner-border spinner-border-sm" />
+                                    )}
                                 </button>
                             </div>
                         </div>

@@ -1,16 +1,19 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import React from "react";
+import { connect } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import FirebaseAPI from "../../apis/FirebaseAPI";
+import { setPost } from "../../redux/actions";
+import "../../styles/Posts/Post.css";
+import { toggleOverlay } from "../OverlayLoader";
 import LikeButton from "./LikeButton";
 import PostDelete from "./PostDelete";
 import UserTile from "./UserTile";
-import "../../styles/Posts/Post.css";
 
-const Post = (props) => {
+const Post = ({ post, user, setPost }) => {
     dayjs.extend(relativeTime);
-
+    const history = useHistory();
     const {
         postId,
         title,
@@ -20,12 +23,23 @@ const Post = (props) => {
         userHandle,
         likeCount,
         commentCount,
-    } = props.post;
+    } = post;
 
     const {
         authenticated,
         credentials: { handle },
-    } = props.user;
+    } = user;
+
+    const fetchData = async () => {
+        toggleOverlay();
+        FirebaseAPI.get(`/posts/${postId}`)
+            .then((res) => {
+                setPost(res.data);
+                toggleOverlay();
+                history.push(`/posts/${postId}`);
+            })
+            .catch((err) => console.error(err));
+    };
 
     function renderAdmin() {
         return (
@@ -55,8 +69,12 @@ const Post = (props) => {
         <div className="card">
             {authenticated && userHandle === handle && renderAdmin()}
             <div className="card-body mr-1">
-                <h5 className="card-title">
-                    <Link to={`/posts/${postId}`}>{title}</Link>
+                <h5
+                    className="card-title"
+                    onClick={fetchData}
+                    style={{ cursor: "pointer" }}
+                >
+                    {title}
                 </h5>
                 <p className="card-text">{bodyMeta}</p>
                 <div className="row meta-data align-items-center">
@@ -85,4 +103,4 @@ const Post = (props) => {
 const mapStateToProps = (state) => {
     return { user: state.user };
 };
-export default connect(mapStateToProps, {})(Post);
+export default connect(mapStateToProps, { setPost })(Post);
