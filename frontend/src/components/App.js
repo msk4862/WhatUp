@@ -11,11 +11,12 @@ import PostShow from "../pages/PostShow";
 import Header from "./Header";
 import PostCreate from "../pages/PostCreate";
 import ProtectedRoute from "./ProtectedRoute";
+import ErrorPage from "../pages/404";
 import "../styles/base.css";
 
 function App() {
     return (
-        <div>
+        <>
             <Router history={history}>
                 <div>
                     <Header />
@@ -50,15 +51,12 @@ function App() {
                                 exact
                                 component={PostShow}
                             />
-                            <Route
-                                path="*"
-                                component={() => <h2>404 not found</h2>}
-                            />
+                            <Route path="*" component={ErrorPage} />
                         </Switch>
                     </div>
                 </div>
             </Router>
-        </div>
+        </>
     );
 }
 
