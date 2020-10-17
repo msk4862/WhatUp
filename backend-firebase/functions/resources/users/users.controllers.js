@@ -269,6 +269,7 @@ exports.getUserDetails = (req, res) => {
                     title: post.data().title,
                     bodyMeta: post.data().bodyMeta,
                     body: post.data().body,
+                    postImage: doc.data().postImage,
                     createdAt: post.data().createdAt,
                     userHandle: post.data().userHandle,
                     userImage: post.data().userImage,

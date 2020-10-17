@@ -65,7 +65,7 @@ exports.onUserImageChangeHandler = (change) => {
             .then((posts) => {
                 posts.forEach((post) => {
                     batch.update(post, {
-                        userImage: change.after.data().userImage,
+                        userImage: change.after.data().imageUrl,
                     });
                 });
 
@@ -74,7 +74,7 @@ exports.onUserImageChangeHandler = (change) => {
     } else return true;
 };
 
-// delete comments/likes on post delete
+// delete comments/likes/notifications on post delete
 exports.onPostDeleteHandler = (postDoc, context) => {
     const postId = context.params.postId;
     const batch = db.batch();

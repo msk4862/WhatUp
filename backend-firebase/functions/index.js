@@ -36,7 +36,7 @@ exports.createNotifictionOnComment = functions.firestore
 exports.onUserImageChange = functions.firestore
     .document("users/{userId}")
     .onUpdate(onUserImageChangeHandler);
-// delete comments/likes on post delete
+// delete comments/likes/notifications on post delete
 exports.onPostDelete = functions.firestore
     .document("posts/{postId}")
     .onDelete(onPostDeleteHandler);
