@@ -4,8 +4,8 @@
     height: 100%;
     left: 0;
     top: 0;
-    /* z-index: 10; */
-    background-color: var(--font-light-color);
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 .loader {
@@ -17,6 +17,11 @@
     margin: auto;
     width: 100px;
     height: 100px;
+    color: var(--primary-dark-color);
+}
+
+.spinner-border {
+    border-width: 8px;
 }
 
 @media only screen and (max-width: 600px) {

@@ -8,8 +8,11 @@ import reducers from "./redux/reducers";
 import App from "./components/App";
 
 let composeEnhancers;
+
+const dev = process.env.REACT_APP_ENV || "development";
+
 // activating redux extension only in development environment
-if (process.env.REACT_APP_ENV === "development")
+if (dev === "development")
     composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 else composeEnhancers = compose;
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));

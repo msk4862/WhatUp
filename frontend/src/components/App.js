@@ -20,7 +20,7 @@ function App() {
             <Router history={history}>
                 <div>
                     <Header />
-                    <div className="container-fluid">
+                    <div className="container">
                         {/* Show only single route at a time (required beacuse /blogs/create=== blogs/:id ) */}
                         <Switch>
                             <Route exact path="/" component={Home} />

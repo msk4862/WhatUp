@@ -3,7 +3,7 @@ import "../styles/loader.css";
 
 const Loader = () => (
     <div className="loader-overlay">
-        <div className="loader spinner-border text-info" role="status">
+        <div className="loader spinner-border" role="status">
             <span className="sr-only">Loading...</span>
         </div>
     </div>
