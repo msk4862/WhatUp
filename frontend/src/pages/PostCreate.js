@@ -9,6 +9,11 @@ const PostCreate = (props) => {
     const [body, setBody] = useState("");
     const [errors, setErrors] = useState({});
 
+    // page title
+    useEffect(() => {
+        document.title = "Create a New Post";
+    }, []);
+
     useEffect(() => {
         if (props.errors) setErrors(props.errors);
     }, [props.errors]);

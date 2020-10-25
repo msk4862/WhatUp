@@ -3,9 +3,15 @@ import { connect } from "react-redux";
 import { authenticate } from "../redux/actions";
 import Profile from "../components/Profile/Profile";
 import PostList from "../components/Posts/PostList";
+import { APP_TITLE } from "../utilities/Constants";
 import "../styles/Home.css";
 
 const Home = (props) => {
+    // home page title
+    useEffect(() => {
+        document.title = `${APP_TITLE}`;
+    }, []);
+
     useEffect(() => {
         if (!props.authenticated) {
             let token = localStorage.getItem("jwtToken");

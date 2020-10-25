@@ -11,6 +11,12 @@ const User = (props) => {
     const [posts, setPosts] = useState([]);
     const [user, setUser] = useState(null);
 
+    // page title
+    useEffect(() => {
+        document.title = `${props.match.params.handle}`;
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     // fetch user details
     useEffect(() => {
         props.fetchUser(props.match.params.handle);

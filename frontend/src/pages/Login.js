@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { login, authenticate } from "../redux/actions";
 import history from "../history";
-import { LOGIN_TITLE } from "../utilities/Constants";
+import { LOGIN_TITLE, APP_TITLE } from "../utilities/Constants";
 import Loader from "../components/Loader";
 import { isBlank, isEmptyObj } from "../utilities/dataValidation";
 import "../styles/Login.css";
@@ -12,6 +12,11 @@ const Login = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({});
+
+    // page title
+    useEffect(() => {
+        document.title = `Login to WhatUp · ${APP_TITLE}`;
+    }, []);
 
     useEffect(() => {
         if (!props.authenticated) {

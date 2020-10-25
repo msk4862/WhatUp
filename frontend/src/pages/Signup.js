@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { signup, authenticate } from "../redux/actions";
 import history from "../history";
-import { SIGNUP_TITLE } from "../utilities/Constants";
+import { APP_TITLE, SIGNUP_TITLE } from "../utilities/Constants";
 import { isBlank, isEmptyObj } from "../utilities/dataValidation";
 import "../styles/Signup.css";
 
@@ -13,6 +13,11 @@ const Signup = (props) => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState({});
+
+    // page title
+    useEffect(() => {
+        document.title = `Join WhatUp · ${APP_TITLE}`;
+    }, []);
 
     useEffect(() => {
         if (props.authenticated) history.push("/");
@@ -153,7 +158,7 @@ const Signup = (props) => {
                             </div>
                             <div className="signup-form button form-group row justify-content-center">
                                 <button type="submit" className="btn">
-                                    Signup
+                                    Create account
                                 </button>
                             </div>
                         </div>
