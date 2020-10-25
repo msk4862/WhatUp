@@ -134,7 +134,12 @@ export const fetchUser = (handle) => {
             .then((res) => {
                 dispatch({ type: ACTIONS.SET_TEMP_USER, payload: res.data });
             })
-            .catch((err) => console.log(err));
+            .catch((error) => {
+                dispatch({
+                    type: ACTIONS.SET_ERROR,
+                    payload: error.response.status,
+                });
+            });
     };
 };
 
@@ -198,11 +203,10 @@ export const fetchPost = (id) => {
                 dispatch({ type: ACTIONS.FETCH_POST, payload: res.data });
                 dispatch({ type: ACTIONS.CLEAR_ERROR });
             })
-            .catch((err) => {
-                console.log(err);
+            .catch((error) => {
                 dispatch({
                     type: ACTIONS.SET_ERROR,
-                    payload: err.response.data,
+                    payload: error.response.status,
                 });
             });
     };

@@ -51,7 +51,7 @@ function App() {
                                 exact
                                 component={PostShow}
                             />
-                            <Route path="*" component={ErrorPage} />
+                            <Route component={ErrorPage} />
                         </Switch>
                     </div>
                 </div>

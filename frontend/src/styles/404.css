@@ -8,3 +8,8 @@
 .not-found h1 {
     font-size: 8rem;
 }
+
+.not-found a {
+    color: var(--primary-dark-color);
+    text-decoration: underline;
+}

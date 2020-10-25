@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { fetchUser, authenticate } from "../redux/actions";
+import history from "../history";
 import Post from "../components/Posts/Post";
 import StaticProfile from "../components/Profile/StaticProfile";
 import CardSkeleton from "../components/Skeletons/CardSkeleton";
@@ -10,11 +11,13 @@ const User = (props) => {
     const [posts, setPosts] = useState([]);
     const [user, setUser] = useState(null);
 
+    // fetch user details
     useEffect(() => {
         props.fetchUser(props.match.params.handle);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // checking if already logged in
     useEffect(() => {
         if (!props.authenticated) {
             let token = localStorage.getItem("jwtToken");
@@ -23,14 +26,17 @@ const User = (props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const { loading, tempUser } = props.user;
+    const { loading, tempUser, errorCode } = props.user;
 
     useEffect(() => {
-        if (tempUser && tempUser.posts && tempUser.user) {
+        // user not found
+        if (errorCode === 404) {
+            history.push("/404");
+        } else if (tempUser && tempUser.posts && tempUser.user) {
             setPosts(tempUser.posts);
             setUser(tempUser.user);
         }
-    }, [tempUser]);
+    }, [tempUser, errorCode]);
 
     const renderPosts = () => {
         if (loading) return <CardSkeleton />;

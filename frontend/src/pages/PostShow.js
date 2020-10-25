@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { fetchPost, authenticate } from "../redux/actions";
+import history from "../history";
 import UserTile from "../components/Posts/UserTile";
 import LikeButton from "../components/Posts/LikeButton";
 import Comments from "../components/Posts/Comments";
@@ -15,7 +16,7 @@ const BlogShow = (props) => {
 
     const [showComments, setShowComments] = useState(false);
 
-    const { authenticated } = props.user;
+    const { authenticated, errorCode } = props.user;
 
     useEffect(() => {
         if (!authenticated) {
@@ -29,6 +30,13 @@ const BlogShow = (props) => {
         props.fetchPost(props.match.params.id);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    useEffect(() => {
+        // post not found
+        if (errorCode === 404) {
+            history.push("/404");
+        }
+    }, [errorCode]);
 
     const {
         loading,

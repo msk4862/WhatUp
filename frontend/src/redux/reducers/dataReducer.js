@@ -6,6 +6,7 @@ const initialState = {
     posts: {},
     post: {},
     loading: false,
+    errorCode: null,
 };
 
 export default (state = initialState, action) => {
@@ -22,6 +23,7 @@ export default (state = initialState, action) => {
                 ...state,
                 post: action.payload,
                 loading: false,
+                errorCode: null,
             };
 
         case ACTIONS.CREATE_POST:
@@ -76,6 +78,13 @@ export default (state = initialState, action) => {
                     ...state.post,
                     comments: [action.payload, ...state.blog.comments],
                 },
+            };
+
+        case ACTIONS.SET_ERROR:
+            return {
+                ...state,
+                loading: false,
+                errorCode: action.payload,
             };
 
         case ACTIONS.LOADING_DATA:

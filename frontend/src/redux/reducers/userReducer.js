@@ -7,6 +7,7 @@ let initialState = {
     likes: [],
     notifications: [],
     tempUser: {},
+    errorCode: null,
 };
 
 export default (state = initialState, action) => {
@@ -19,6 +20,7 @@ export default (state = initialState, action) => {
                 authenticated: true,
                 ...action.payload,
                 loading: false,
+                errorCode: null,
             };
 
         case ACTIONS.SET_TEMP_USER:
@@ -26,6 +28,7 @@ export default (state = initialState, action) => {
                 ...state,
                 tempUser: action.payload,
                 loading: false,
+                errorCode: null,
             };
 
         case ACTIONS.LIKE_POST:
@@ -61,6 +64,9 @@ export default (state = initialState, action) => {
 
         case ACTIONS.LOADING_USER:
             return { ...state, loading: true };
+
+        case ACTIONS.SET_ERROR:
+            return { ...state, errorCode: action.payload };
 
         default:
             return state;
