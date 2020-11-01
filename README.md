@@ -1,7 +1,7 @@
 <div align="center">
     <h1>WhatUp</h1>
     <p>
-         <b>A simple Blog web app implemented using React and Firebase Backend.</b>
+         <b>A simple markdown supported Blog web app implemented using React and Firebase Backend.</b>
     </p>
       <img src="https://travis-ci.org/msk4862/WhatUp.svg?branch=master" width="100">
       <img src="https://img.shields.io/github/license/msk4862/Anomly?style=flat-square" width="92">
@@ -15,6 +15,7 @@
 
 - User Login, SignUp and User Authentication
 - Add, delete and edit posts
+- Markdown support in Post content and comment
 - Home page that displays all the posts posted by all the users
 - Comment and like feature for posts
 - Notification section
@@ -25,6 +26,7 @@
 
 - [ReactJs](https://reactjs.org)
 - [Firebase](https://firebase.google.com)
+- [markdown-to-jsx](https://github.com/probablyup/markdown-to-jsx)
 
 ## Getting Started
 
@@ -35,12 +37,16 @@
 First install dependencies:
 
 ```
+npm install
+// or
 yarn install
 ```
 
 Then run using:
 
 ```
+npm run start
+// or
 yarn start
 ```
 
