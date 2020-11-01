@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import MarkdownEditor from "../components/MarkdownEditor";
 import { createPost } from "../redux/actions";
 import { isBlank, isEmptyObj } from "../utilities/dataValidation";
 
@@ -18,7 +19,7 @@ const PostCreate = (props) => {
         if (props.errors) setErrors(props.errors);
     }, [props.errors]);
 
-    function onCreatePost(event) {
+    const onCreatePost = (event) => {
         event.preventDefault();
 
         const post = {
@@ -35,7 +36,7 @@ const PostCreate = (props) => {
         if (isEmptyObj(err)) props.createPost(post);
 
         setErrors(err);
-    }
+    };
 
     return (
         <div className="container">
@@ -58,7 +59,7 @@ const PostCreate = (props) => {
                     <textarea
                         type="textarea"
                         className="form-control"
-                        rows="5"
+                        rows="1"
                         value={bodyMeta}
                         onChange={(event) => setBodyMeta(event.target.value)}
                     ></textarea>
@@ -70,18 +71,17 @@ const PostCreate = (props) => {
                 </div>
                 <div className="form-group">
                     <label>Post Content</label>
-                    <textarea
-                        type="textarea"
-                        className="form-control"
-                        rows="10"
-                        value={body}
-                        onChange={(event) => setBody(event.target.value)}
-                    ></textarea>
+                    <MarkdownEditor
+                        editorPlaceholder="Write your content (markdown supported)"
+                        editorRows="25"
+                        editorValue={body}
+                        editorSetValue={setBody}
+                        previewBg={true}
+                    />
                     {errors.body ? (
                         <small className="error-message">{errors.body}</small>
                     ) : null}
                 </div>
-
                 <div className="form-group row justify-content-center">
                     <button type="submit" className="btn">
                         Publish Post

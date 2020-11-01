@@ -232,6 +232,18 @@ export const createPost = (data) => {
     };
 };
 
+export const uploadPostImage = (formData, postId) => {
+    return (dispatch) => {
+        // dispatch({ type: ACTIONS.LOADING_USER });
+
+        FirebaseAPI.post(`/posts/${postId}/upload`, formData)
+            .then(() => {
+                dispatch(fetchPost(postId));
+            })
+            .catch((err) => console.error(err));
+    };
+};
+
 export const editPost = (id, data) => {
     return (dispatch) => {
         FirebaseAPI.put(`/posts/${id}`, data)

@@ -1,0 +1,12 @@
+.markdown-editor button {
+    background-color: #fff;
+    border-bottom: 0;
+}
+
+.markdown-editor button {
+    border: 0;
+}
+
+.markdown-editor .nav-pills .nav-item .active {
+    background-color: var(--primary-dark-color);
+}

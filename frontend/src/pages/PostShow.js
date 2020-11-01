@@ -9,6 +9,7 @@ import LikeButton from "../components/Posts/LikeButton";
 import Comments from "../components/Posts/Comments";
 import CommentForm from "../components/Posts/CommentForm";
 import Loader from "../components/Loader";
+import MarkdownRenderer from "../components/MarkdownRenderer";
 import "../styles/Posts/PostShow.css";
 
 const BlogShow = (props) => {
@@ -71,7 +72,7 @@ const BlogShow = (props) => {
                                 />
                             </div>
                             <div className="post-text mt-4">
-                                <p>{body}</p>
+                                <MarkdownRenderer content={body} />
                             </div>
                         </div>
                     </div>

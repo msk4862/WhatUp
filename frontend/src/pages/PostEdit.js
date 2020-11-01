@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import MarkdownEditor from "../components/MarkdownEditor";
 import { fetchPost, editPost } from "../redux/actions";
 import { isBlank, isEmptyObj } from "../utilities/dataValidation";
 
@@ -70,7 +71,7 @@ const PostEdit = (props) => {
                     <textarea
                         type="textarea"
                         className="form-control"
-                        rows="5"
+                        rows="2"
                         value={bodyMeta}
                         onChange={(event) => {
                             setBodyMeta(event.target.value);
@@ -84,15 +85,13 @@ const PostEdit = (props) => {
                 </div>
                 <div className="form-group">
                     <label>Post Content</label>
-                    <textarea
-                        type="textarea"
-                        className="form-control"
-                        rows="10"
-                        value={body}
-                        onChange={(event) => {
-                            setBody(event.target.value);
-                        }}
-                    ></textarea>
+                    <MarkdownEditor
+                        editorPlaceholder="Write your content (markdown supported)"
+                        editorRows="25"
+                        editorValue={body}
+                        editorSetValue={setBody}
+                        previewBg={true}
+                    />
                     {errors.body ? (
                         <small className="error-message">{errors.body}</small>
                     ) : null}
