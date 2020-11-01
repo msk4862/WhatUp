@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import MarkdownRenderer from "../MarkdownRenderer";
 import "../../styles/Posts/userTile.css";
 
 const UserTile = ({ userImage, userHandle, createdAt, body }) => {
@@ -23,7 +24,9 @@ const UserTile = ({ userImage, userHandle, createdAt, body }) => {
                             <Link to={`/user/${userHandle}`}>{userHandle}</Link>
                         </p>
                         <small>{dayjs(createdAt).fromNow()}</small>
-                        <p>{body}</p>
+
+                        {/* text */}
+                        <MarkdownRenderer content={body} />
                     </div>
                 </div>
             </div>

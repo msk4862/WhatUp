@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { submitComment } from "../../redux/actions";
+import MarkdownEditor from "../../components/MarkdownEditor";
 import "../../styles/Posts/commentForm.css";
 import { isBlank, isEmptyObj } from "../../utilities/dataValidation";
 
@@ -34,18 +35,16 @@ const CommentForm = (props) => {
                     className="form row justify-content-center"
                     onSubmit={postComment}
                 >
-                    <div className="col-12 col-sm-8">
+                    <div className="col-12">
                         <div className="form-group mb-2">
-                            <textarea
-                                type="textarea"
-                                className="form-control"
-                                rows="3"
-                                placeholder="What your thoughts?"
-                                value={comment}
-                                onChange={(event) =>
-                                    setComment(event.target.value)
-                                }
-                            ></textarea>
+                            <MarkdownEditor
+                                editorPlaceholder="What your thoughts? (markdown supported)"
+                                editorRows="3"
+                                editorValue={comment}
+                                editorSetValue={setComment}
+                                previewBg={true}
+                            />
+
                             {errors.comment ? (
                                 <small className="error-message">
                                     {errors.comment}
