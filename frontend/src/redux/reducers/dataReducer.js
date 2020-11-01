@@ -72,11 +72,12 @@ export default (state = initialState, action) => {
                 };
 
         case ACTIONS.SUBMIT_COMMENT:
+            // console.log(action)
             return {
                 ...state,
                 post: {
                     ...state.post,
-                    comments: [action.payload, ...state.blog.comments],
+                    comments: [action.payload, ...state.post.comments],
                 },
             };
 

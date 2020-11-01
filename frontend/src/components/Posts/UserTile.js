@@ -26,7 +26,7 @@ const UserTile = ({ userImage, userHandle, createdAt, body }) => {
                         <small>{dayjs(createdAt).fromNow()}</small>
 
                         {/* text */}
-                        <MarkdownRenderer content={body} />
+                        {body && <MarkdownRenderer content={body} />}
                     </div>
                 </div>
             </div>
