@@ -1,6 +1,6 @@
 .navbar {
     background-color: var(--primary-dark-color);
-    box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.4);
+    box-shadow: 2px 2px 15px 4px rgb(0, 0, 0, 0.15);
     padding: 0 10px;
 }
 
